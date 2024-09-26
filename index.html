@@ -8,9 +8,15 @@
 </head>
 
 <body>
+  <label for="modes">Actions:</label>
+  
+  <select name="modes" id="mode">
+    <option value="maneuver">sail</option>
+    <option value="fire">shoot</option>
+  </select>
+  <button id='turn'>END TURN</button>
   <canvas id="myCanvas" width="300" height="600" style="border:5px solid #000000;">
   </canvas>
-  <button id='turn'>END TURN</button>
 </body>
 
 </html>

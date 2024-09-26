@@ -37,7 +37,7 @@ class vessel {
   }
   
   new_course(vec) {
-    if(in_range(this.pos[this.pos.length-1], vec, this.speed))
+    if(in_range(this.pos.at(-1), vec, this.speed))
       this.new_pos=vec;
   }
   
@@ -103,27 +103,25 @@ window.onload = ()=> {
   var ctx = c.getContext("2d");
   
   c.addEventListener("touchmove", (e)=>{
-  /*  switch (document.getElementById('mode').) {
-      case 'maveuver':*/
-        battle.vessels[0].weapons[0].target(battle.vessels[0].pos.at(-1),{
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY
-        });
-    /*    break;
-        
-      case 'fire':
-        battle.vessels[0].target({
+    switch (document.getElementById("mode").value) {
+      case 'maneuver':
+        battle.vessels[0].new_course({
           x: e.touches[0].clientX,
           y: e.touches[0].clientY
         });
         break;
-    }*/
+        
+      case 'fire':
+        battle.vessels[0].weapons[0].target(battle.vessels[0].pos.at(-1),{
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY
+        });
+        break;
+    }
     draw_game(battle);
   });
   
   function draw_solution(vpos, weapon){
-    console.log(vpos)
-    console.log(vpos.x)
     ctx.beginPath()
     ctx.strokeStyle = 'orange'
     ctx.moveTo(vpos.x, vpos.y)
@@ -166,49 +164,61 @@ window.onload = ()=> {
         ctx.stroke()
       }
     }
-    ctx.beginPath();
-    ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'blue'
-    ctx.stroke();
+    
     ctx.beginPath();
     ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
     ctx.strokeStyle = 'green'
     ctx.stroke();
-    
-    //destination 
-    let d = vessel.new_pos;
-    if (d) {
-     ctx.beginPath();
-     ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
-     ctx.fillStyle = 'gray'
-     ctx.fill();
-      ctx.beginPath()
-      ctx.strokeStyle = 'orange'
-      ctx.moveTo(x, y)
-      ctx.lineTo(d.x, d.y)
-      ctx.stroke()
+    switch (document.getElementById("mode").value) {
+      case 'maneuver':
+        //destination 
+        let d = vessel.new_pos;
+        if (d) {
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
+          ctx.fillStyle = 'gray'
+          ctx.fill();
+          ctx.beginPath()
+          ctx.strokeStyle = 'orange'
+          ctx.moveTo(x, y)
+          ctx.lineTo(d.x, d.y)
+          ctx.stroke()
+              
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
+          ctx.strokeStyle = 'pink'
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
+          ctx.strokeStyle = 'turquoise'
+          ctx.stroke();
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
+        ctx.strokeStyle = 'blue'
+        ctx.stroke();
+        
+        break;
+        
+        case 'fire':
+          //weapons
+          vessel.weapons.forEach(w=>{
+            ctx.beginPath();
+            ctx.arc(x, y, w.range, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'orange'
+            ctx.strokeWidth = 2
+            ctx.stroke();
+                
+            draw_solution(vessel.pos.at(-1),w)
+          });
           
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
-      ctx.strokeStyle = 'pink'
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
-      ctx.strokeStyle = 'turquoise'
-      ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(x, y, vessel.weapons[0].range, 0, 2 * Math.PI);
+          ctx.strokeStyle = 'orange'
+          ctx.stroke();
+          
+        break;
     }
-    
-    //weapons
-    vessel.weapons.forEach(w=>{
-      ctx.beginPath();
-      ctx.arc(x, y, w.range, 0, 2 * Math.PI);
-      ctx.strokeStyle = 'orange'
-      ctx.strokeWidtg = 2
-      ctx.stroke();
-          
-      draw_solution(vessel.pos.at(-1),w)
-    });
-
   }
     
   function draw_game(game) {
