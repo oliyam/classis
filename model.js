@@ -6,7 +6,7 @@ class game {
   
   constructor(n){
     for (var i = 0; i < n; i++) {
-      this.vessels.push(new vessel(n, "DD", null, 100,40,[], new radar()));
+      this.vessels.push(new vessel(n, "DD", null, 100,40, new weapon(), new radar()));
       
     }
   }
@@ -31,31 +31,61 @@ class vessel {
     this.pos=pos||this.pos;
     this.health=health||this.health;
     this.speed=speed||this.speed;
-    this.weapons=weapons||this.weapons;
+    if(weapons)
+      this.weapons.push(weapons);
     this.radar=radar||this.radar;
   }
   
   new_course(vec) {
-    let p = this.pos[this.pos.length - 1];
-    let d_x = p.x - vec.x;
-    let d_y = p.y - vec.y;
-    let d = Math.sqrt((d_x * d_x) + (d_y * d_y));
-  
-    if (d <= this.speed)
-      this.new_pos={ x: vec.x, y: vec.y };
+    if(in_range(this.pos[this.pos.length-1], vec, this.speed))
+      this.new_pos=vec;
   }
   
   sail(){
     if(this.new_pos)
-    this.pos.push(this.new_pos);
+      this.pos.push(this.new_pos);
   }
   
 }
 
 class radar {
-  range=80;
+  range=200;
 }
 
+class weapon {
+  range=50;
+  radius=10;
+  
+  damage=25;
+  
+  ammo=4;
+  
+  lockon={};
+  
+  constructor(){}
+  
+  target(pos, vec){
+    if (in_range(pos, vec, this.range)&&this.ammo>0){
+      this.lockon = vec;
+    }
+  }
+  
+  fire(){
+    if (this.ammo>0) {
+      let coords=this.lockon;
+      this.lockon=undefined;
+      this.ammo--;
+      return (coords, this.radius, this.damage);
+    }
+  }
+}
+
+function in_range(pos, vec, range) {
+  let d_x=pos.x-vec.x;
+  let d_y=pos.y-vec.y;
+    
+  return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
+}
 
 window.onload = ()=> {
   
@@ -73,18 +103,38 @@ window.onload = ()=> {
   var ctx = c.getContext("2d");
   
   c.addEventListener("touchmove", (e)=>{
-    battle.vessels[0].new_course({
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY
-    });
+  /*  switch (document.getElementById('mode').) {
+      case 'maveuver':*/
+        battle.vessels[0].weapons[0].target(battle.vessels[0].pos.at(-1),{
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY
+        });
+    /*    break;
+        
+      case 'fire':
+        battle.vessels[0].target({
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY
+        });
+        break;
+    }*/
     draw_game(battle);
   });
   
-  c.addEventListener("touchend", (e) => {
+  function draw_solution(vpos, weapon){
+    console.log(vpos)
+    console.log(vpos.x)
+    ctx.beginPath()
+    ctx.strokeStyle = 'orange'
+    ctx.moveTo(vpos.x, vpos.y)
+    ctx.lineTo(weapon.lockon.x, weapon.lockon.y)
+    ctx.stroke()
     
-    draw_game(battle);
-  });
-  
+    ctx.beginPath();
+    ctx.arc(weapon.lockon.x, weapon.lockon.y, weapon.radius, 0, 2 * Math.PI);
+    ctx.fillStyle = 'red'
+    ctx.fill();
+  }
   
   function draw_vessel(vessel){
     let p=vessel.pos[vessel.pos.length-1];
@@ -118,7 +168,7 @@ window.onload = ()=> {
     }
     ctx.beginPath();
     ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'red'
+    ctx.strokeStyle = 'blue'
     ctx.stroke();
     ctx.beginPath();
     ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
@@ -148,6 +198,17 @@ window.onload = ()=> {
       ctx.stroke();
     }
     
+    //weapons
+    vessel.weapons.forEach(w=>{
+      ctx.beginPath();
+      ctx.arc(x, y, w.range, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'orange'
+      ctx.strokeWidtg = 2
+      ctx.stroke();
+          
+      draw_solution(vessel.pos.at(-1),w)
+    });
+
   }
     
   function draw_game(game) {
