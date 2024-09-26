@@ -8,7 +8,7 @@ class game {
   
   constructor(n){
     for (var i = 0; i < n; i++) {
-      this.vessels.push(new vessel(n, "DD", null, 100,40, new weapon(), new radar()));
+      this.vessels.push(new vessel(n, "Destroyer", null, 100,40, new weapon(), new radar()));
       
     }
   }
@@ -64,8 +64,6 @@ class weapon {
   
   lockon;
   
-  constructor(){}
-  
   target(pos, vec){
     if (in_range(pos, vec, this.range)&&this.ammo>0){
       this.lockon = vec;
@@ -91,7 +89,11 @@ function in_range(pos, vec, range) {
 
 window.onload = ()=> {
   
+  var c = document.getElementById("myCanvas");
+  var ctx = c.getContext("2d");
+  
   var battle=new game(1);
+  draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
     battle.vessels.forEach(v=>{
@@ -108,8 +110,9 @@ window.onload = ()=> {
     draw_game(battle)
   }
   
-  var c = document.getElementById("myCanvas");
-  var ctx = c.getContext("2d");
+  document.getElementById('mode').addEventListener("change", () => {
+    draw_game(battle)
+  })
   
   c.addEventListener("touchmove", (e)=>{
     switch (document.getElementById("mode").value) {
@@ -134,8 +137,10 @@ window.onload = ()=> {
     game.splashes.forEach(s=>{
     ctx.beginPath();
     ctx.arc(s.pos.x, s.pos.y, s.rad, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'gray'
-    ctx.stroke();
+    ctx.globalAlpha = s.dmg/100
+    ctx.fillStyle = 'gray'
+    ctx.fill();
+    ctx.globalAlpha = 1
     });
   }
   
@@ -163,7 +168,7 @@ window.onload = ()=> {
       
       if(i+1==vessel.pos.length){
         ctx.fillStyle = "purple"
-        ctx.font = "20px Arial";
+        ctx.font = "10px Lucida Console";
         ctx.fillText(vessel.vclass, c.x, c.y);
       
         ctx.beginPath();
@@ -178,7 +183,7 @@ window.onload = ()=> {
       let m = vessel.pos[i+1]
       if(m){
         ctx.beginPath()
-        ctx.strokeStyle = 'black'
+        ctx.strokeStyle = 'lightgreen'
         ctx.moveTo(c.x,c.y)
         ctx.lineTo(m.x,m.y)
         ctx.stroke()
