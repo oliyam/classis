@@ -17,7 +17,7 @@ class vessel {
   id;
   vclass = "warship";
   
-  pos = [{x: 69, y: 69}]
+  pos = [{x: 69, y: 69}];
   new_pos;
   
   health = 100;
@@ -45,6 +45,11 @@ class vessel {
       this.new_pos={ x: vec.x, y: vec.y };
   }
   
+  sail(){
+    if(this.new_pos)
+    this.pos.push(this.new_pos);
+  }
+  
 }
 
 class radar {
@@ -57,6 +62,9 @@ window.onload = ()=> {
   var battle=new game(1);
   
   document.getElementById('turn').onclick=()=>{
+    battle.vessels.forEach(v=>{
+      v.sail()
+    })
     draw_game(battle);
   }
   
@@ -68,6 +76,11 @@ window.onload = ()=> {
       x: e.touches[0].clientX,
       y: e.touches[0].clientY
     });
+    draw_game(battle);
+  });
+  
+  c.addEventListener("touched", (e) => {
+    battle.vessels[0].new_pos=null;
     draw_game(battle);
   });
   
@@ -102,20 +115,27 @@ window.onload = ()=> {
     
     //destination 
     let d = vessel.new_pos;
-    if(d) {
-    ctx.moveTo(x, y)
-    ctx.lineTo(d.x, d.y)
-    ctx.stroke()
+    if (d) {
+     ctx.beginPath();
+     ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
+     ctx.fillStyle = 'gray'
+     ctx.fill();
+      ctx.beginPath()
+      ctx.strokeStyle = 'orange'
+      ctx.moveTo(x, y)
+      ctx.lineTo(d.x, d.y)
+      ctx.stroke()
           
-    ctx.beginPath();
-    ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'red'
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'green'
-    ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'pink'
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'turquoise'
+      ctx.stroke();
     }
+    
   }
     
   function draw_game(game) {
