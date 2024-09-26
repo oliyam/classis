@@ -65,6 +65,7 @@ window.onload = ()=> {
     battle.vessels.forEach(v=>{
       v.sail()
     })
+    battle.vessels[0].new_pos=undefined;
     draw_game(battle);
   }
   
@@ -79,8 +80,8 @@ window.onload = ()=> {
     draw_game(battle);
   });
   
-  c.addEventListener("touched", (e) => {
-    battle.vessels[0].new_pos=null;
+  c.addEventListener("touchend", (e) => {
+    
     draw_game(battle);
   });
   
@@ -89,16 +90,18 @@ window.onload = ()=> {
     let p=vessel.pos[vessel.pos.length-1];
     let x=p.x;
     let y=p.y;
-    console.log(vessel.pos);
     for(let i=0;i<vessel.pos.length;i++){
       let c = vessel.pos[i];
       ctx.beginPath();
-      ctx.arc(c.x, c.y, 2.5, 0, 2 * Math.PI);
+      ctx.arc(c.x, c.y, (i+1==vessel.pos.length)?4:1.5, 0, 2 * Math.PI);
       ctx.fillStyle = 'blue'
       ctx.fill();
-      ctx.beginPath()
+      ctx.font = "5px Arial";
+      ctx.fillText(vessel.vclass, c.x, c.y);
       let m = vessel.pos[i+1]
       if(m){
+        ctx.beginPath()
+        ctx.strokeStyle = 'black'
         ctx.moveTo(c.x,c.y)
         ctx.lineTo(m.x,m.y)
         ctx.stroke()
