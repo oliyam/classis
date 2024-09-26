@@ -4,6 +4,8 @@ class game {
   
   vessels = [];
   
+  splashes = [];
+  
   constructor(n){
     for (var i = 0; i < n; i++) {
       this.vessels.push(new vessel(n, "DD", null, 100,40, new weapon(), new radar()));
@@ -53,14 +55,14 @@ class radar {
 }
 
 class weapon {
-  range=50;
+  range=150;
   radius=10;
   
   damage=25;
   
   ammo=4;
   
-  lockon={};
+  lockon;
   
   constructor(){}
   
@@ -71,12 +73,12 @@ class weapon {
   }
   
   fire(){
-    if (this.ammo>0) {
-      let coords=this.lockon;
-      this.lockon=undefined;
+    if (this.ammo>0&&this.lockon) {
       this.ammo--;
-      return (coords, this.radius, this.damage);
+      console.log(this.ammo)
+      return {pos: this.lockon, rad: this.radius, dmg: this.damage};
     }
+    return 0;
   }
 }
 
@@ -94,9 +96,16 @@ window.onload = ()=> {
   document.getElementById('turn').onclick=()=>{
     battle.vessels.forEach(v=>{
       v.sail()
+      v.weapons.forEach(w=>{
+        let shot = w.fire()
+        if(shot)
+          battle.splashes.push(shot)
+      })
     })
+    //document.getElementById('mode').value='maneuver'
+    battle.vessels[0].weapons[0].lockon=undefined;
     battle.vessels[0].new_pos=undefined;
-    draw_game(battle);
+    draw_game(battle)
   }
   
   var c = document.getElementById("myCanvas");
@@ -121,17 +130,28 @@ window.onload = ()=> {
     draw_game(battle);
   });
   
-  function draw_solution(vpos, weapon){
-    ctx.beginPath()
-    ctx.strokeStyle = 'orange'
-    ctx.moveTo(vpos.x, vpos.y)
-    ctx.lineTo(weapon.lockon.x, weapon.lockon.y)
-    ctx.stroke()
-    
+  function draw_splashes(game){
+    game.splashes.forEach(s=>{
     ctx.beginPath();
-    ctx.arc(weapon.lockon.x, weapon.lockon.y, weapon.radius, 0, 2 * Math.PI);
-    ctx.fillStyle = 'red'
-    ctx.fill();
+    ctx.arc(s.pos.x, s.pos.y, s.rad, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'gray'
+    ctx.stroke();
+    });
+  }
+  
+  function draw_solution(vpos, weapon){
+    if (weapon.ammo>0&&weapon.lockon) {
+      ctx.beginPath()
+      ctx.strokeStyle = 'orange'
+      ctx.moveTo(vpos.x, vpos.y)
+      ctx.lineTo(weapon.lockon.x, weapon.lockon.y)
+      ctx.stroke()
+      
+      ctx.beginPath();
+      ctx.arc(weapon.lockon.x, weapon.lockon.y, weapon.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = 'red'
+      ctx.fill();
+    }
   }
   
   function draw_vessel(vessel){
@@ -208,7 +228,7 @@ window.onload = ()=> {
             ctx.strokeStyle = 'orange'
             ctx.strokeWidth = 2
             ctx.stroke();
-                
+    
             draw_solution(vessel.pos.at(-1),w)
           });
           
@@ -226,6 +246,7 @@ window.onload = ()=> {
     game.vessels.forEach(v => {
       draw_vessel(v);
     });
+    draw_splashes(game)
   }
   
 }
