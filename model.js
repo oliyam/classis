@@ -6,7 +6,7 @@ class game {
   
   constructor(n){
     for (var i = 0; i < n; i++) {
-      this.vessels.push(new vessel(n, "destroyer", null, 100,50,[], new radar()));
+      this.vessels.push(new vessel(n, "destroyer", null, 100,40,[], new radar()));
       
     }
   }
