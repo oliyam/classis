@@ -6,7 +6,7 @@ class game {
   
   constructor(n){
     for (var i = 0; i < n; i++) {
-      this.vessels.push(new vessel(n, "destroyer", null, 100,40,[], new radar()));
+      this.vessels.push(new vessel(n, "DD", null, 100,40,[], new radar()));
       
     }
   }
@@ -92,12 +92,21 @@ window.onload = ()=> {
     let y=p.y;
     for(let i=0;i<vessel.pos.length;i++){
       let c = vessel.pos[i];
-      ctx.beginPath();
-      ctx.arc(c.x, c.y, (i+1==vessel.pos.length)?4:1.5, 0, 2 * Math.PI);
+      
+      if(i+1==vessel.pos.length){
+        ctx.fillStyle = "purple"
+        ctx.font = "20px Arial";
+        ctx.fillText(vessel.vclass, c.x, c.y);
+      
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, 3, 0, 2 * Math.PI);
+      }
+      else {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, 1.5, 0, 2 * Math.PI);
+      }
       ctx.fillStyle = 'blue'
       ctx.fill();
-      ctx.font = "5px Arial";
-      ctx.fillText(vessel.vclass, c.x, c.y);
       let m = vessel.pos[i+1]
       if(m){
         ctx.beginPath()
