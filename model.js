@@ -33,7 +33,7 @@ class vessel {
   new_pos;
   
   health = 100;
-  speed = 50;
+  speed = 100;
   weapons = [];
   radar = {};
   
@@ -124,7 +124,7 @@ window.onload = ()=> {
       if (shot)
         battle.splashes.push(shot)
 
-    battle.deal_dmg()
+    //battle.deal_dmg()
     battle.vessels[0].weapons[0].lockon = undefined;
     draw_game(battle)
   }
@@ -157,7 +157,7 @@ window.onload = ()=> {
     ctx.beginPath();
     ctx.arc(s.pos.x, s.pos.y, s.rad, 0, 2 * Math.PI);
     ctx.globalAlpha = s.dmg/100
-    ctx.fillStyle = s.active?'red':'gray'
+    ctx.fillStyle = s.active?'orange':'gray'
     ctx.fill();
     ctx.globalAlpha = 1
     });
