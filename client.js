@@ -17,13 +17,14 @@ window.onload = ()=> {
       })
     })
     battle.deal_dmg()
-    battle.vessels[0].weapons[0].lockon=undefined;
-    battle.vessels[0].new_pos=undefined;
+    battle.vessels[battle.selected_v].weapons[0].lockon=undefined;
+    battle.vessels[battle.selected_v].new_pos=undefined;
     draw_game(battle)
   }
   
   document.getElementById('scan').onclick = () => {
     battle.scan()
+    document.getElementById('radar').checked=true;
     draw_game(battle)
   }
   
@@ -35,13 +36,13 @@ window.onload = ()=> {
         break;
     
       case 'fire':
-        let shot = battle.vessels[0].weapons[0].fire()
+        let shot = battle.vessels[battle.selected_v].weapons[0].fire()
         if (shot)
           battle.splashes.push(shot)
         break;
     }
-    battle.vessels[0].weapons[0].lockon = undefined;
-    battle.vessels[0].new_pos = undefined;
+    battle.vessels[battle.selected_v].weapons[0].lockon = undefined;
+    battle.vessels[battle.selected_v].new_pos = undefined;
     draw_game(battle)
   }
   
@@ -51,37 +52,21 @@ window.onload = ()=> {
   document.getElementById('radar').addEventListener("change", () => {
     draw_game(battle)
   })
-  /*
-  c.addEventListener("dbclick", ()=>{
-    switch (document.getElementById("mode").value) {
-      case 'maneuver':
-        battle.vessels[0].new_course({
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY
-        });
-        break;
-    
-      case 'fire':
-        battle.vessels[0].weapons[0].target(battle.vessels[0].pos.at(-1), {
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY
-        });
-        break;
-    }
-    draw_game(battle);
+  document.getElementById('info').addEventListener("change", () => {
+    draw_game(battle)
   })
-  */
+
   c.addEventListener("touchmove", (e)=>{
     switch (document.getElementById("mode").value) {
       case 'maneuver':
-        battle.vessels[0].new_course({
+        battle.vessels[battle.selected_v].new_course({
           x: e.touches[0].clientX,
           y: e.touches[0].clientY
         });
         break;
         
       case 'fire':
-        battle.vessels[0].weapons[0].target(battle.vessels[0].pos.at(-1),{
+        battle.vessels[battle.selected_v].weapons[0].target(battle.vessels[battle.selected_v].pos.at(-1),{
           x: e.touches[0].clientX,
           y: e.touches[0].clientY
         });
@@ -151,7 +136,7 @@ window.onload = ()=> {
       ctx.fill();
       
       //every blip - info
-      if(b.sign){
+      if(b.sign && document.getElementById('info').checked) {
         ctx.fillStyle = "white"
         ctx.font = "italic 10px monospace";
         ctx.fillText(b.sign, b.pos.x - ctx.measureText(b.sign).width/2, b.pos.y);
@@ -257,21 +242,23 @@ window.onload = ()=> {
           ctx.stroke()
           
           //info-text
-          ctx.fillStyle = "yellow"
-          ctx.font = "bold 15px monospace";
-          ctx.fillText(vessel.vclass, c.x + 10, c.y);
-           
-          ctx.fillStyle = "red"
-          ctx.font = "bold 10px monospace";
-          ctx.fillText("♡:"+vessel.health, c.x + 10, c.y + 10);
-          
-          let nr=1;
-          vessel.weapons.forEach(w => {
-            ctx.fillStyle = "orange"
+          if (document.getElementById('info').checked) {
+            ctx.fillStyle = "yellow"
+            ctx.font = "bold 15px monospace";
+            ctx.fillText(vessel.vclass, c.x + 10, c.y);
+             
+            ctx.fillStyle = "red"
             ctx.font = "bold 10px monospace";
-            ctx.fillText(nr+"¤:" + w.ammo, c.x + 10, c.y + 10 + 10*nr);
-            nr++;
-          });
+            ctx.fillText("♡:"+vessel.health, c.x + 10, c.y + 10);
+            
+            let nr=1;
+            vessel.weapons.forEach(w => {
+              ctx.fillStyle = "orange"
+              ctx.font = "bold 10px monospace";
+              ctx.fillText(nr+"¤:" + w.ammo, c.x + 10, c.y + 10 + 10*nr);
+              nr++;
+            });
+          }
         }
         
         //every position - dot
