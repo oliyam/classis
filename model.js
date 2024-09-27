@@ -71,7 +71,7 @@
       
       damage=25;
       
-      ammo=4;
+      ammo=12;
       
       lockon;
       

@@ -9,14 +9,19 @@
 </head>
 
 <body style="background-color: #000000">
-  <label for="modes" style="font-family: monospace; color: #00FF00">actions:</label>
-  
+  <label for="radar" style="font-family: monospace; color: #00FF00">radar:</label>
+  <input type="checkbox" id="radar" name="radar">
+ 
+  <label for="modes" style="font-family: monospace; color: #00FF00">modes:</label>
   <select name="modes" id="mode">
     <option value="maneuver">sail</option>
     <option value="fire">shoot</option>
   </select>
+  
   <button id='shoot'>SHOOT</button>
+  
   <button id='turn'>END TURN</button>
+  
   <canvas id="myCanvas" width="300" height="600" style="border:5px solid #00FF00;">
   </canvas>
 </body>

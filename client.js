@@ -2,6 +2,7 @@ window.onload = ()=> {
   
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
+  ctx.lineWidth = 1.5;
   
   var battle=new game(1);
   draw_game(battle)
@@ -22,19 +23,49 @@ window.onload = ()=> {
   }
   
   document.getElementById('shoot').onclick = () => {
-      let shot = battle.vessels[0].weapons[0].fire()
-      if (shot)
-        battle.splashes.push(shot)
-
-    //battle.deal_dmg()
+    switch (document.getElementById("mode").value) {
+      case 'maneuver':
+        document.getElementById("mode").value='fire'
+        
+        break;
+    
+      case 'fire':
+        let shot = battle.vessels[0].weapons[0].fire()
+        if (shot)
+          battle.splashes.push(shot)
+        break;
+    }
     battle.vessels[0].weapons[0].lockon = undefined;
+    battle.vessels[0].new_pos = undefined;
     draw_game(battle)
   }
   
   document.getElementById('mode').addEventListener("change", () => {
     draw_game(battle)
   })
-  
+  document.getElementById('radar').addEventListener("change", () => {
+    draw_game(battle)
+  })
+  /*
+  c.addEventListener("dbclick", ()=>{
+    switch (document.getElementById("mode").value) {
+      case 'maneuver':
+        battle.vessels[0].new_course({
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY
+        });
+        break;
+    
+      case 'fire':
+        battle.vessels[0].weapons[0].target(battle.vessels[0].pos.at(-1), {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY
+        });
+        break;
+    }
+    draw_game(battle);
+  })
+  */
   c.addEventListener("touchmove", (e)=>{
     switch (document.getElementById("mode").value) {
       case 'maneuver':
@@ -92,20 +123,27 @@ window.onload = ()=> {
         
         ctx.fillStyle = 'lightgreen'
         ctx.beginPath();
-        let t=20;
-        ctx.moveTo(c.x, c.y);
-        ctx.lineTo(c.x+t/2, c.y+Math.abs(Math.sin(Math.PI/3)*t));
-        ctx.lineTo(c.x-t/2, c.y+Math.abs(Math.sin(Math.PI/3)*t));
+        let 
+          l=20,
+          h=Math.abs(Math.sin(Math.PI/3)*l),
+          p={x: c.x, y: c.y+l/2}
+        ;
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x-l/2, p.y-h);
+        ctx.lineTo(p.x+l/2, p.y-h);
+        ctx.lineTo(p.x, p.y);
         ctx.fill()
+        ctx.strokeStyle = 'green'
+        ctx.stroke()
         
         //info-text
         ctx.fillStyle = "purple"
         ctx.font = "bold 15px monospace";
-        ctx.fillText(vessel.vclass, c.x, c.y);
+        ctx.fillText(vessel.vclass, c.x+10, c.y);
          
         ctx.fillStyle = "red"
         ctx.font = "bold 10px monospace";
-        ctx.fillText(vessel.health, c.x, c.y+10);
+        ctx.fillText(vessel.health, c.x+10, c.y+10);
       }
       
       //every position
@@ -125,10 +163,13 @@ window.onload = ()=> {
       }
     }
     
-    ctx.beginPath();
-    ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'green'
-    ctx.stroke();
+    if(document.getElementById('radar').checked){
+      ctx.beginPath();
+      ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+      ctx.strokeStyle = 'green'
+      ctx.stroke();
+    }
+    
     switch (document.getElementById("mode").value) {
       case 'maneuver':
         //destination 
@@ -148,10 +189,13 @@ window.onload = ()=> {
           ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
           ctx.strokeStyle = 'turquoise'
           ctx.stroke();
-          ctx.beginPath();
-          ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
-          ctx.strokeStyle = 'lightgreen'
-          ctx.stroke();
+          
+          if (document.getElementById('radar').checked) {
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'lightgreen'
+            ctx.stroke();
+          }
         }
         ctx.beginPath();
         ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
