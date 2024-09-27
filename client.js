@@ -19,6 +19,10 @@ window.onload = ()=> {
     battle.deal_dmg()
     battle.vessels[0].weapons[0].lockon=undefined;
     battle.vessels[0].new_pos=undefined;
+    draw_game(battle)
+  }
+  
+  document.getElementById('scan').onclick = () => {
     battle.scan()
     draw_game(battle)
   }
