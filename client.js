@@ -19,6 +19,7 @@ window.onload = ()=> {
     battle.deal_dmg()
     battle.vessels[0].weapons[0].lockon=undefined;
     battle.vessels[0].new_pos=undefined;
+    battle.scan()
     draw_game(battle)
   }
   
@@ -44,7 +45,6 @@ window.onload = ()=> {
     draw_game(battle)
   })
   document.getElementById('radar').addEventListener("change", () => {
-    battle.scan()
     draw_game(battle)
   })
   /*
