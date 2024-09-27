@@ -4,7 +4,7 @@ window.onload = ()=> {
   var ctx = c.getContext("2d");
   ctx.lineWidth = 1.5;
   
-  var battle=new game(8);
+  var battle=new game(5);
   draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
@@ -111,124 +111,143 @@ window.onload = ()=> {
     }
   }
   
+  function draw_blips(radar) {
+    radar.blips.forEach(b=>{
+      //every blip - dot
+      ctx.fillStyle = 'red'
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, 4, 0, 2 * Math.PI);
+      ctx.fill();
+    })
+  }
+  
   function draw_vessel(vessel, selected){
+   
     let p=vessel.pos.at(-1);
     let x=p.x;
     let y=p.y;
-    for(let i=0;i<vessel.pos.length;i++){
-      let c = vessel.pos[i];
-            
-      //if last - current vessel sition
-      if(i+1==vessel.pos.length){
-        
-        ctx.fillStyle = 'lightgreen'
-        ctx.beginPath();
-        let 
-          l=20,
-          h=Math.abs(Math.sin(Math.PI/3)*l),
-          p={x: c.x, y: c.y+l/2}
-        ;
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x-l/2, p.y-h);
-        ctx.lineTo(p.x+l/2, p.y-h);
-        ctx.lineTo(p.x, p.y);
-        ctx.fill()
-        ctx.strokeStyle = 'green'
-        ctx.stroke()
-        
-        //info-text
-        ctx.fillStyle = "purple"
-        ctx.font = "bold 15px monospace";
-        ctx.fillText(vessel.vclass, c.x+10, c.y);
-         
-        ctx.fillStyle = "red"
-        ctx.font = "bold 10px monospace";
-        ctx.fillText(vessel.health, c.x+10, c.y+10);
-      }
-      
-      //every position - dot
-      ctx.fillStyle = 'blue'
-      ctx.beginPath();
-      ctx.arc(c.x, c.y, 3, 0, 2 * Math.PI);
-      ctx.fill();
-      
-      //if next - line
-      let m = vessel.pos[i+1]
-      if(m){
-        ctx.beginPath()
-        ctx.strokeStyle = 'lightgreen'
-        ctx.moveTo(c.x,c.y)
-        ctx.lineTo(m.x,m.y)
-        ctx.stroke()
-      }
-    }
     
-    if(document.getElementById('radar').checked){
-      ctx.beginPath();
-      ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-      ctx.strokeStyle = 'green'
-      ctx.stroke();
-    }
-    if(selected)
-      switch (document.getElementById("mode").value) {
-        case 'maneuver':
-          //destination 
-          let d = vessel.new_pos;
-          if (d) {
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
-            ctx.fillStyle = 'gray'
-            ctx.fill();
-            ctx.beginPath()
-            ctx.strokeStyle = 'orange'
-            ctx.moveTo(x, y)
-            ctx.lineTo(d.x, d.y)
-            ctx.stroke()
-                
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
-            ctx.strokeStyle = 'turquoise'
-            ctx.stroke();
-            
-            if (document.getElementById('radar').checked) {
-              ctx.beginPath();
-              ctx.arc(d.x, y, vessel.radar.range, 0, 2 * Math.PI);
-              ctx.strokeStyle = 'lightgreen'
-              ctx.stroke();
-            }
-          }
+      //loop through past positions
+      for(let i=0;i<vessel.pos.length;i++){
+        let c = vessel.pos[i];
+              
+        //if last - current vessel position
+        if(i+1==vessel.pos.length){
+          
+          ctx.fillStyle = 'lightgreen'
           ctx.beginPath();
-          ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
-          ctx.strokeStyle = 'blue'
-          ctx.stroke();
+          let 
+            l=20,
+            h=Math.abs(Math.sin(Math.PI/3)*l),
+            p={x: c.x, y: c.y+l/2}
+          ;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x-l/2, p.y-h);
+          ctx.lineTo(p.x+l/2, p.y-h);
+          ctx.lineTo(p.x, p.y);
+          ctx.fill()
+          ctx.strokeStyle = 'green'
+          ctx.stroke()
           
-          break;
-          
-          case 'fire':
-            //weapons
-            vessel.weapons.forEach(w=>{
-              ctx.beginPath();
-              ctx.arc(x, y, w.range, 0, 2 * Math.PI);
-              ctx.strokeStyle = 'orange'
-              ctx.strokeWidth = 2
-              ctx.stroke();
+          //info-text
+          ctx.fillStyle = "purple"
+          ctx.font = "bold 15px monospace";
+          ctx.fillText(vessel.vclass, c.x+10, c.y);
+           
+          ctx.fillStyle = "red"
+          ctx.font = "bold 10px monospace";
+          ctx.fillText(vessel.health, c.x+10, c.y+10);
+        }
+        
+        //every position - dot
+        ctx.fillStyle = 'blue'
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, 3, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        //if next - line
+        let m = vessel.pos[i+1]
+        if(m){
+          ctx.beginPath()
+          ctx.strokeStyle = 'lightgreen'
+          ctx.moveTo(c.x,c.y)
+          ctx.lineTo(m.x,m.y)
+          ctx.stroke()
+        }
+      }
       
-              draw_solution(vessel.pos.at(-1),w)
-            });
-            
+      if(document.getElementById('radar').checked){
+        ctx.beginPath();
+        ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+        ctx.strokeStyle = 'green'
+        ctx.stroke();
+        
+        draw_blips(vessel.radar)
+      }
+      if(selected)
+        switch (document.getElementById("mode").value) {
+          case 'maneuver':
+            //destination 
+            let d = vessel.new_pos;
+            if (d) {
+              ctx.beginPath();
+              ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
+              ctx.fillStyle = 'gray'
+              ctx.fill();
+              ctx.beginPath()
+              ctx.strokeStyle = 'orange'
+              ctx.moveTo(x, y)
+              ctx.lineTo(d.x, d.y)
+              ctx.stroke()
+                  
+              ctx.beginPath();
+              ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
+              ctx.strokeStyle = 'turquoise'
+              ctx.stroke();
+              
+              if (document.getElementById('radar').checked) {
+                ctx.beginPath();
+                ctx.arc(d.x, y, vessel.radar.range, 0, 2 * Math.PI);
+                ctx.strokeStyle = 'lightgreen'
+                ctx.stroke();
+              }
+            }
             ctx.beginPath();
-            ctx.arc(x, y, vessel.weapons[0].range, 0, 2 * Math.PI);
-            ctx.strokeStyle = 'orange'
+            ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'blue'
             ctx.stroke();
             
-          break;
-      }
+            break;
+            
+            case 'fire':
+              //weapons
+              vessel.weapons.forEach(w=>{
+                ctx.beginPath();
+                ctx.arc(x, y, w.range, 0, 2 * Math.PI);
+                ctx.strokeStyle = 'orange'
+                ctx.strokeWidth = 2
+                ctx.stroke();
+        
+                draw_solution(vessel.pos.at(-1),w)
+              });
+              
+              ctx.beginPath();
+              ctx.arc(x, y, vessel.weapons[0].range, 0, 2 * Math.PI);
+              ctx.strokeStyle = 'orange'
+              ctx.stroke();
+              
+            break;
+        }
   }
     
   function draw_game(game) {
     ctx.clearRect(0,0,c.width,c.height);
     game.vessels.forEach(v => {
-      draw_vessel(v,game.selected_v==v.id);
+      game.scan(v.id)
+      console.log(v.radar.blips)
+      if (v.faction=='frien'){
+        draw_vessel(v,game.selected_v==v.id, false);
+      }
     });
     draw_splashes(game)
   }

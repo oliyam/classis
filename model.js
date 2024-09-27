@@ -9,10 +9,23 @@
       splashes = [];
       
       constructor(n){
-        for (var i = 0; i < n; i++) {
-          this.vessels.push(new vessel(i, "DD-0"+i, [{x: i*50, y: i*30}], 100, 50, new weapon(), new radar()));
-          
+        this.vessels.push(new vessel(0, 'frien', "ROCINANTE", null, 100, 50, new weapon(), new radar()))
+        for (var i = 1; i < n; i++) {
+          this.vessels.push(new vessel(i, null, "DD-0"+i, [{x: i*50+25, y: i*30+20}], 100, 50, new weapon(), new radar()));
         }
+      }
+      
+      scan(v_id){
+        this.vessels[v_id].radar.blips=[];
+        this.vessels.forEach(ufo=>{
+          if (
+            in_range(this.vessels[v_id].pos.at(-1), ufo.pos.at(-1), this.vessels[v_id].radar.range) &&  
+            ufo.faction!=this.vessels[v_id].faction && 
+            ufo.health>0
+          ) {
+            this.vessels[v_id].radar.blips.push(ufo.pos.at(-1))
+          }
+        })
       }
       
       deal_dmg(){
@@ -30,6 +43,7 @@
     
       id;
       vclass = "warship";
+      faction = "x";
       
       pos = [{x: 69, y: 69}];
       new_pos;
@@ -39,8 +53,9 @@
       weapons = [];
       radar = {};
       
-      constructor(id, vclass, pos, health, speed, weapons, radar){
+      constructor(id, faction, vclass, pos, health, speed, weapons, radar){
         this.id=id;
+        this.faction=faction||this.faction;
         this.vclass=vclass||this.vclass;
         this.pos=pos||this.pos;
         this.health=health||this.health;
@@ -64,6 +79,8 @@
     
     class radar {
       range=200;
+      
+      blips=[];
     }
     
     class weapon {
