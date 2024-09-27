@@ -12,6 +12,16 @@ class game {
       
     }
   }
+  
+  deal_dmg(){
+   this.splashes.forEach(s=>{
+     this.vessels.forEach(v=>{
+       if (in_range(s.pos, v.pos.at(-1), s.rad)&&s.active)
+         v.health-=s.dmg;
+     })
+     s.active=0;
+   })
+  }
 }
 
 class vessel {
@@ -56,7 +66,7 @@ class radar {
 
 class weapon {
   range=150;
-  radius=10;
+  radius=15;
   
   damage=25;
   
@@ -73,8 +83,7 @@ class weapon {
   fire(){
     if (this.ammo>0&&this.lockon) {
       this.ammo--;
-      console.log(this.ammo)
-      return {pos: this.lockon, rad: this.radius, dmg: this.damage};
+      return {pos: this.lockon, rad: this.radius, dmg: this.damage, active: true};
     }
     return 0;
   }
@@ -104,9 +113,19 @@ window.onload = ()=> {
           battle.splashes.push(shot)
       })
     })
-    //document.getElementById('mode').value='maneuver'
+    battle.deal_dmg()
     battle.vessels[0].weapons[0].lockon=undefined;
     battle.vessels[0].new_pos=undefined;
+    draw_game(battle)
+  }
+  
+  document.getElementById('shoot').onclick = () => {
+      let shot = battle.vessels[0].weapons[0].fire()
+      if (shot)
+        battle.splashes.push(shot)
+
+    battle.deal_dmg()
+    battle.vessels[0].weapons[0].lockon = undefined;
     draw_game(battle)
   }
   
@@ -138,7 +157,7 @@ window.onload = ()=> {
     ctx.beginPath();
     ctx.arc(s.pos.x, s.pos.y, s.rad, 0, 2 * Math.PI);
     ctx.globalAlpha = s.dmg/100
-    ctx.fillStyle = 'gray'
+    ctx.fillStyle = s.active?'red':'gray'
     ctx.fill();
     ctx.globalAlpha = 1
     });
@@ -170,7 +189,11 @@ window.onload = ()=> {
         ctx.fillStyle = "purple"
         ctx.font = "10px Lucida Console";
         ctx.fillText(vessel.vclass, c.x, c.y);
-      
+       
+        ctx.fillStyle = "pink"
+        ctx.font = "10px Lucida Console";
+        ctx.fillText(vessel.health, c.x, c.y+10);
+       
         ctx.beginPath();
         ctx.arc(c.x, c.y, 3, 0, 2 * Math.PI);
       }
@@ -211,11 +234,11 @@ window.onload = ()=> {
               
           ctx.beginPath();
           ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
-          ctx.strokeStyle = 'pink'
+          ctx.strokeStyle = 'turquoise'
           ctx.stroke();
           ctx.beginPath();
           ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
-          ctx.strokeStyle = 'turquoise'
+          ctx.strokeStyle = 'lightgreen'
           ctx.stroke();
         }
         ctx.beginPath();
