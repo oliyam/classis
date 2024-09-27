@@ -147,8 +147,15 @@ window.onload = ()=> {
       //every blip - dot
       ctx.fillStyle = 'red'
       ctx.beginPath();
-      ctx.arc(b.x, b.y, 4, 0, 2 * Math.PI);
+      ctx.arc(b.pos.x, b.pos.y, 4, 0, 2 * Math.PI);
       ctx.fill();
+      
+      //every blip - info
+      if(b.sign){
+        ctx.fillStyle = "white"
+        ctx.font = "italic 10px monospace";
+        ctx.fillText(b.sign, b.pos.x - ctx.measureText(b.sign).width/2, b.pos.y);
+      }
     })
   }
   
@@ -173,6 +180,71 @@ window.onload = ()=> {
     let x=p.x;
     let y=p.y;
     
+    if (selected)
+      switch (document.getElementById("mode").value) {
+        case 'maneuver':
+          //destination 
+          let d = vessel.new_pos;
+          if (d) {
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
+            ctx.fillStyle = 'gray'
+            ctx.fill();
+            ctx.beginPath()
+            ctx.strokeStyle = 'orange'
+            ctx.moveTo(x, y)
+            ctx.lineTo(d.x, d.y)
+            ctx.stroke()
+    
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'turquoise'
+            ctx.stroke();
+    
+            if (document.getElementById('radar').checked) {
+              ctx.beginPath();
+              ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
+              ctx.strokeStyle = 'lightgreen'
+              ctx.stroke();
+            }
+          }
+          ctx.beginPath();
+          ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
+          ctx.strokeStyle = 'blue'
+          ctx.stroke();
+    
+          break;
+    
+        case 'fire':
+          //weapons
+          vessel.weapons.forEach(w => {
+            ctx.beginPath();
+            ctx.arc(x, y, w.range, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'orange'
+            ctx.strokeWidth = 2
+            ctx.stroke();
+    
+            draw_solution(vessel.pos.at(-1), w)
+    
+            //circle - each weapon range
+            ctx.beginPath();
+            ctx.arc(x, y, w.range, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'orange'
+            ctx.stroke();
+          });
+          break;
+      }
+    
+        //draw radar-range and blips
+        if (document.getElementById('radar').checked) {
+          ctx.beginPath();
+          ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+          ctx.strokeStyle = 'green'
+          ctx.stroke();
+
+          draw_blips(vessel.radar)
+        }
+    
       //loop through past positions
       for(let i=0;i<vessel.pos.length;i++){
         let c = vessel.pos[i];
@@ -185,13 +257,21 @@ window.onload = ()=> {
           ctx.stroke()
           
           //info-text
-          ctx.fillStyle = "purple"
+          ctx.fillStyle = "yellow"
           ctx.font = "bold 15px monospace";
-          ctx.fillText(vessel.vclass, c.x+10, c.y);
+          ctx.fillText(vessel.vclass, c.x + 10, c.y);
            
           ctx.fillStyle = "red"
           ctx.font = "bold 10px monospace";
-          ctx.fillText(vessel.health, c.x+10, c.y+10);
+          ctx.fillText("♡:"+vessel.health, c.x + 10, c.y + 10);
+          
+          let nr=1;
+          vessel.weapons.forEach(w => {
+            ctx.fillStyle = "orange"
+            ctx.font = "bold 10px monospace";
+            ctx.fillText(nr+"¤:" + w.ammo, c.x + 10, c.y + 10 + 10*nr);
+            nr++;
+          });
         }
         
         //every position - dot
@@ -210,69 +290,6 @@ window.onload = ()=> {
           ctx.stroke()
         }
       }
-      
-      if(document.getElementById('radar').checked){
-        ctx.beginPath();
-        ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-        ctx.strokeStyle = 'green'
-        ctx.stroke();
-        
-        draw_blips(vessel.radar)
-      }
-      if(selected)
-        switch (document.getElementById("mode").value) {
-          case 'maneuver':
-            //destination 
-            let d = vessel.new_pos;
-            if (d) {
-              ctx.beginPath();
-              ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
-              ctx.fillStyle = 'gray'
-              ctx.fill();
-              ctx.beginPath()
-              ctx.strokeStyle = 'orange'
-              ctx.moveTo(x, y)
-              ctx.lineTo(d.x, d.y)
-              ctx.stroke()
-                  
-              ctx.beginPath();
-              ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
-              ctx.strokeStyle = 'turquoise'
-              ctx.stroke();
-              
-              if (document.getElementById('radar').checked) {
-                ctx.beginPath();
-                ctx.arc(d.x, y, vessel.radar.range, 0, 2 * Math.PI);
-                ctx.strokeStyle = 'lightgreen'
-                ctx.stroke();
-              }
-            }
-            ctx.beginPath();
-            ctx.arc(x, y, vessel.speed, 0, 2 * Math.PI);
-            ctx.strokeStyle = 'blue'
-            ctx.stroke();
-            
-            break;
-            
-            case 'fire':
-              //weapons
-              vessel.weapons.forEach(w=>{
-                ctx.beginPath();
-                ctx.arc(x, y, w.range, 0, 2 * Math.PI);
-                ctx.strokeStyle = 'orange'
-                ctx.strokeWidth = 2
-                ctx.stroke();
-        
-                draw_solution(vessel.pos.at(-1),w)
-      
-                //circle - each weapon range
-                ctx.beginPath();
-                ctx.arc(x, y, w.range, 0, 2 * Math.PI);
-                ctx.strokeStyle = 'orange'
-                ctx.stroke();
-              });
-            break;
-        }
   }
     
   function draw_game(game) {

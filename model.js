@@ -9,8 +9,8 @@
       splashes = [];
       
       constructor(n){
-        this.vessels.push(new vessel(0, 'frien', "ROCINANTE", null, 100, 50, new weapon(), new radar()))
-        this.vessels.push(new vessel(1, 'frien', "ENTERPRISE", [{x: 200, y: 500}], 100, 50, new weapon(), new radar()))
+        this.vessels.push(new vessel(0, 'frien', "ROCINANTE", null, 100, 50, null, new radar(100)))
+        this.vessels.push(new vessel(1, 'frien', "ENTERPRISE", [{x: 200, y: 500}], 100, 50, new weapon(69), new radar(200,1)))
         for (var i = 2; i < n; i++) {
           this.vessels.push(new vessel(i, null, "DD-0"+i, [{x: i*10+25, y: i*30+20}], 100, 50, new weapon(), new radar()));
         }
@@ -25,7 +25,7 @@
               ufo.faction!=v.faction && 
               ufo.health>0
             ) {
-              v.radar.blips.push(ufo.pos.at(-1))
+              v.radar.blips.push({pos: ufo.pos.at(-1), sign: v.radar.id_ufo?ufo.vclass:undefined})
             }
           })
         });
@@ -53,7 +53,7 @@
       
       health = 100;
       speed = 30;
-      weapons = [];
+      weapons = [new weapon()];
       radar = {};
       
       constructor(id, faction, vclass, pos, health, speed, weapons, radar){
@@ -82,8 +82,14 @@
     
     class radar {
       range=200;
+      id_ufo=false;
       
       blips=[];
+      
+      constructor(range, id_ufo){
+        this.range=range||this.range;
+        this.id_ufo=id_ufo||this.id_ufo;
+      }
     }
     
     class weapon {
@@ -95,6 +101,10 @@
       ammo=12;
       
       lockon;
+      
+      constructor(ammo){
+        this.ammo=ammo||this.ammo;
+      }
       
       target(pos, vec){
         if (in_range(pos, vec, this.range)&&this.ammo>0){
