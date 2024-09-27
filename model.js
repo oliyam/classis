@@ -10,22 +10,25 @@
       
       constructor(n){
         this.vessels.push(new vessel(0, 'frien', "ROCINANTE", null, 100, 50, new weapon(), new radar()))
-        for (var i = 1; i < n; i++) {
-          this.vessels.push(new vessel(i, null, "DD-0"+i, [{x: i*50+25, y: i*30+20}], 100, 50, new weapon(), new radar()));
+        this.vessels.push(new vessel(1, 'frien', "ENTERPRISE", [{x: 200, y: 500}], 100, 50, new weapon(), new radar()))
+        for (var i = 2; i < n; i++) {
+          this.vessels.push(new vessel(i, null, "DD-0"+i, [{x: i*10+25, y: i*30+20}], 100, 50, new weapon(), new radar()));
         }
       }
       
-      scan(v_id){
-        this.vessels[v_id].radar.blips=[];
-        this.vessels.forEach(ufo=>{
-          if (
-            in_range(this.vessels[v_id].pos.at(-1), ufo.pos.at(-1), this.vessels[v_id].radar.range) &&  
-            ufo.faction!=this.vessels[v_id].faction && 
-            ufo.health>0
-          ) {
-            this.vessels[v_id].radar.blips.push(ufo.pos.at(-1))
-          }
-        })
+      scan(){
+        this.vessels.forEach(v => {
+          v.radar.blips=[];
+          this.vessels.forEach(ufo=>{
+            if (
+              in_range(v.pos.at(-1), ufo.pos.at(-1), v.radar.range) &&  
+              ufo.faction!=v.faction && 
+              ufo.health>0
+            ) {
+              v.radar.blips.push(ufo.pos.at(-1))
+            }
+          })
+        });
       }
       
       deal_dmg(){
@@ -85,7 +88,7 @@
     
     class weapon {
       range=150;
-      radius=15;
+      radius=20;
       
       damage=25;
       

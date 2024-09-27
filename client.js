@@ -4,7 +4,7 @@ window.onload = ()=> {
   var ctx = c.getContext("2d");
   ctx.lineWidth = 1.5;
   
-  var battle=new game(5);
+  var battle=new game(20);
   draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
@@ -44,6 +44,7 @@ window.onload = ()=> {
     draw_game(battle)
   })
   document.getElementById('radar').addEventListener("change", () => {
+    battle.scan()
     draw_game(battle)
   })
   /*
@@ -98,16 +99,42 @@ window.onload = ()=> {
   
   function draw_solution(vpos, weapon){
     if (weapon.ammo>0&&weapon.lockon) {
+      
       ctx.beginPath()
       ctx.strokeStyle = 'orange'
       ctx.moveTo(vpos.x, vpos.y)
       ctx.lineTo(weapon.lockon.x, weapon.lockon.y)
       ctx.stroke()
-      
+
       ctx.beginPath();
       ctx.arc(weapon.lockon.x, weapon.lockon.y, weapon.radius, 0, 2 * Math.PI);
-      ctx.fillStyle = 'red'
-      ctx.fill();
+      ctx.strokeStyle = 'red'
+      ctx.stroke();
+      
+      draw_triangle(weapon.lockon, weapon.radius/3, 'red')
+      
+      //croshair
+      let arr = [
+        {
+          x_s: 0, y_s: 1,
+          x_e: 0, y_e: .5
+        },
+        {
+          x_s: 1, y_s: 0,
+          x_e: .5, y_e: 0
+        },
+        {
+          x_s: -1, y_s: 0,
+          x_e: -.5, y_e: 0
+        },
+      ];
+      
+      for (var i = 0; i < arr.length; i++) {
+        ctx.beginPath()
+        ctx.moveTo(weapon.lockon.x + weapon.radius*arr[i].x_s, weapon.lockon.y + weapon.radius*arr[i].y_s)
+        ctx.lineTo(weapon.lockon.x + weapon.radius*arr[i].x_e, weapon.lockon.y + weapon.radius*arr[i].y_e)
+        ctx.stroke()
+      }
     }
   }
   
@@ -119,6 +146,21 @@ window.onload = ()=> {
       ctx.arc(b.x, b.y, 4, 0, 2 * Math.PI);
       ctx.fill();
     })
+  }
+  
+  function draw_triangle(pos, size, color) {
+          ctx.fillStyle = color;
+          ctx.beginPath();
+          let 
+            l=size,
+            h=Math.abs(Math.sin(Math.PI/3)*l),
+            p={x: pos.x, y: pos.y+l/2}
+          ;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x-l/2, p.y-h);
+          ctx.lineTo(p.x+l/2, p.y-h);
+          ctx.lineTo(p.x, p.y);
+          ctx.fill()
   }
   
   function draw_vessel(vessel, selected){
@@ -134,18 +176,7 @@ window.onload = ()=> {
         //if last - current vessel position
         if(i+1==vessel.pos.length){
           
-          ctx.fillStyle = 'lightgreen'
-          ctx.beginPath();
-          let 
-            l=20,
-            h=Math.abs(Math.sin(Math.PI/3)*l),
-            p={x: c.x, y: c.y+l/2}
-          ;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p.x-l/2, p.y-h);
-          ctx.lineTo(p.x+l/2, p.y-h);
-          ctx.lineTo(p.x, p.y);
-          ctx.fill()
+          draw_triangle(c, 20, 'lightgreen')
           ctx.strokeStyle = 'green'
           ctx.stroke()
           
@@ -229,27 +260,25 @@ window.onload = ()=> {
                 ctx.stroke();
         
                 draw_solution(vessel.pos.at(-1),w)
+      
+                //circle - each weapon range
+                ctx.beginPath();
+                ctx.arc(x, y, w.range, 0, 2 * Math.PI);
+                ctx.strokeStyle = 'orange'
+                ctx.stroke();
               });
-              
-              ctx.beginPath();
-              ctx.arc(x, y, vessel.weapons[0].range, 0, 2 * Math.PI);
-              ctx.strokeStyle = 'orange'
-              ctx.stroke();
-              
             break;
         }
   }
     
   function draw_game(game) {
     ctx.clearRect(0,0,c.width,c.height);
+    draw_splashes(game)
     game.vessels.forEach(v => {
-      game.scan(v.id)
-      console.log(v.radar.blips)
       if (v.faction=='frien'){
         draw_vessel(v,game.selected_v==v.id, false);
       }
     });
-    draw_splashes(game)
   }
   
 }
