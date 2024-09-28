@@ -16,13 +16,14 @@
         }
       }
       
-      scan(){
+      scan(faction){
         this.vessels.forEach(v => {
           v.radar.blips=[];
           this.vessels.forEach(ufo=>{
             if (
               in_range(v.pos.at(-1), ufo.pos.at(-1), v.radar.range) &&  
               ufo.faction!=v.faction && 
+              ufo.faction!=faction && 
               ufo.health>0
             ) {
               v.radar.blips.push({pos: ufo.pos.at(-1), sign: v.radar.id_ufo?ufo.vclass:undefined})

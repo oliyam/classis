@@ -23,15 +23,16 @@ window.onload = ()=> {
   }
   
   document.getElementById('scan').onclick = () => {
-    battle.scan()
+    battle.scan(document.getElementById('iff').value)
     document.getElementById('radar').checked=true;
     draw_game(battle)
   }
   
   document.getElementById('selectv').onclick = () => {
-    {
-      battle.selected_v=battle.selected_v+1%battle.vessels.length;
-    }while(battle.vessels[battle.selected_v].faction!=document.getElementById('iff'))
+    do {
+      battle.selected_v=(battle.selected_v+1)%battle.vessels.length;
+      console.log(battle.selected_v)
+    } while(battle.vessels[battle.selected_v].faction!=document.getElementById('iff').value)
     draw_game(battle)
   }
   
