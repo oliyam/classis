@@ -10,12 +10,8 @@ window.onload = ()=> {
   document.getElementById('turn').onclick=()=>{
     battle.vessels.forEach(v=>{
       v.sail()
-      v.weapons.forEach(w=>{
-        let shot = w.fire()
-        if(shot)
-          battle.splashes.push(shot)
-      })
     })
+    battle.fire()
     battle.deal_dmg()
     battle.vessels[battle.selected_v].weapons[0].lockon=undefined;
     battle.vessels[battle.selected_v].new_pos=undefined;
@@ -32,7 +28,10 @@ window.onload = ()=> {
     do {
       battle.selected_v=(battle.selected_v+1)%battle.vessels.length;
       console.log(battle.selected_v)
-    } while(battle.vessels[battle.selected_v].faction!=document.getElementById('iff').value)
+    } while(
+      battle.vessels[battle.selected_v].faction!=document.getElementById('iff').value ||
+      !battle.vessels[battle.selected_v].health>0
+    )
     draw_game(battle)
   }
   
@@ -44,13 +43,11 @@ window.onload = ()=> {
         break;
     
       case 'fire':
-        let shot = battle.vessels[battle.selected_v].weapons[0].fire()
-        if (shot)
-          battle.splashes.push(shot)
+        battle.fire();
         break;
     }
     battle.vessels[battle.selected_v].weapons[0].lockon = undefined;
-    //battle.vessels[battle.selected_v].new_pos = undefined;
+    battle.vessels[battle.selected_v].new_pos = undefined;
     draw_game(battle)
   }
   
@@ -187,6 +184,8 @@ window.onload = ()=> {
   
   function draw_vessel(vessel, selected){
    
+    var ded = !vessel.health;
+   
     let p=vessel.pos.at(-1);
     let x=p.x;
     let y=p.y;
@@ -262,39 +261,6 @@ window.onload = ()=> {
       //loop through past positions
       for(let i=0;i<vessel.pos.length;i++){
         let c = vessel.pos[i];
-              
-        //if last - current vessel position
-        if(i+1==vessel.pos.length){
-          
-          draw_triangle(c, 20, 'lightgreen')
-          ctx.strokeStyle = 'green'
-          ctx.stroke()
-          
-          //info-text
-          if (document.getElementById('info').checked) {
-            ctx.fillStyle = "yellow"
-            ctx.font = "bold 15px monospace";
-            ctx.fillText(vessel.vclass, c.x + 10, c.y);
-             
-            ctx.fillStyle = "red"
-            ctx.font = "bold 10px monospace";
-            ctx.fillText("♡:"+vessel.health, c.x + 10, c.y + 10);
-            
-            let nr=1;
-            vessel.weapons.forEach(w => {
-              ctx.fillStyle = "orange"
-              ctx.font = "bold 10px monospace";
-              ctx.fillText(nr+"¤:" + w.ammo, c.x + 10, c.y + 10 + 10*nr);
-              nr++;
-            });
-          }
-        }
-        
-        //every position - dot
-        ctx.fillStyle = 'blue'
-        ctx.beginPath();
-        ctx.arc(c.x, c.y, 3, 0, 2 * Math.PI);
-        ctx.fill();
         
         //if next - line
         let m = vessel.pos[i+1]
@@ -305,7 +271,64 @@ window.onload = ()=> {
           ctx.lineTo(m.x,m.y)
           ctx.stroke()
         }
+        //every position - dot
+        ctx.fillStyle = 'blue'
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, 3, 0, 2 * Math.PI);
+        ctx.fill();
       }
+        if(!ded){
+          draw_triangle(p, 20, 'lightgreen')
+          ctx.strokeStyle = 'green'
+          ctx.stroke()
+          
+         ctx.fillStyle = 'blue'
+         ctx.beginPath();
+         ctx.arc(p.x, p.y, 3, 0, 2 * Math.PI);
+         ctx.fill();
+          
+          //info-text
+          if (document.getElementById('info').checked) {
+            ctx.fillStyle = "yellow"
+            ctx.font = "bold 15px monospace";
+            ctx.fillText(vessel.vclass, p.x + 10, p.y);
+             
+            ctx.fillStyle = "red"
+            ctx.font = "bold 10px monospace";
+            ctx.fillText("♡:"+vessel.health, p.x + 10, p.y + 10);
+            
+            let nr=1;
+            vessel.weapons.forEach(w => {
+              ctx.fillStyle = "orange"
+              ctx.font = "bold 10px monospace";
+              ctx.fillText(nr+"¤:" + w.ammo, p.x + 10, p.y + 10 + 10*nr);
+              nr++;
+            });
+          }
+        }
+          else {
+             draw_triangle(p, 20, 'gray')
+             ctx.strokeStyle = 'green'
+             ctx.stroke()
+          
+             ctx.fillStyle = 'blue'
+             ctx.beginPath();
+             ctx.arc(p.x, p.y, 3, 0, 2 * Math.PI);
+             ctx.fillStyle = "black"
+             ctx.font = "bold 15px monospace";
+             ctx.fillText('X', p.x + 10, p.y);
+          
+             //info-text
+             if (document.getElementById('info').checked) {
+               ctx.fillStyle = "yellow"
+               ctx.font = "bold 15px monospace";
+               ctx.fillText(vessel.vclass, p.x + 10, p.y);
+          
+               ctx.fillStyle = "red"
+               ctx.font = "bold 10px monospace";
+               ctx.fillText("casualty", p.x + 10, p.y + 10);
+             }
+          }
   }
     
   function draw_game(game) {
