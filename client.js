@@ -248,16 +248,6 @@ window.onload = ()=> {
           break;
       }
     
-        //draw radar-range and blips
-        if (document.getElementById('radar').checked) {
-          ctx.beginPath();
-          ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-          ctx.strokeStyle = 'green'
-          ctx.stroke();
-
-          draw_blips(vessel.radar)
-        }
-    
       //loop through past positions
       for(let i=0;i<vessel.pos.length;i++){
         let c = vessel.pos[i];
@@ -305,28 +295,38 @@ window.onload = ()=> {
               nr++;
             });
           }
+          
+          //draw radar-range and blips
+          if (document.getElementById('radar').checked) {
+            ctx.beginPath();
+            ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'green'
+            ctx.stroke();
+        
+            draw_blips(vessel.radar)
+          }
         }
           else {
-             draw_triangle(p, 20, 'gray')
+             draw_triangle(p, 20, 'black')
              ctx.strokeStyle = 'green'
              ctx.stroke()
           
              ctx.fillStyle = 'blue'
              ctx.beginPath();
              ctx.arc(p.x, p.y, 3, 0, 2 * Math.PI);
-             ctx.fillStyle = "black"
-             ctx.font = "bold 15px monospace";
-             ctx.fillText('X', p.x + 10, p.y);
+             ctx.fillStyle = "red"
+             ctx.font = "30px monospace";
+             ctx.fillText('×', p.x-ctx.measureText('×').width/2, p.y+10);
           
              //info-text
              if (document.getElementById('info').checked) {
-               ctx.fillStyle = "yellow"
+               ctx.fillStyle = "white"
                ctx.font = "bold 15px monospace";
                ctx.fillText(vessel.vclass, p.x + 10, p.y);
           
-               ctx.fillStyle = "red"
+               ctx.fillStyle = "purple"
                ctx.font = "bold 10px monospace";
-               ctx.fillText("casualty", p.x + 10, p.y + 10);
+               ctx.fillText("CASUALTY", p.x + 10, p.y + 10);
              }
           }
   }
