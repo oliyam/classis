@@ -16,6 +16,22 @@
         }
       }
       
+      reset_tmp(){
+        this.vessels[this.selected_v].weapons[0].lockon = undefined;
+        this.vessels[this.selected_v].new_pos = undefined;
+      }
+      
+      select_next(iff){
+        for (var i = 1; i < this.vessels.length; i++) {
+          console.log((this.selected_v + i) % this.vessels.length)
+          let s = this.vessels[(this.selected_v + i) % this.vessels.length];
+          if (s.faction == iff) {
+            this.selected_v = s.id;
+            break;
+          }
+        }
+      }
+      
       scan(faction){
         this.vessels.forEach(v => {
           v.radar.blips=[];
@@ -52,6 +68,15 @@
          })
          s.active=0;
        })
+      }
+      
+      turn(){
+        this.vessels.forEach(v => {
+          v.sail()
+        })
+        this.fire()
+        this.deal_dmg()
+        this.reset_tmp()
       }
     }
     

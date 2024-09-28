@@ -8,13 +8,7 @@ window.onload = ()=> {
   draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
-    battle.vessels.forEach(v=>{
-      v.sail()
-    })
-    battle.fire()
-    battle.deal_dmg()
-    battle.vessels[battle.selected_v].weapons[0].lockon=undefined;
-    battle.vessels[battle.selected_v].new_pos=undefined;
+    battle.turn()
     draw_game(battle)
   }
   
@@ -25,14 +19,7 @@ window.onload = ()=> {
   }
   
   document.getElementById('selectv').onclick = () => {
-    for (var i = 1; i < battle.vessels.length; i++) {
-      console.log((battle.selected_v+i)%battle.vessels.length)
-      let s = battle.vessels[(battle.selected_v+i)%battle.vessels.length];
-      if (s.faction==document.getElementById('iff').value) {
-        battle.selected_v=s.id;
-        break;
-      }
-    }
+    battle.select_next(document.getElementById('iff').value)
     draw_game(battle)
   }
   
@@ -40,15 +27,13 @@ window.onload = ()=> {
     switch (document.getElementById("mode").value) {
       case 'maneuver':
         document.getElementById("mode").value='fire'
-        
         break;
     
       case 'fire':
         battle.fire();
         break;
     }
-    battle.vessels[battle.selected_v].weapons[0].lockon = undefined;
-    battle.vessels[battle.selected_v].new_pos = undefined;
+    battle.reset_tmp()
     draw_game(battle)
   }
   
@@ -63,9 +48,7 @@ window.onload = ()=> {
   })
 
   document.getElementById('iff').addEventListener("change", () => {
-    do {
-      battle.selected_v = (battle.selected_v + 1) % battle.vessels.length;
-    } while (battle.vessels[battle.selected_v].faction != document.getElementById('iff').value)
+    battle.select_next(document.getElementById('iff').value)
     draw_game(battle)
   })
 
@@ -204,7 +187,7 @@ window.onload = ()=> {
       ctx.stroke()
     }
     
-    if (selected)
+    if (selected && !ded)
       switch (document.getElementById("mode").value) {
         case 'maneuver':
           
