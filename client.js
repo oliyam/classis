@@ -50,7 +50,7 @@ window.onload = ()=> {
         break;
     }
     battle.vessels[battle.selected_v].weapons[0].lockon = undefined;
-    battle.vessels[battle.selected_v].new_pos = undefined;
+    //battle.vessels[battle.selected_v].new_pos = undefined;
     draw_game(battle)
   }
   
@@ -65,6 +65,10 @@ window.onload = ()=> {
   })
 
   document.getElementById('iff').addEventListener("change", () => {
+    do {
+      battle.selected_v = (battle.selected_v + 1) % battle.vessels.length;
+      console.log(battle.selected_v)
+    } while (battle.vessels[battle.selected_v].faction != document.getElementById('iff').value)
     draw_game(battle)
   })
 
@@ -95,6 +99,7 @@ window.onload = ()=> {
       ctx.fillStyle = s.active?'orange':'gray'
       ctx.fill();
       ctx.globalAlpha = 1
+      draw_crosshair(s.pos, s.rad, 'darkred');
     });
   }
   
@@ -106,36 +111,9 @@ window.onload = ()=> {
       ctx.moveTo(vpos.x, vpos.y)
       ctx.lineTo(weapon.lockon.x, weapon.lockon.y)
       ctx.stroke()
-
-      ctx.beginPath();
-      ctx.arc(weapon.lockon.x, weapon.lockon.y, weapon.radius, 0, 2 * Math.PI);
-      ctx.strokeStyle = 'red'
-      ctx.stroke();
       
       draw_triangle(weapon.lockon, weapon.radius/3, 'red')
-      
-      //croshair
-      let arr = [
-        {
-          x_s: 0, y_s: 1,
-          x_e: 0, y_e: .5
-        },
-        {
-          x_s: 1, y_s: 0,
-          x_e: .5, y_e: 0
-        },
-        {
-          x_s: -1, y_s: 0,
-          x_e: -.5, y_e: 0
-        },
-      ];
-      
-      for (var i = 0; i < arr.length; i++) {
-        ctx.beginPath()
-        ctx.moveTo(weapon.lockon.x + weapon.radius*arr[i].x_s, weapon.lockon.y + weapon.radius*arr[i].y_s)
-        ctx.lineTo(weapon.lockon.x + weapon.radius*arr[i].x_e, weapon.lockon.y + weapon.radius*arr[i].y_e)
-        ctx.stroke()
-      }
+      draw_crosshair(weapon.lockon, weapon.radius, 0, 'red')
     }
   }
   
@@ -171,33 +149,88 @@ window.onload = ()=> {
           ctx.fill()
   }
   
+  function rotate_vec(vec, center, rot){
+    rot*=Math.PI/100;
+    let 
+      cos=Math.cos(rot),
+      sin=Math.sin(rot)
+    ;
+    
+    return {
+      x: center.x+(vec.x-center.x)*cos-(vec.y-center.y)*sin,
+      y: center.y+(vec.x-center.x)*sin+(vec.y-center.y)*cos
+    }
+  }
+  
+  function draw_crosshair(pos, radius, rot, color){
+      //croshair
+      let arr = [
+        {
+          x_s: 0, y_s: 1,
+          x_e: 0, y_e: .5
+        },
+        {
+          x_s: 1, y_s: 0,
+          x_e: .5, y_e: 0
+        },
+        {
+          x_s: -1, y_s: 0,
+          x_e: -.5, y_e: 0
+        },
+      ];
+      
+      let final_pos = [];
+      
+      
+      for (var i = 0; i < arr.length; i++)
+        final_pos.push({
+            s: rotate_vec({x: pos.x + radius*arr[i].x_s, y: pos.y + radius*arr[i].y_s}, pos, rot),
+            e: rotate_vec({x: pos.x + radius*arr[i].x_e, y: pos.y + radius*arr[i].y_e}, pos, rot),
+        });
+      
+      ctx.strokeStyle = color;
+      final_pos.forEach(p => {
+        ctx.beginPath()
+        ctx.moveTo(p.s.x, p.s.y)
+        ctx.lineTo(p.e.x, p.e.y)
+        ctx.stroke()
+      });
+      
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
+      ctx.stroke();
+    }
+  
   function draw_vessel(vessel, selected){
    
     let p=vessel.pos.at(-1);
     let x=p.x;
     let y=p.y;
     
+    //destination 
+    let d = vessel.new_pos;
+    if (d) {
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
+      ctx.fillStyle = 'gray'
+      ctx.fill();
+      ctx.beginPath()
+      ctx.strokeStyle = 'orange'
+      ctx.moveTo(x, y)
+      ctx.lineTo(d.x, d.y)
+      ctx.stroke()
+    }
+    
     if (selected)
       switch (document.getElementById("mode").value) {
         case 'maneuver':
-          //destination 
-          let d = vessel.new_pos;
+          
           if (d) {
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, 2.5, 0, 2 * Math.PI);
-            ctx.fillStyle = 'gray'
-            ctx.fill();
-            ctx.beginPath()
-            ctx.strokeStyle = 'orange'
-            ctx.moveTo(x, y)
-            ctx.lineTo(d.x, d.y)
-            ctx.stroke()
-    
             ctx.beginPath();
             ctx.arc(d.x, d.y, vessel.speed, 0, 2 * Math.PI);
             ctx.strokeStyle = 'turquoise'
             ctx.stroke();
-    
+
             if (document.getElementById('radar').checked) {
               ctx.beginPath();
               ctx.arc(d.x, d.y, vessel.radar.range, 0, 2 * Math.PI);
