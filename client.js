@@ -99,7 +99,8 @@ window.onload = ()=> {
       ctx.fillStyle = s.active?'orange':'gray'
       ctx.fill();
       ctx.globalAlpha = 1
-      draw_crosshair(s.pos, s.rad, 'darkred');
+      if(s.active)
+        draw_crosshair(s.pos, crosshairs.lockon, s.rad, 45, 'darkred')
     });
   }
   
@@ -113,7 +114,7 @@ window.onload = ()=> {
       ctx.stroke()
       
       draw_triangle(weapon.lockon, weapon.radius/3, 'red')
-      draw_crosshair(weapon.lockon, weapon.radius, 0, 'red')
+      draw_crosshair(weapon.lockon, crosshairs.aim, weapon.radius, 0, 'red')
     }
   }
   
@@ -150,7 +151,7 @@ window.onload = ()=> {
   }
   
   function rotate_vec(vec, center, rot){
-    rot*=Math.PI/100;
+    rot*=Math.PI/180;
     let 
       cos=Math.cos(rot),
       sin=Math.sin(rot)
@@ -162,30 +163,13 @@ window.onload = ()=> {
     }
   }
   
-  function draw_crosshair(pos, radius, rot, color){
-      //croshair
-      let arr = [
-        {
-          x_s: 0, y_s: 1,
-          x_e: 0, y_e: .5
-        },
-        {
-          x_s: 1, y_s: 0,
-          x_e: .5, y_e: 0
-        },
-        {
-          x_s: -1, y_s: 0,
-          x_e: -.5, y_e: 0
-        },
-      ];
-      
+  function draw_crosshair(pos, mtrx, radius, rot, color){
       let final_pos = [];
-      
-      
-      for (var i = 0; i < arr.length; i++)
+    
+      for (var i = 0; i < mtrx.length; i++)
         final_pos.push({
-            s: rotate_vec({x: pos.x + radius*arr[i].x_s, y: pos.y + radius*arr[i].y_s}, pos, rot),
-            e: rotate_vec({x: pos.x + radius*arr[i].x_e, y: pos.y + radius*arr[i].y_e}, pos, rot),
+            s: rotate_vec({x: pos.x + radius*mtrx[i].x_s, y: pos.y + radius*mtrx[i].y_s}, pos, rot),
+            e: rotate_vec({x: pos.x + radius*mtrx[i].x_e, y: pos.y + radius*mtrx[i].y_e}, pos, rot),
         });
       
       ctx.strokeStyle = color;
