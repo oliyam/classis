@@ -86,8 +86,8 @@ class view_ {
     
       for (var i = 0; i < mtrx.length; i++)
         final_pos.push({
-            s: rotate_vec({x: pos.x + radius*mtrx[i].x_s, y: pos.y + radius*mtrx[i].y_s}, pos, rot),
-            e: rotate_vec({x: pos.x + radius*mtrx[i].x_e, y: pos.y + radius*mtrx[i].y_e}, pos, rot),
+            s: this.rotate_vec({x: pos.x + radius*mtrx[i].x_s, y: pos.y + radius*mtrx[i].y_s}, pos, rot),
+            e: this.rotate_vec({x: pos.x + radius*mtrx[i].x_e, y: pos.y + radius*mtrx[i].y_e}, pos, rot),
         });
       
       this.ctx.strokeStyle = color;
