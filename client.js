@@ -25,13 +25,14 @@ window.onload = ()=> {
   }
   
   document.getElementById('selectv').onclick = () => {
-    do {
-      battle.selected_v=(battle.selected_v+1)%battle.vessels.length;
-      console.log(battle.selected_v)
-    } while(
-      battle.vessels[battle.selected_v].faction!=document.getElementById('iff').value ||
-      !battle.vessels[battle.selected_v].health>0
-    )
+    for (var i = 1; i < battle.vessels.length; i++) {
+      console.log((battle.selected_v+i)%battle.vessels.length)
+      let s = battle.vessels[(battle.selected_v+i)%battle.vessels.length];
+      if (s.faction==document.getElementById('iff').value) {
+        battle.selected_v=s.id;
+        break;
+      }
+    }
     draw_game(battle)
   }
   
@@ -64,7 +65,6 @@ window.onload = ()=> {
   document.getElementById('iff').addEventListener("change", () => {
     do {
       battle.selected_v = (battle.selected_v + 1) % battle.vessels.length;
-      console.log(battle.selected_v)
     } while (battle.vessels[battle.selected_v].faction != document.getElementById('iff').value)
     draw_game(battle)
   })
@@ -291,7 +291,7 @@ window.onload = ()=> {
             vessel.weapons.forEach(w => {
               ctx.fillStyle = "orange"
               ctx.font = "bold 10px monospace";
-              ctx.fillText(nr+"¤:" + w.ammo, p.x + 10, p.y + 10 + 10*nr);
+              ctx.fillText("¤"+nr+":" + w.ammo, p.x + 10, p.y + 10 + 10*nr);
               nr++;
             });
           }
