@@ -126,7 +126,7 @@ window.onload = ()=> {
       //every blip - info
       if(b.sign && document.getElementById('info').checked) {
         ctx.fillStyle = "white"
-        ctx.font = "italic 10px monospace";
+        ctx.font = "bold italic 10px monospace";
         ctx.fillText(b.sign, b.pos.x - ctx.measureText(b.sign).width/2, b.pos.y);
       }
     })
