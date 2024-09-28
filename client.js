@@ -4,7 +4,7 @@ window.onload = ()=> {
   var ctx = c.getContext("2d");
   ctx.lineWidth = 1.5;
   
-  var battle=new game(20);
+  var battle=new game(10);
   draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
@@ -25,6 +25,13 @@ window.onload = ()=> {
   document.getElementById('scan').onclick = () => {
     battle.scan()
     document.getElementById('radar').checked=true;
+    draw_game(battle)
+  }
+  
+  document.getElementById('selectv').onclick = () => {
+    {
+      battle.selected_v=battle.selected_v+1%battle.vessels.length;
+    }while(battle.vessels[battle.selected_v].faction!=document.getElementById('iff'))
     draw_game(battle)
   }
   
@@ -53,6 +60,10 @@ window.onload = ()=> {
     draw_game(battle)
   })
   document.getElementById('info').addEventListener("change", () => {
+    draw_game(battle)
+  })
+
+  document.getElementById('iff').addEventListener("change", () => {
     draw_game(battle)
   })
 
@@ -283,7 +294,7 @@ window.onload = ()=> {
     ctx.clearRect(0,0,c.width,c.height);
     draw_splashes(game)
     game.vessels.forEach(v => {
-      if (v.faction=='frien'){
+      if (v.faction==document.getElementById('iff').value){
         draw_vessel(v,game.selected_v==v.id, false);
       }
     });

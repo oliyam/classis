@@ -4,7 +4,7 @@
       size = {x:300,y:600}
       
       vessels = [];
-      selected_v = 1;
+      selected_v = 0;
       
       splashes = [];
       
@@ -12,7 +12,7 @@
         this.vessels.push(new vessel(0, 'frien', "ROCINANTE", null, 100, 50, null, new radar(100)))
         this.vessels.push(new vessel(1, 'frien', "ENTERPRISE", [{x: 200, y: 500}], 100, 50, new weapon(69, 200), new radar(200,1)))
         for (var i = 2; i < n; i++) {
-          this.vessels.push(new vessel(i, null, "DD-0"+i, [{x: i*10+25, y: i*30+20}], 100, 50, new weapon(), new radar()));
+          this.vessels.push(new vessel(i, null, "DD-0"+i, [{x: i*10+25, y: i*30+20}], 100, 50, null, new radar()));
         }
       }
       
