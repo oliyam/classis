@@ -1,14 +1,14 @@
 class multiplayer {
-  get_game(){
+  get_game= new Promise((res) =>{
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      return JSON.parse(xhttp.responseText);
+      res(JSON.parse(xhttp.responseText))
    }
   };
   xhttp.open("GET","battle", true);
   xhttp.send();
-  }
+  })
   
   async send_data(data){
     return await fetch('http://yameogo.ddns.net:50240', {
