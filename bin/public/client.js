@@ -3,7 +3,7 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
   
   var view=new view_(c)
-  var battle=new multiplayer().get_game()
+  var battle=JSOn.parse(new multiplayer().get_game())
   view.draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{

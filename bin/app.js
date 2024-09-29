@@ -26,7 +26,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle', (req, res) => {
-  log(game)
   res.json(game)
 })
 
