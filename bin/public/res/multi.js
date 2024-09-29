@@ -1,7 +1,7 @@
 class multiplayer {
   
   async get_game(){
-    return await fetch('http://yameogo.ddns.net:50240/battle');
+    return await JSON.parse(fetch('http://yameogo.ddns.net:50240/battle'));
   }
   
   async send_data(data){

@@ -4,12 +4,9 @@ window.onload = ()=> {
   
   var view=new view_(c)
   var battle=new multiplayer().get_game()
-
   view.draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
-    console.log('sex')
-      console.log(battle)
     battle.turn()
     pvp.send_data(battle)
     view.draw_game(battle)
