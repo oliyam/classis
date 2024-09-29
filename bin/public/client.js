@@ -1,12 +1,7 @@
-var res=new multiplayer().get_game()
-
-  
-  //console.log(res)
-
 window.onload = ()=> {
   
   var c = document.getElementById("myCanvas");
-  var battle=res;
+  var battle=new multiplayer().get_game();
   var view=new view_(c)
 
   document.getElementById('turn').onclick=()=>{

@@ -3,7 +3,7 @@ class multiplayer {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      console.log("sex"+xhttp.responseText);
+      return xhttp.responseText;
    }
   };
   xhttp.open("GET","battle", true);
