@@ -3,8 +3,8 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
   var battle;
   var view=new view_(c)
-  new multiplayer().get_game().then( res => {
-    console.log(res)
+  new multiplayer().get_game().then( value => {
+    console.log(value)
     battle=(res)
     view.draw_game(battle)
     
