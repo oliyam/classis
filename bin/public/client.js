@@ -1,9 +1,11 @@
-  new multiplayer().get_game()
+new multiplayer().get_game().then(res=>{
+  
+  
 
 window.onload = ()=> {
   
   var c = document.getElementById("myCanvas");
-  var battle;
+  var battle=res;
   var view=new view_(c)
 
   document.getElementById('turn').onclick=()=>{
@@ -71,3 +73,4 @@ window.onload = ()=> {
     view.draw_game(battle);
   });
 }
+});
