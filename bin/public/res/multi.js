@@ -1,10 +1,13 @@
 class multiplayer {
-  
-  async get_game(){
-    await fetch('http://yameogo.ddns.net:50240/battle').then(res=>{
-      console.log(res.json)
-       return res.json
-    });
+  get_game(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log("sex"+xhttp.responseText);
+   }
+  };
+  xhttp.open("GET","battle", true);
+  xhttp.send();
   }
   
   async send_data(data){

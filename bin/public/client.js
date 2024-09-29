@@ -1,6 +1,7 @@
-new multiplayer().get_game().then(res=>{
+var res=new multiplayer().get_game()
+
   
-  
+  //console.log(res)
 
 window.onload = ()=> {
   
@@ -73,4 +74,3 @@ window.onload = ()=> {
     view.draw_game(battle);
   });
 }
-});
