@@ -1,7 +1,6 @@
 window.onload = ()=> {
   
-  var pvp = new mul_()
-  console.log(pvp.send_data({}))
+  var pvp = new multiplayer()
   
   var c = document.getElementById("myCanvas");
   
@@ -11,6 +10,7 @@ window.onload = ()=> {
   
   document.getElementById('turn').onclick=()=>{
     battle.turn()
+    pvp.send_data({x: "sex"})
     view.draw_game(battle)
   }
   

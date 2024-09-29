@@ -1,4 +1,4 @@
-class mul_ {
+class multiplayer {
   
   async send_data(data){
     return await fetch('http://yameogo.ddns.net:50240', {
