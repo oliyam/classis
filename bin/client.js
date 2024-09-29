@@ -10,7 +10,7 @@ window.onload = ()=> {
   
   document.getElementById('turn').onclick=()=>{
     battle.turn()
-    pvp.send_data({x: "sex"})
+    pvp.send_data(battle)
     view.draw_game(battle)
   }
   
