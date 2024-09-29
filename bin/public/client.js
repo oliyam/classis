@@ -8,6 +8,7 @@ window.onload = ()=> {
   view.draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
+    console.log('sex')
       console.log(battle)
     battle.turn()
     pvp.send_data(battle)
