@@ -1,9 +1,15 @@
+//custom color logger
+const log = require('./logger/color-logger.js').log;
+
+
 const express = require('express');
+require('./model.js').run()
+
 const app = express();
 
 const port = 3000;
 
-app.use(express.static('bin'));
+app.use(express.static('./bin/public'));
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded());
 
@@ -19,9 +25,15 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname+"/bin/res/index.html")
 })
 
+app.get('/battle', (req, res) => {
+  res.sendFile(__dirname+new game())
+})
+
 app.listen(port, () => {
-  console.log("==================")
-  console.log("==================")
-  console.log("CLASSIS-server is running:")
-  console.log("PORT:"+port)
+  log("==========================")
+  log("==========================")
+  log("CLASSIS-server is running:", 'yellow')
+  log("PORT:"+port, 'cyan')
+  log("==========================")
+  log("ACTIVITY:", 'orange')
 })

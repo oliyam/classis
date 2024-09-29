@@ -1,4 +1,4 @@
-
+exports.run = () => {
     class game {
       
       size = {x:300,y:600}
@@ -167,3 +167,4 @@
         
       return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
     }
+}

@@ -1,11 +1,9 @@
 window.onload = ()=> {
   
-  var pvp = new multiplayer()
-  
   var c = document.getElementById("myCanvas");
   
   var view=new view_(c)
-  var battle=new game(10);
+  var battle=new multiplayer().get_game()
   view.draw_game(battle)
   
   document.getElementById('turn').onclick=()=>{
