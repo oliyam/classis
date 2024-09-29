@@ -1,5 +1,8 @@
 window.onload = ()=> {
   
+  var pvp = new mul_()
+  pvp.send_data({})
+  
   var c = document.getElementById("myCanvas");
   
   var view=new view_(c)
