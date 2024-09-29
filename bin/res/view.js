@@ -1,4 +1,4 @@
-class view_ {  
+  class view_ {  
   
   ctx;
   size;

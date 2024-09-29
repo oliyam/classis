@@ -118,6 +118,7 @@
       
     }
     
+    
     class radar {
       range=200;
       id_ufo=false;
