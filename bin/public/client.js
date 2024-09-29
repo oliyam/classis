@@ -1,8 +1,8 @@
 window.onload = ()=> {
-   new multiplayer().get_game.then(battle=>{
+   new multiplayer().get_game.then(b=>{
   var c = document.getElementById("myCanvas");
 
-  console.log(battle)
+  var battle=b
   var view=new view_(c)
 
   document.getElementById('turn').onclick=()=>{
