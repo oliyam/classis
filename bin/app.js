@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 app.get('/battle', (req, res) => {
   log(game)
-  res.sendFile(game.json())
+  res.json(game)
 })
 
 app.listen(port, () => {
