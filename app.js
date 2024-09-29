@@ -12,7 +12,8 @@ app.use(express.json());
 
 // Access the parse results as request.body
 app.post('/', function(req) {
-  console.log(req);
+  console.log('x')
+  console.log(req.body);
 });
 
 app.get('/', (req, res) => {
