@@ -3,7 +3,7 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
   
   var view=new view_(c)
-  JSON.parse(new multiplayer().get_game()).then( battle => {
+  new multiplayer().get_game().then( battle => {
     view.draw_game(battle)
   });
   document.getElementById('turn').onclick=()=>{
