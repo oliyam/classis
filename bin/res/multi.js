@@ -1,8 +1,6 @@
 class mul_ {
   
-  constructor(){}
-
-  send_data(data){
+  async send_data(data){
     return await fetch('http://yameogo.ddns.net:50240', {
       method: 'POST',
       headers: {

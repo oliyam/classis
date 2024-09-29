@@ -1,7 +1,7 @@
 window.onload = ()=> {
   
   var pvp = new mul_()
-  pvp.send_data({})
+  console.log(pvp.send_data({}))
   
   var c = document.getElementById("myCanvas");
   
