@@ -1,14 +1,9 @@
 window.onload = ()=> {
   
   var c = document.getElementById("myCanvas");
-  var battle;
+  var battle = fetch('http://yameogo.ddns.net:50240/battle').json;
   var view=new view_(c)
-  new multiplayer().get_game().then( value => {
-    console.log(value)
-    battle=(res)
-    view.draw_game(battle)
-    
-  });
+
   document.getElementById('turn').onclick=()=>{
     battle.turn()
     pvp.send_data(battle)

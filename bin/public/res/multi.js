@@ -2,7 +2,7 @@ class multiplayer {
   
   async get_game(){
     fetch('http://yameogo.ddns.net:50240/battle').then(res=>{
-      return (res)
+       console.log(res)
     });
   }
   
