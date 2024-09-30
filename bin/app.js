@@ -30,7 +30,7 @@ app.get('/battle_rx', (req, res) => {
 })
 
 app.get('/battle_tx', (req, res) => {
-  Object.assign(classis, req.body)
+  classis=Object.assign(classis, req.body)
   res.sendStatus(200)
 })
 
