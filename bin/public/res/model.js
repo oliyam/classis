@@ -21,11 +21,11 @@ class game {
       }
       
       new_course(destination){
-        this.vessels[this.selected_v].new_course(destination)
+        this.vessels[this.selected_v]=new_course(this.vessels[this.selected_v], destination)
       }
       
-      target(weapon, coords){
-        this.vessels[this.selected_v].weapon[0].target()
+      target(w, coords){
+        target(this.vessels[this.selected_v].weapon[w], coords)
       }
       
       select_next(iff){
@@ -79,7 +79,7 @@ class game {
       
       turn(){
         this.vessels.forEach(v => {
-          v.sail()
+          sail(this.vessels[this.selected_v])
         })
         this.fire()
         this.deal_dmg()
@@ -113,18 +113,17 @@ class game {
         this.radar=radar||this.radar;
       }
       
-      new_course(vec) {
-        if(in_range(this.pos.at(-1), vec, this.speed) && this.health>0)
-          this.new_pos=vec;
-      }
-      
-      sail(){
-        if(this.new_pos && this.health>0)
-          this.pos.push(this.new_pos);
-      }
-      
     }
     
+    function new_course(v, vec) {
+      if (in_range(v.pos.at(-1), vec, v.speed) && v.health > 0)
+        v.new_pos = vec;
+    }
+    
+    function sail(v) {
+      if (v.new_pos && v.health > 0)
+        v.pos.push(v.new_pos);
+    }
     
     class radar {
       range=200;
@@ -152,21 +151,22 @@ class game {
         this.ammo=ammo||this.ammo;
         this.radius=radius||this.radius;
       }
+    }
       
-      target(pos, vec){
-        if (in_range(pos, vec, this.range)&&this.ammo>0){
-          this.lockon = vec;
+    function target(w, pos, vec){
+        if (in_range(pos, vec, w.range)&&w.ammo>0){
+          w.lockon = vec;
         }
       }
       
-      fire(){
-        if (this.ammo>0&&this.lockon) {
-          this.ammo--;
-          return {pos: this.lockon, rad: this.radius, dmg: this.damage, active: true};
+    function fire(w){
+        if (w.ammo>0&&w.lockon) {
+          w.ammo--;
+          return {pos: w.lockon, rad: w.radius, dmg: w.damage, active: true};
         }
         return 0;
       }
-    }
+    
     
     function in_range(pos, vec, range) {
       let d_x=pos.x-vec.x;
