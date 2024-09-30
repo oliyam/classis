@@ -154,7 +154,7 @@ class game {
     }
       
     function weapon_target(w, v, vec){
-        if (in_range(v.pos, vec, v.weapons[w].range)&&v.weapons[w].ammo>0)
+        //if (in_range(v.pos, vec, v.weapons[w].range)&&v.weapons[w].ammo>0)
           v.weapons[w].lockon = vec;
     }
       
