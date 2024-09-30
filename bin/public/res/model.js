@@ -25,7 +25,7 @@ class game {
       }
       
       target(w, coords){
-        weapon_target(w, this.vessels[this.selected_v].pos, coords)
+        weapon_target(w, this.vessels[this.selected_v], coords)
       }
       
       select_next(iff){
@@ -153,10 +153,9 @@ class game {
       }
     }
       
-    function weapon_target(w, pos, vec){
-        if (in_range(pos, vec, w.range)&&w.ammo>0){
-          w.lockon = vec;
-        }
+    function weapon_target(w, v, vec)
+        if (in_range(v.pos, vec, v.weapons[w].range)&&v.weapons[w].ammo>0){
+          v.weapons[w].lockon = vec;
       }
       
     function fire(w){
