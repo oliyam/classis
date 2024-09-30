@@ -61,8 +61,8 @@ window.onload = ()=> {
         });
         break;
         
-      case 'fi?re':
-        battle.target({
+      case 'fire':
+        battle.target(0, {
           x: e.touches[0].clientX,
           y: e.touches[0].clientY
         });
