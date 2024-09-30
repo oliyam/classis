@@ -15,7 +15,7 @@ class multiplayer {
         res(JSON.parse(this.xhttp.responseText))
      }
     };
-    this.xhttp.open("GET", this.url+"battle_rx", true);
+    this.xhttp.open("GET",this.url+"battle_rx", true);
     this.xhttp.send();
   })
   

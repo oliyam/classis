@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle_rx', (req, res) => {
-  res.send(JSON.stringify(classis))
+  res.sendFile(JSON.stringify(classis))
 })
 
 app.get('/battle_tx', (req, res) => {
