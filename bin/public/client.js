@@ -8,7 +8,7 @@ window.onload = ()=> {
 
   document.getElementById('turn').onclick=()=>{
     battle.turn()
-    pvp.send_data(battle)
+    //pvp.send_data(battle)
     view.draw_game(battle)
   }
   
