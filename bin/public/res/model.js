@@ -21,11 +21,11 @@ class game {
       }
       
       new_course(destination){
-        this.vessels[this.selected_v]=new_course(this.vessels[this.selected_v], destination)
+        vessel_new_course(this.vessels[this.selected_v], destination)
       }
       
       target(w, coords){
-        target(this.vessels[this.selected_v].weapon[w], coords)
+        weapon_target(this.vessels[this.selected_v].weapon[w], coords)
       }
       
       select_next(iff){
@@ -115,7 +115,7 @@ class game {
       
     }
     
-    function new_course(v, vec) {
+    function vessel_new_course(v, vec) {
       if (in_range(v.pos.at(-1), vec, v.speed) && v.health > 0)
         v.new_pos = vec;
     }
@@ -153,7 +153,7 @@ class game {
       }
     }
       
-    function target(w, pos, vec){
+    function weapon_target(w, pos, vec){
         if (in_range(pos, vec, w.range)&&w.ammo>0){
           w.lockon = vec;
         }
