@@ -4,6 +4,7 @@ window.onload = ()=> {
 
   var battle=Object.assign(new game(), server_data);
   var view=new view_(c)
+  view.draw_game(battle)
 
   document.getElementById('turn').onclick=()=>{
     battle.turn()
