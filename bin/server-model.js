@@ -172,4 +172,6 @@ exports.run = () => {
         
       return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
     }
+    
+    return new game(4)
 }
