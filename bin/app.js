@@ -3,7 +3,9 @@ const log = require('./logger/color-logger.js').log;
 
 
 const express = require('express');
-var game = require('./model.js').run();
+const fs = require('fs');
+
+eval(fs.readFileSync('./bin/public/res/model.js').toString());
 
 const app = express();
 
@@ -26,7 +28,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle', (req, res) => {
-  res.send(JSON.stringify(game))
+  res.send(JSON.stringify(new game()))
 })
 
 app.listen(port, () => {
