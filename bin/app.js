@@ -3,7 +3,7 @@ const log = require('./logger/color-logger.js').log;
 
 
 const express = require('express');
-const classis = require('./server-model.js');
+var classis = require('./server-model.js');
 
 const app = express();
 
