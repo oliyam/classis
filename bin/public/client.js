@@ -54,14 +54,14 @@ window.onload = ()=> {
   c.addEventListener("touchmove", (e)=>{
     switch (document.getElementById("mode").value) {
       case 'maneuver':
-        battle.vessels[battle.selected_v].new_course({
+        battle.new_course({
           x: e.touches[0].clientX,
           y: e.touches[0].clientY
         });
         break;
         
-      case 'fire':
-        battle.vessels[battle.selected_v].weapons[0].target(battle.vessels[battle.selected_v].pos.at(-1),{
+      case 'fi?re':
+        battle.target({
           x: e.touches[0].clientX,
           y: e.touches[0].clientY
         });

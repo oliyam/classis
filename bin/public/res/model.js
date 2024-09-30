@@ -20,6 +20,14 @@ class game {
         this.vessels[this.selected_v].new_pos = undefined;
       }
       
+      new_course(destination){
+        this.vessels[this.selected_v].new_course(destination)
+      }
+      
+      target(weapon, coords){
+        this.vessels[this.selected_v].weapon[0].target()
+      }
+      
       select_next(iff){
         for (var i = 1; i < this.vessels.length; i++) {
           console.log((this.selected_v + i) % this.vessels.length)
