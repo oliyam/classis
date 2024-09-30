@@ -1,5 +1,6 @@
 module.exports = {
-class game {
+
+  game: class game {
       
       size = {x:300,y:600}
       
@@ -79,8 +80,10 @@ class game {
         this.reset_tmp()
       }
     }
+
+}
     
-class vessel {
+  class vessel {
     
       id;
       vclass = "warship";
@@ -116,10 +119,9 @@ class vessel {
           this.pos.push(this.new_pos);
       }
       
-    }
+    },
     
-    
-class radar {
+  class radar {
       range=200;
       id_ufo=false;
       
@@ -129,9 +131,9 @@ class radar {
         this.range=range||this.range;
         this.id_ufo=id_ufo||this.id_ufo;
       }
-    }
+    },
     
-class weapon {
+  class weapon {
       range=150;
       radius=20;
       
@@ -161,10 +163,9 @@ class weapon {
       }
     }
     
-function in_range(pos, vec, range) {
+  function in_range(pos, vec, range) {
       let d_x=pos.x-vec.x;
       let d_y=pos.y-vec.y;
         
       return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
     }
-}
