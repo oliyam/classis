@@ -2,7 +2,7 @@ window.onload = ()=> {
   new multiplayer().get_game.then(server_data=>{
   var c = document.getElementById("myCanvas");
 
-  var battle=new game().from(server_data);
+  var battle=game.from(server_data);
   var view=new view_(c)
 
   document.getElementById('turn').onclick=()=>{
