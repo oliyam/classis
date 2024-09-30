@@ -5,7 +5,7 @@ const log = require('./logger/color-logger.js').log;
 const express = require('express');
 const fs = require('fs');
 
-eval(fs.readFileSync('bin/public/res/model.js').toString());
+eval(fs.readFileSync('./bin/public/res/model.js').toString());
 
 const app = express();
 
