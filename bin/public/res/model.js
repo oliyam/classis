@@ -79,7 +79,7 @@ class game {
       
       turn(){
         this.vessels.forEach(v => {
-          sail(this.vessels[this.selected_v])
+          sail(v)
         })
         this.fire()
         this.deal_dmg()
@@ -165,7 +165,7 @@ class game {
         }
         return 0;
       }
-    
+      
     
     function in_range(pos, vec, range) {
       let d_x=pos.x-vec.x;

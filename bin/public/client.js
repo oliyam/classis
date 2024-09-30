@@ -51,6 +51,10 @@ window.onload = ()=> {
     battle.select_next(document.getElementById('iff').value)
     view.draw_game(battle)
   })
+  
+  document.getElementById('req').onclick = () => {
+    pvp.send
+  }
 
   c.addEventListener("touchmove", (e)=>{
     switch (document.getElementById("mode").value) {
