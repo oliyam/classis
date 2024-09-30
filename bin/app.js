@@ -3,8 +3,7 @@ const log = require('./logger/color-logger.js').log;
 
 
 const express = require('express');
-const classis = require('./server-model.js');
-var game = classis(8);
+const game = require('./server-model.js')(8);
 
 const app = express();
 
