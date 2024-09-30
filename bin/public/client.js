@@ -11,7 +11,7 @@ window.onload = ()=> {
 
   document.getElementById('turn').onclick=()=>{
     battle.turn()
-    mult.send_data(battle)
+    mult.send_game(battle)
     view.draw_game(battle)
   }
   
