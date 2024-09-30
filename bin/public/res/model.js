@@ -25,7 +25,7 @@ class game {
       }
       
       target(w, coords){
-        weapon_target(this.vessels[this.selected_v].weapons[w], coords)
+        weapon_target(w, this.vessels[this.selected_v].pos, coords)
       }
       
       select_next(iff){
