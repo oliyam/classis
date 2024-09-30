@@ -31,6 +31,7 @@ app.get('/battle_rx', (req, res) => {
 
 app.get('/battle_tx', (req, res) => {
   Object.assign(classis, req)
+  res.sendStatus(200)
 })
 
 app.listen(port, () => {
