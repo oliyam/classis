@@ -1,5 +1,5 @@
 window.onload = ()=> {
-   new multiplayer().get_game.then(server_data=>{
+  new multiplayer().get_game.then(server_data=>{
   var c = document.getElementById("myCanvas");
 
   var battle=new game().from(server_data);
