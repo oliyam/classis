@@ -3,7 +3,7 @@ const log = require('./logger/color-logger.js').log;
 
 
 const express = require('express');
-const game = require('./server-model.js')(8);
+const classis = require('./server-model.js');
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle', (req, res) => {
-  res.send(JSON.stringify(game))
+  res.send(JSON.stringify(new game()))
 })
 
 app.listen(port, () => {

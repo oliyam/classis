@@ -1,5 +1,4 @@
-exports = (n) => {
-
+module.exports = {
 class game {
       
       size = {x:300,y:600}
@@ -168,6 +167,4 @@ function in_range(pos, vec, range) {
         
       return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
     }
-
-return new game(n);
 }
