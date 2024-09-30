@@ -1,6 +1,6 @@
-module.exports = {
+module.exports = {game: new game(8)}
 
-  game: class game {
+  class game {
       
       size = {x:300,y:600}
       
@@ -80,8 +80,6 @@ module.exports = {
         this.reset_tmp()
       }
     }
-
-}
     
   class vessel {
     
@@ -119,7 +117,7 @@ module.exports = {
           this.pos.push(this.new_pos);
       }
       
-    },
+    }
     
   class radar {
       range=200;
@@ -131,7 +129,7 @@ module.exports = {
         this.range=range||this.range;
         this.id_ufo=id_ufo||this.id_ufo;
       }
-    },
+    }
     
   class weapon {
       range=150;

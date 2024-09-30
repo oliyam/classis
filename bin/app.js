@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle', (req, res) => {
-  res.send(JSON.stringify(new game()))
+  res.send(JSON.stringify(classis))
 })
 
 app.listen(port, () => {
