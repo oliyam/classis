@@ -26,14 +26,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle_rx', (req, res) => {
-  res.sendFile(JSON.stringify(classis))
+  res.send(JSON.stringify(classis))
 })
-
+/*
 app.get('/battle_tx', (req, res) => {
   Object.assign(classis, req)
   res.sendStatus(200)
 })
-
+*/
 app.listen(port, () => {
   log("==========================")
   log("==========================")
