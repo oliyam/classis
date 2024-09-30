@@ -25,8 +25,12 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname+"/bin/res/index.html")
 })
 
-app.get('/battle', (req, res) => {
+app.get('/battle_rx', (req, res) => {
   res.send(JSON.stringify(classis))
+})
+
+app.get('/battle_tx', (req, res) => {
+  Object.assign(classis, req)
 })
 
 app.listen(port, () => {

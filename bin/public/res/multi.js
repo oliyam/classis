@@ -1,17 +1,26 @@
 class multiplayer {
+  
+  xhttp;
+  url;
+  
+  constructor(url){
+    this.url=url||'/';
+    this.xhttp = new XMLHttpRequest();
+  }
+  
   get_game= new Promise((res) =>{
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+ 
+    this.xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        res(JSON.parse(xhttp.responseText))
+        res(JSON.parse(this.xhttp.responseText))
      }
     };
-    xhttp.open("GET","battle", true);
-    xhttp.send();
+    this.xhttp.open("GET",url+"battle_rx", true);
+    this.xhttp.send();
   })
   
-  send_game = () => {
-    var xhttp = new XMLHttpRequest();
-    xhttp.send();
+  send_game = (data) => {
+    this.xhttp.open("POST", url+"battle_tx");
+    this.xhttp.send(JSON.stringify(data));
   }
 }

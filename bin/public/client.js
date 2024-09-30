@@ -1,14 +1,17 @@
 window.onload = ()=> {
-  new multiplayer().get_game.then(server_data=>{
+  
+  var battle=new game();
+  
+  var mult = new multiplayer();
+    
   var c = document.getElementById("myCanvas");
 
-  var battle=Object.assign(new game(), server_data);
   var view=new view_(c)
   view.draw_game(battle)
 
   document.getElementById('turn').onclick=()=>{
     battle.turn()
-    //pvp.send_data(battle)
+    mult.send_data(battle)
     view.draw_game(battle)
   }
   
@@ -53,7 +56,9 @@ window.onload = ()=> {
   })
   
   document.getElementById('req').onclick = () => {
-    pvp.send
+    mult.get_game.then(server_data => {
+        battle=Object.assign(new game(), server_data);
+    });
   }
 
   c.addEventListener("touchmove", (e)=>{
