@@ -30,7 +30,7 @@ app.get('/battle_rx', (req, res) => {
   res.send(JSON.stringify(game))
 })
 
-app.get('/battle_tx', (req, res) => {
+app.post('/battle_tx', (req, res) => {
   console.log(req)
   game=Object.assign(game, req)
   res.sendStatus(200)
