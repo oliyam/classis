@@ -4,7 +4,7 @@ const log = require('./logger/color-logger.js').log;
 
 const express = require('express');
 const classis = require('./server-model.js').run();
-var game = new game(8);
+var game = new classis.game(8);
 
 const app = express();
 
