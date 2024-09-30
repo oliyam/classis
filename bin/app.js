@@ -3,7 +3,8 @@ const log = require('./logger/color-logger.js').log;
 
 
 const express = require('express');
-var classis = require('./server-model.js');
+const classis = require('./server-model.js').run();
+var game = new game(8);
 
 const app = express();
 
@@ -26,11 +27,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle_rx', (req, res) => {
-  res.send(JSON.stringify(classis))
+  res.send(JSON.stringify(game))
 })
 
 app.get('/battle_tx', (req, res) => {
-  classis=Object.assign(classis, req.body)
+  game=Object.assign(game, req.body)
   res.sendStatus(200)
 })
 

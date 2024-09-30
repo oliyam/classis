@@ -1,4 +1,4 @@
-
+exports.run = () => {
   class game {
       
       size = {x:300,y:600}
@@ -19,6 +19,14 @@
       reset_tmp(){
         this.vessels[this.selected_v].weapons[0].lockon = undefined;
         this.vessels[this.selected_v].new_pos = undefined;
+      }
+      
+      new_course(destination){
+        vessel_new_course(this.vessels[this.selected_v], destination)
+      }
+      
+      target(w, coords){
+        weapon_target(w, this.vessels[this.selected_v], coords)
       }
       
       select_next(iff){
@@ -51,7 +59,7 @@
       
       fire(){
         if(this.vessels[this.selected_v].health>0){
-          let shot = this.vessels[this.selected_v].weapons[0].fire()
+          let shot = fire(this.vessels[this.selected_v].weapons[0])
           if (shot)
             this.splashes.push(shot)
         }
@@ -72,15 +80,14 @@
       
       turn(){
         this.vessels.forEach(v => {
-          v.sail()
+          sail(v)
         })
         this.fire()
         this.deal_dmg()
         this.reset_tmp()
       }
     }
-    
-  class vessel {
+    class vessel {
     
       id;
       vclass = "warship";
@@ -106,19 +113,18 @@
         this.radar=radar||this.radar;
       }
       
-      new_course(vec) {
-        if(in_range(this.pos.at(-1), vec, this.speed) && this.health>0)
-          this.new_pos=vec;
-      }
-      
-      sail(){
-        if(this.new_pos && this.health>0)
-          this.pos.push(this.new_pos);
-      }
-      
+    }
+    function vessel_new_course(v, vec) {
+      if (in_range(v.pos.at(-1), vec, v.speed) && v.health > 0)
+        v.new_pos = vec;
     }
     
-  class radar {
+    function sail(v) {
+      if (v.new_pos && v.health > 0)
+        v.pos.push(v.new_pos);
+    }
+    
+    class radar {
       range=200;
       id_ufo=false;
       
@@ -130,7 +136,7 @@
       }
     }
     
-  class weapon {
+    class weapon {
       range=150;
       radius=20;
       
@@ -144,27 +150,26 @@
         this.ammo=ammo||this.ammo;
         this.radius=radius||this.radius;
       }
+    }
       
-      target(pos, vec){
-        if (in_range(pos, vec, this.range)&&this.ammo>0){
-          this.lockon = vec;
-        }
-      }
+    function weapon_target(w, v, vec){
+        if(in_range(v.pos.at(-1), vec, v.weapons[w].range)&&v.weapons[w].ammo>0)
+          v.weapons[w].lockon = vec;
+    }
       
-      fire(){
-        if (this.ammo>0&&this.lockon) {
-          this.ammo--;
-          return {pos: this.lockon, rad: this.radius, dmg: this.damage, active: true};
+    function fire(w){
+        if (w.ammo>0&&w.lockon) {
+          w.ammo--;
+          return {pos: w.lockon, rad: w.radius, dmg: w.damage, active: true};
         }
         return 0;
       }
-    }
+      
     
-  function in_range(pos, vec, range) {
+    function in_range(pos, vec, range) {
       let d_x=pos.x-vec.x;
       let d_y=pos.y-vec.y;
         
       return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
     }
-
-  module.exports = new game(8)
+}
