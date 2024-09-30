@@ -1,4 +1,3 @@
-module.exports = {game: new game(8)}
 
   class game {
       
@@ -167,3 +166,5 @@ module.exports = {game: new game(8)}
         
       return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
     }
+
+  module.exports = new game(8)
