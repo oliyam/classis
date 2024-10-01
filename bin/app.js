@@ -27,11 +27,12 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle_rx', (req, res) => {
+  log("[> TX: sending game-update. <]",'yellow')
   res.send(JSON.stringify(game))
 })
 
 app.post('/battle_tx', (req, res) => {
-  console.log(req.body)
+  log("[> RX: recieved game-update. <]",'yellow')
   game=Object.assign(game, req.body)
   res.sendStatus(200)
 })

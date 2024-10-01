@@ -1,6 +1,6 @@
 window.onload = ()=> {
   
-  var battle=new game();
+  var battle=undefined;
   
   var mult = new multiplayer();
     
@@ -12,7 +12,7 @@ window.onload = ()=> {
   document.getElementById('turn').onclick=()=>{
     battle.turn()
     mult.send_game(battle)
-    view.draw_game(battle)
+    battle=undefined;
   }
   
   document.getElementById('scan').onclick = () => {

@@ -253,12 +253,19 @@
   }
     
   draw_game(game) {
-    this.ctx.clearRect(0,0,this.size.x,this.size.y);
-    this.draw_splashes(game)
-    game.vessels.forEach(v => {
-      if (v.faction==document.getElementById('iff').value){
-        this.draw_vessel(v,game.selected_v==v.id, false);
-      }
-    });
+    if (game) {
+      this.ctx.clearRect(0,0,this.size.x,this.size.y);
+      this.draw_splashes(game)
+      game.vessels.forEach(v => {
+        if (v.faction==document.getElementById('iff').value){
+          this.draw_vessel(v,game.selected_v==v.id, false);
+        }
+      });
+    }
+    else {
+        this.ctx.fillStyle = "white"
+        this.ctx.font = "bold 15px monospace";
+        this.ctx.fillText("REQUEST NEW GAME-UPDATE: press 'req'! ...",0,0);
+    }
   }
 }
