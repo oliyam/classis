@@ -264,8 +264,8 @@
     }
     else {
         this.ctx.fillStyle = "white"
-        this.ctx.font = "bold 15px monospace";
-        this.ctx.fillText("REQUEST NEW GAME-UPDATE: press 'req'! ...",50,50);
+        this.ctx.font = "bold 10px monospace";
+        this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE: press 'req'! ...",20,20);
     }
   }
 }

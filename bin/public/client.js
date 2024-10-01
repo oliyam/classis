@@ -12,8 +12,9 @@ window.onload = ()=> {
   document.getElementById('turn').onclick=()=>{
     battle.turn()
     mult.send_game(battle)
-    view.draw_game(battle)
+    document.getElementById('turn').disabled=true;
     battle=undefined;
+    view.draw_game(battle)
   }
   
   document.getElementById('scan').onclick = () => {
@@ -58,8 +59,9 @@ window.onload = ()=> {
   
   document.getElementById('req').onclick = () => {
     mult.get_game.then(server_data => {
-        battle=Object.assign(new game(), server_data);
-        view.draw_game(battle)
+      document.getElementById('turn').disabled=false;
+      battle=Object.assign(new game(), server_data);
+      view.draw_game(battle)
     });
   }
 
