@@ -7,14 +7,13 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
 
   var view=new view_(c)
-  view.draw_game(battle)
+  view.draw_game(battle,1)
 
   document.getElementById('turn').onclick=()=>{
     battle.turn()
     mult.send_game(battle)
     document.getElementById('turn').disabled=true;
-    battle=undefined;
-    view.draw_game(battle)
+    view.draw_game(battle,1)
   }
   
   document.getElementById('scan').onclick = () => {
