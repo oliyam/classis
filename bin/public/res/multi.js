@@ -14,6 +14,6 @@ class multiplayer {
   send_game = (data) => {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "battle_tx");
-    xhttp.send(JSON.parse(data));
+    xhttp.send(data.json);
   }
 }
