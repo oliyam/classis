@@ -75,11 +75,13 @@ window.onload = ()=> {
   })
   
   document.getElementById('req').onclick = () => {
+    setTimeout(
     mult.get_game().then(res => {
       disableUI(false)
       battle=Object.assign(new game(), res);
       view.draw_game(battle)
     })
+    , 1000);
   }
 
   c.addEventListener("touchmove", (e)=>{
