@@ -31,8 +31,8 @@ app.get('/battle_rx', (req, res) => {
 })
 
 app.post('/battle_tx', (req, res) => {
-  console.log(req)
   game=Object.assign(game, req.body)
+  console.log(game)
   res.sendStatus(200)
 })
 
