@@ -265,7 +265,7 @@
     else {
         this.ctx.fillStyle = "white"
         this.ctx.font = "bold 15px monospace";
-        this.ctx.fillText("REQUEST NEW GAME-UPDATE: press 'req'! ...",0,0);
+        this.ctx.fillText("REQUEST NEW GAME-UPDATE: press 'req'! ...",50,50);
     }
   }
 }
