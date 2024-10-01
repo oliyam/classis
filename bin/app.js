@@ -34,7 +34,7 @@ app.get('/battle_rx', (req, res) => {
 app.post('/battle_tx', (req, res) => {
   log("[> RX: recieved game-update. <]",'yellow')
   game=Object.assign(game, req.body)
-  res.sendStatus(200)
+  res.send()
 })
 
 app.listen(port, () => {
