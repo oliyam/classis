@@ -75,9 +75,11 @@ window.onload = ()=> {
   })
   
   document.getElementById('req').onclick = () => {
+    mult.get_game().then(res => {
       disableUI(false)
-      battle=Object.assign(new game(), mult.get_game());
+      battle=Object.assign(new game(), res);
       view.draw_game(battle)
+    })
   }
 
   c.addEventListener("touchmove", (e)=>{

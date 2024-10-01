@@ -9,7 +9,7 @@ class multiplayer {
     };
     xhttp.open("GET", "battle_rx", true);
     xhttp.send();
-  }).then(res => {return res})
+  })
   
   send_game = (data) => {
     var xhttp = new XMLHttpRequest();
