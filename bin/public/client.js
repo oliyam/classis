@@ -1,6 +1,6 @@
 window.onload = ()=> {
   
-  var battle=undefined;
+  var battle=new game();
   
   var mult = new multiplayer();
     
