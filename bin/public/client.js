@@ -9,10 +9,26 @@ window.onload = ()=> {
   var view=new view_(c)
   view.draw_game(battle,1)
 
+  function disableUI(yes){
+    var ids=[
+      'turn',
+      'radar',
+      'scan',
+      'selectv',
+      'shoot',
+      'mode',
+      'iff',
+      'info'
+    ];
+    ids.forEach(id => {
+      document.getElementById(id).disable=yes;
+    })
+  }
+
   document.getElementById('turn').onclick=()=>{
     battle.turn()
     mult.send_game(battle)
-    document.getElementById('turn').disabled=true;
+    diableUI(true)
     view.draw_game(battle,1)
   }
   
@@ -58,7 +74,7 @@ window.onload = ()=> {
   
   document.getElementById('req').onclick = () => {
     mult.get_game.then(server_data => {
-      document.getElementById('turn').disabled=false;
+      disableUI(false)
       battle=Object.assign(new game(), server_data);
       view.draw_game(battle)
     });
