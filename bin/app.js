@@ -27,14 +27,14 @@ app.get('/', (req, res) => {
 })
 
 app.get('/battle_rx', (req, res) => {
-  log("[> TX: sending game-update. <]",'yellow')
+  log("[> TX: sending game-update. >]",'yellow')
   res.send(JSON.stringify(game))
 })
 
 app.post('/battle_tx', (req, res) => {
-  log("[> RX: recieved game-update. <]",'yellow')
+  log("[< RX: recieved game-update. <]",'yellow')
   game=Object.assign(game, req.body)
-  res.send()
+  res.send
 })
 
 app.listen(port, () => {
@@ -43,5 +43,5 @@ app.listen(port, () => {
   log("CLASSIS-server is running:", 'yellow')
   log("PORT:"+port, 'cyan')
   log("==========================")
-  log("ACTIVITY:", 'orange')
+  log("ACTIVITY:", 'magenta')
 })
