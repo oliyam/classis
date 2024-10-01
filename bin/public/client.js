@@ -21,7 +21,7 @@ window.onload = ()=> {
       'info'
     ];
     ids.forEach(id => {
-      document.getElementById(id).disable=true;
+      document.getElementById(id).disabled=yes;
     })
   }
 
