@@ -24,6 +24,8 @@ window.onload = ()=> {
       document.getElementById(id).disabled=yes;
     })
   }
+  
+  disableUI(1)
 
   document.getElementById('turn').onclick=()=>{
     battle.turn()
