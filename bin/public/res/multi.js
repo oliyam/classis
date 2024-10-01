@@ -8,7 +8,7 @@ class multiplayer {
      }
     };
     xhttp.open("GET", "battle_rx", true);
-    xhttp.sendStatus(200);
+    xhttp.send();
   })
   
   send_game = (data) => {
