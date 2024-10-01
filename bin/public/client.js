@@ -28,7 +28,7 @@ window.onload = ()=> {
   document.getElementById('turn').onclick=()=>{
     battle.turn()
     mult.send_game(battle)
-    diableUI(true)
+    disableUI(true)
     view.draw_game(battle,1)
   }
   
