@@ -1,6 +1,6 @@
 class multiplayer {
   
-  get_game = new Promise((res) =>{
+  get_game = () => new Promise((res) =>{
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -9,7 +9,7 @@ class multiplayer {
     };
     xhttp.open("GET", "battle_rx", true);
     xhttp.send();
-  })
+  }).then(res => {return res})
   
   send_game = (data) => {
     var xhttp = new XMLHttpRequest();

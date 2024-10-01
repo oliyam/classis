@@ -75,11 +75,9 @@ window.onload = ()=> {
   })
   
   document.getElementById('req').onclick = () => {
-    mult.get_game.then(server_data => {
       disableUI(false)
-      battle=Object.assign(new game(), server_data);
+      battle=Object.assign(new game(), mult.get_game());
       view.draw_game(battle)
-    });
   }
 
   c.addEventListener("touchmove", (e)=>{
