@@ -258,18 +258,18 @@
     
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive) {
-      this.ctx.globalAlpha = .25;
       this.ctx.fillStyle = "white"
       this.ctx.font = "bold 10px monospace";
       this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE: press 'req'! ...",20,20);
+      this.ctx.globalAlpha = .25;
     }
-    else{
+    
     this.draw_splashes(game)
     game.vessels.forEach(v => {
       if (v.faction == document.getElementById('iff').value)
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
-    }
+    
     this.ctx.globalAlpha=1;
   }
 }
