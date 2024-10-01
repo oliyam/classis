@@ -11,12 +11,13 @@
   
   draw_splashes(game){
     game.splashes.forEach(s=>{
+      let tmp = this.ctx.globalAlpha;
       this.ctx.globalAlpha = s.dmg/100
       this.ctx.beginPath();
       this.ctx.arc(s.pos.x, s.pos.y, s.rad, 0, 2 * Math.PI);
       this.ctx.fillStyle = s.active?'orange':'gray'
       this.ctx.fill();
-      this.ctx.globalAlpha = 1
+      this.ctx.globalAlpha = tmp;
       if(s.active)
         this.draw_crosshair(s.pos, crosshairs.lockon, s.rad, 45, 'darkred')
     });
@@ -262,12 +263,13 @@
       this.ctx.font = "bold 10px monospace";
       this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE: press 'req'! ...",20,20);
     }
-    
+    else{
     this.draw_splashes(game)
     game.vessels.forEach(v => {
       if (v.faction == document.getElementById('iff').value)
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
+    }
     this.ctx.globalAlpha=1;
   }
 }
