@@ -58,6 +58,7 @@ window.onload = ()=> {
   document.getElementById('req').onclick = () => {
     mult.get_game.then(server_data => {
         battle=Object.assign(new game(), server_data);
+        view.draw_game(battle)
     });
   }
 
