@@ -253,17 +253,16 @@
   }
     
   draw_game(game, inactive) {
-    var loading = setInterval({}, 250)
-    if (!inactive) {
-      this.ctx.globalAlpha = .25;
-    }
-    else {
-        this.ctx.fillStyle = "white"
-        this.ctx.font = "bold 10px monospace";
-        this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE: press 'req'! ...",20,20);
-    }
+    var loading;
     
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
+    if (inactive) {
+      this.ctx.globalAlpha = .25;
+      this.ctx.fillStyle = "white"
+      this.ctx.font = "bold 10px monospace";
+      this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE: press 'req'! ...",20,20);
+    }
+    
     this.draw_splashes(game)
     game.vessels.forEach(v => {
       if (v.faction == document.getElementById('iff').value)
