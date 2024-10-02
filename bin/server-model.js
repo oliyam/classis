@@ -33,7 +33,8 @@ exports.run = () => {
       splashes = [];
       
       constructor(n){
-        
+              this.vessels.push(new vessel(0, 'red', "ROCINANTE", null, 100, 50, null, new radar(100)))
+              this.vessels.push(new vessel(1, 'red', "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
       }
       
       reset_tmp(){
