@@ -269,7 +269,7 @@
       var txt="PRESS 'REQ' "
       var sym="○";
       var sym_l=this.ctx.measureText(sym).width;
-      var txt_l=this.ctx.measureText(txt).width+sym_l;
+      var txt_l=this.ctx.measureText(txt).width;
       
       this.ctx.fillStyle = "white"
       this.ctx.font = "bold "+px+"px monospace";
