@@ -258,9 +258,34 @@
     
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive) {
+      var 
+        x=20,
+        y=40,
+        
+        px=10
+      ;
+      var i=0
+      var txt="PRESS 'REQ' "
+      var sym="○";
+      var sym_l=this.ctx.measureText(sym).width;
+      var txt_l=this.ctx.measureText(txt).width+sym_l;
+      
       this.ctx.fillStyle = "white"
-      this.ctx.font = "bold 10px monospace";
-      this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE: press 'req'! ...",20,20);
+      this.ctx.font = "bold "+px+"px monospace";
+      this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE:", x, y);
+      this.ctx.fillText(txt, x, y+px);
+      
+      
+      loading = setInterval(()=>{
+        if (i%4==0)
+            this.ctx.clearRect(x+txt_l+sym_l,y,4*sym_l,px);
+        else{
+            this.ctx.fillStyle = "white"
+            this.ctx.font = "bold " + px + "px monospace";
+            this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
+        }
+        i++;
+      }, 500)
       this.ctx.globalAlpha = .25;
     }
     
