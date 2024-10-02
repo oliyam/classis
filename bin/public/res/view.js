@@ -288,6 +288,9 @@
       }, 500)
       this.ctx.globalAlpha = .25;
     }
+    else {
+      loader.clearInterval()
+    }
     
     this.draw_splashes(game)
     game.vessels.forEach(v => {
