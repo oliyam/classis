@@ -252,6 +252,8 @@
              }
           }
   }
+  
+  loading;
     
   draw_game(game, inactive) {
     
@@ -275,7 +277,7 @@
       this.ctx.fillText(txt, x, y+px);
       
       
-      var loading = setInterval(()=>{
+      this.loading = setInterval(()=>{
         if (i%4==0)
             this.ctx.clearRect(x+txt_l+sym_l,y,4*sym_l,px);
         else{
@@ -287,8 +289,8 @@
       }, 500)
       this.ctx.globalAlpha = .25;
     }
-    else if (loading) {
-      clearInterval(loading)
+    else if (this.loading) {
+      clearInterval(this.loading)
     }
     
     this.draw_splashes(game)
