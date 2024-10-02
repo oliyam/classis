@@ -290,6 +290,7 @@
       this.ctx.globalAlpha = .25;
     }
     else if (this.loading) {
+      i=0;
       clearInterval(this.loading)
      //this.loading=undefined;
     }
