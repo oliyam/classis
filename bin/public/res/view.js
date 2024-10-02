@@ -298,7 +298,6 @@
     
     this.draw_splashes(game)
     game.vessels.forEach(v => {
-      if (v.faction == document.getElementById('iff').value)
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
     
