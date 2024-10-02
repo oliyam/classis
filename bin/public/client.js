@@ -19,7 +19,6 @@ window.onload = ()=> {
       'selectv',
       'shoot',
       'mode',
-      'iff',
       'info'
     ];
     ids.forEach(id => {
