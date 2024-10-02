@@ -1,5 +1,27 @@
 exports.run = () => {
   
+  class turn_system {
+    active_f;
+    
+    factions = [];
+    
+    game;
+    
+    constructor(){
+      this.factions = ['red', 'blue']
+      this.active_f=0;
+      this.game = new game()
+    }
+    
+    turn(client_game){
+      if (client_game.faction==this.factions[this.active_f]) {
+        Object.assign(this.game, client_game)
+      
+        this.active_f=this.active_f++%this.factions.length;
+      }
+    }
+    
+  }
   
   class game {
       
@@ -11,11 +33,7 @@ exports.run = () => {
       splashes = [];
       
       constructor(n){
-        this.vessels.push(new vessel(0, 'frien', "ROCINANTE", null, 100, 50, null, new radar(100)))
-        this.vessels.push(new vessel(1, 'frien', "ENTERPRISE", [{x: 200, y: 100}], 100, 50, new weapon(69, 200), new radar(200,1)))
-        for (var i = 2; i < n; i++) {
-          this.vessels.push(new vessel(i, null, "DD-0"+i, [{x: i*10+25, y: i*30+20}], 100, 50, null, new radar()));
-        }
+        
       }
       
       reset_tmp(){

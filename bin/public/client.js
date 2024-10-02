@@ -1,6 +1,8 @@
 window.onload = ()=> {
   
-  var battle=new game();
+  const faction=promt('PLS SELECT FACTION! [red/blue]:')
+  
+  var battle=new game(faction);
   
   var mult = new multiplayer();
     
@@ -68,17 +70,12 @@ window.onload = ()=> {
   document.getElementById('info').addEventListener("change", () => {
     view.draw_game(battle)
   })
-
-  document.getElementById('iff').addEventListener("change", () => {
-    battle.select_next(document.getElementById('iff').value)
-    view.draw_game(battle)
-  })
   
   document.getElementById('req').onclick = () => {
     setTimeout(
     mult.get_game().then(res => {
       disableUI(false)
-      battle=Object.assign(new game(), res);
+      battle=Object.assign(new game(faction), res);
       view.draw_game(battle)
     })
     , 1000);
