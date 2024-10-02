@@ -27,11 +27,11 @@ class game {
         weapon_target(w, this.vessels[this.selected_v], coords)
       }
       
-      select_next(iff){
+      select_next(){
         for (var i = 1; i < this.vessels.length; i++) {
           console.log((this.selected_v + i) % this.vessels.length)
           let s = this.vessels[(this.selected_v + i) % this.vessels.length];
-          if (s.faction == iff) {
+          if (s.faction == this.faction) {
             this.selected_v = s.id;
             break;
           }

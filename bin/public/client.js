@@ -42,7 +42,7 @@ window.onload = ()=> {
   }
   
   document.getElementById('selectv').onclick = () => {
-    battle.select_next(document.getElementById('iff').value)
+    battle.select_next()
     view.draw_game(battle)
   }
   
