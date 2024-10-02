@@ -254,7 +254,6 @@
   }
     
   draw_game(game, inactive) {
-    var loading;
     
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive) {
@@ -276,7 +275,7 @@
       this.ctx.fillText(txt, x, y+px);
       
       
-      loading = setInterval(()=>{
+      var loading = setInterval(()=>{
         if (i%4==0)
             this.ctx.clearRect(x+txt_l+sym_l,y,4*sym_l,px);
         else{
@@ -288,8 +287,7 @@
       }, 500)
       this.ctx.globalAlpha = .25;
     }
-    else if (loading){
-      console.log('sex')
+    else if (loading) {
       clearInterval(loading)
     }
     
