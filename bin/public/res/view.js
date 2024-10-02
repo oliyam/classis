@@ -266,7 +266,7 @@
         px=10
       ;
       var i=0
-      var txt="PRESS 'REQ' "
+      var txt="PRESS 'REQ'"
       var sym="○";
       var sym_l=this.ctx.measureText(sym).width;
       var txt_l=this.ctx.measureText(txt).width+sym_l;
@@ -290,9 +290,7 @@
       this.ctx.globalAlpha = .25;
     }
     else if (this.loading) {
-      i=0;
       clearInterval(this.loading)
-     //this.loading=undefined;
     }
     
     this.draw_splashes(game)
