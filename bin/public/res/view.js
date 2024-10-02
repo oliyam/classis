@@ -291,7 +291,7 @@
     }
     else if (this.loading) {
       clearInterval(this.loading)
-      this.loading=undefined;
+     //this.loading=undefined;
     }
     
     this.draw_splashes(game)
