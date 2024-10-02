@@ -266,6 +266,9 @@
         px=10
       ;
       var i=0
+      
+      this.ctx.fillStyle = "white"
+      this.ctx.font = "bold " + px + "px monospace";
       var txt="PRESS 'REQ'";
       var sym="○";
       var sym_l=this.ctx.measureText(sym).width;
@@ -273,8 +276,6 @@
       
       console.log(sym_l+" "+txt_l)
       
-      this.ctx.fillStyle = "white"
-      this.ctx.font = "bold "+px+"px monospace";
       this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE:", x, y);
       this.ctx.fillText(txt, x, y+px);
       
@@ -285,7 +286,7 @@
         else{
             this.ctx.fillStyle = "white"
             this.ctx.font = "bold " + px + "px monospace";
-            this.ctx.fillText(sym, x + txt_l + (i% 4+1) * sym_l, y + px)
+            this.ctx.fillText(sym, x + txt_l + (i% 4) * sym_l, y + px)
         }
         i++;
       }, 500)
