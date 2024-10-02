@@ -285,7 +285,7 @@
         else{
             this.ctx.fillStyle = "white"
             this.ctx.font = "bold " + px + "px monospace";
-            this.ctx.fillText(sym, x + txt_l + (i % 4) * sym_l, y + px)
+            this.ctx.fillText(sym, x + txt_l + (i% 4+1) * sym_l, y + px)
         }
         i++;
       }, 500)
