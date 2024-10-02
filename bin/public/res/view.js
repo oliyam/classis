@@ -288,8 +288,8 @@
       }, 500)
       this.ctx.globalAlpha = .25;
     }
-    else if (loader){
-      clearInterval(loader)
+    else if (loading){
+      clearInterval(loading)
     }
     
     this.draw_splashes(game)
