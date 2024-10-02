@@ -283,14 +283,14 @@
         else{
             this.ctx.fillStyle = "white"
             this.ctx.font = "bold " + px + "px monospace";
-            this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
+            this.ctx.fillText(sym, x + txt_l + (i % 4) * sym_l, y + px)
         }
         i++;
       }, 500)
       this.ctx.globalAlpha = .25;
     }
     else if (this.loading) {
-      //clearInterval(this.loading)
+      clearInterval(this.loading)
     }
     
     this.draw_splashes(game)
