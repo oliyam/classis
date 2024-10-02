@@ -289,6 +289,7 @@
       this.ctx.globalAlpha = .25;
     }
     else if (loading){
+      console.log('sex')
       clearInterval(loading)
     }
     
