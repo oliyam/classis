@@ -271,6 +271,8 @@
       var sym_l=this.ctx.measureText(sym).width;
       var txt_l=this.ctx.measureText(txt).width;
       
+      console.log(sym_l+" "+txt_l)
+      
       this.ctx.fillStyle = "white"
       this.ctx.font = "bold "+px+"px monospace";
       this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE:", x, y);
