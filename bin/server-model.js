@@ -13,7 +13,7 @@ exports.run = () => {
     constructor(){
       this.factions = []
       this.active_f=0;
-      this.server_game=new game('red');
+      this.server_game=new game();
     }
     
     req_turn(data){/*
@@ -62,12 +62,12 @@ exports.run = () => {
       splashes = [];
       
       constructor(faction){
-        if(faction)
-        if(faction=='red'){
+      
+        
         this.vessels.push(new vessel(this.vessels.length, faction, "ROCINANTE", null, 100, 50, null, new radar(100)))
-        }else{
+        
         this.vessels.push(new vessel(this.vessels.length, faction, "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
-        }
+        
       }
       
       scan(faction){
