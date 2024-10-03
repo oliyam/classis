@@ -32,23 +32,14 @@ exports.run = () => {
     }
     
     req_game(data){
-      var s = this.server_game;
-      var cg = s;
-      /*
-      for (var i = 0; i < s.vessels.length; i++) {
-        if (s.vessels[i].faction==data.f){
-          s.scan(data.f)
-          s.vessels.forEach(v => {
-            if(v.faction==data.f)
-              v.radar.blips.forEach(b => {
-                cg.radar.blips=b;
-              })
-          })
-          break;
-        }
-      }*/
+      var cg = this.server_game;
+  
+      cg.scan(data.f)
+      cg.vessels.forEach(v => {
+        if (v.faction!=data.f) 
+          cg.vessels.splice(cg.vessels.indexOf(v), 1);
+      })
 
-      
       return cg;
     }
     
