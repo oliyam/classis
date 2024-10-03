@@ -29,7 +29,7 @@ window.onload = ()=> {
   disableUI(1)
 
   document.getElementById('turn').onclick=()=>{
-    battle.turn()
+  //  battle.turn()
     mult.send_game(battle)
     disableUI(true)
     view.draw_game(battle,1)
@@ -72,7 +72,7 @@ window.onload = ()=> {
   
   document.getElementById('req').onclick = () => {
     setTimeout(
-    mult.get_game({f: faction}).then(res => {
+    mult.get_game({f:faction}).then(res => {
       disableUI(false)
       battle=Object.assign(new game(faction), res);
       view.draw_game(battle)
