@@ -7,25 +7,37 @@ exports.run = () => {
     fleets = [];
     
     server_game;
+    client_games = [];
     
     constructor(){
       this.factions = ['red', 'blue']
       this.active_f=0;
       this.server_game=new game();
+      factions.forEach(() => {
+        client_games.push(this.server_game);
+      });
     }
     
-    req_turn(client_game){
-      var f = this.active_f;
-      if (client_game.faction==f){
-        
+    req_turn(data){
+  
         //next player - next game
         this.active_f=f++%this.factions.length;
         console.log("game updated - turn ended")
       }
     }
     
-    req_game(client_game){
-      return this.server_game;
+    req_game(data){
+      var f = data.faction;
+      var s = this.server_game;
+      
+        s.scan(f)
+        client_games[f].vessels=[];
+        s.vessels.forEach(v => {
+          if (v.faction==f)
+            client_games[f].vessels.push(v)
+        })
+      
+      return client_games[f];
     }
     
   }
@@ -35,7 +47,6 @@ exports.run = () => {
       size = {x:300,y:600}
       
       vessels = [];
-      selected_v = 0;
       
       splashes = [];
       
