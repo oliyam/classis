@@ -9,7 +9,7 @@ class multiplayer {
     };
     xhttp.open("POST", "battle_rx", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(data);
+    xhttp.send(JSON.stringify(data));
   })
   
   send_game = (data) => {
