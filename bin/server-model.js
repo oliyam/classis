@@ -26,6 +26,7 @@ exports.run = () => {
     }
     
     req_game(data){
+      var s = this.server_game;
       var cgs = this.client_games;
       var cg;
       
