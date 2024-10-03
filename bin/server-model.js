@@ -18,20 +18,20 @@ exports.run = () => {
     }
     
     req_turn(data){
-  
+        data.vessels
         //next player - next game
-        this.active_f=f++%this.factions.length;
+        //this.active_f=f++%this.factions.length;
         console.log("game updated - turn ended")
       
     }
     
-    req_game(data){
+    req_game(faction){
       var s = this.server_game;
       var cgs = this.client_games;
       var cg;
       
       for (var i = 0; i < cgs.length; i++) {
-        if (cgs[i].faction==data.faction){
+        if (cgs[i].faction==faction){
           cg=cgs[i]
           s.scan(cg.faction)
           s.vessels.forEach(v => {
@@ -44,9 +44,9 @@ exports.run = () => {
         }
       }
       if (!cg)
-        this.client_games.push(data)
+        this.client_games.push(new game(faction))
       
-      return cg||data;
+      return cg||cgs.at(-1);
     }
     
   }
@@ -59,9 +59,13 @@ exports.run = () => {
       
       splashes = [];
       
-      constructor(n){
-              this.vessels.push(new vessel(0, 'red', "ROCINANTE", null, 100, 50, null, new radar(100)))
-              this.vessels.push(new vessel(1, 'blue', "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
+      constructor(faction){
+        if(faction)
+        if(faction=='red'){
+        this.vessels.push(new vessel(this.vessels.length, faction, "ROCINANTE", null, 100, 50, null, new radar(100)))
+        }else{
+        this.vessels.push(new vessel(this.vessels.length, faction, "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
+        }
       }
       
       scan(faction){
