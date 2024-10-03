@@ -72,7 +72,7 @@ window.onload = ()=> {
   
   document.getElementById('req').onclick = () => {
     setTimeout(
-    mult.get_game(battle).then(res => {
+    mult.get_game(faction).then(res => {
       disableUI(false)
       battle=Object.assign(new game(faction), res);
       view.draw_game(battle)
