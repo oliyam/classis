@@ -32,7 +32,7 @@ exports.run = () => {
     }
     
     req_game(data){
-      this.server_game.scan(data.f)
+      //this.server_game.scan(data.f)
       var cg = Object.assign({}, this.server_game);
 
       cg.vessels.forEach(v => {
