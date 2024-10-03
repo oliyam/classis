@@ -64,7 +64,7 @@ exports.run = () => {
       constructor(faction){
       
         
-        this.vessels.push(new vessel(this.vessels.length, faction, "ROCINANTE", null, 100, 50, null, new radar(100)))
+        //this.vessels.push(new vessel(this.vessels.length, faction, "ROCINANTE", null, 100, 50, null, new radar(100)))
         
         this.vessels.push(new vessel(this.vessels.length, faction, "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
         
