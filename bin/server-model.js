@@ -14,7 +14,7 @@ exports.run = () => {
       this.active_f=0;
       this.server_game=new game();
       this.factions.forEach(() => {
-        client_games.push(this.server_game);
+        this.client_games.push(this.server_game);
       });
     }
     
@@ -31,13 +31,13 @@ exports.run = () => {
       var s = this.server_game;
       
         s.scan(f)
-        client_games[f].vessels=[];
+        this.client_games[f].vessels=[];
         s.vessels.forEach(v => {
           if (v.faction==f)
-            client_games[f].vessels.push(v)
+            this.client_games[f].vessels.push(v)
         })
       
-      return client_games[f];
+      return this.client_games[f];
     }
     
   }
