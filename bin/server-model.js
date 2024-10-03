@@ -31,8 +31,8 @@ exports.run = () => {
       var cg;
       
       for (var i = 0; i < cgs.length; i++) {
-        cg=cgs[i];
-        if (cg.faction==data.faction){
+        if (cgs[i].faction==data.faction){
+          cg=cgs[i]
           s.scan(cg.faction)
           s.vessels.forEach(v => {
             if(v.faction==cg.faction)
