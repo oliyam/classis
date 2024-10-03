@@ -41,30 +41,6 @@ exports.run = () => {
               this.vessels.push(new vessel(1, 'blue', "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
       }
       
-      reset_tmp(){
-        this.vessels[this.selected_v].weapons[0].lockon = undefined;
-        this.vessels[this.selected_v].new_pos = undefined;
-      }
-      
-      new_course(destination){
-        vessel_new_course(this.vessels[this.selected_v], destination)
-      }
-      
-      target(w, coords){
-        weapon_target(w, this.vessels[this.selected_v], coords)
-      }
-      
-      select_next(iff){
-        for (var i = 1; i < this.vessels.length; i++) {
-          console.log((this.selected_v + i) % this.vessels.length)
-          let s = this.vessels[(this.selected_v + i) % this.vessels.length];
-          if (s.faction == iff) {
-            this.selected_v = s.id;
-            break;
-          }
-        }
-      }
-      
       scan(faction){
         this.vessels.forEach(v => {
           v.radar.blips=[];
@@ -82,9 +58,14 @@ exports.run = () => {
         });
       }
       
-      fire(){
-        if(this.vessels[this.selected_v].health>0){
-          let shot = fire(this.vessels[this.selected_v].weapons[0])
+      sail(v) {
+        if (v.new_pos && v.health > 0)
+          v.pos.push(v.new_pos);
+      }
+      
+      fire(v){
+        if(v.health>0){
+          let shot = fire(v.weapons[0])
           if (shot)
             this.splashes.push(shot)
         }
@@ -105,11 +86,10 @@ exports.run = () => {
       
       turn(){
         this.vessels.forEach(v => {
-          sail(v)
+          this.sail(v)
+          this.fire(v)
         })
-        this.fire()
         this.deal_dmg()
-        this.reset_tmp()
       }
     }
     class vessel {
@@ -139,15 +119,6 @@ exports.run = () => {
       }
       
     }
-    function vessel_new_course(v, vec) {
-      if (in_range(v.pos.at(-1), vec, v.speed) && v.health > 0)
-        v.new_pos = vec;
-    }
-    
-    function sail(v) {
-      if (v.new_pos && v.health > 0)
-        v.pos.push(v.new_pos);
-    }
     
     class radar {
       range=200;
@@ -176,20 +147,6 @@ exports.run = () => {
         this.radius=radius||this.radius;
       }
     }
-      
-    function weapon_target(w, v, vec){
-        if(in_range(v.pos.at(-1), vec, v.weapons[w].range)&&v.weapons[w].ammo>0)
-          v.weapons[w].lockon = vec;
-    }
-      
-    function fire(w){
-        if (w.ammo>0&&w.lockon) {
-          w.ammo--;
-          return {pos: w.lockon, rad: w.radius, dmg: w.damage, active: true};
-        }
-        return 0;
-      }
-      
     
     function in_range(pos, vec, range) {
       let d_x=pos.x-vec.x;
