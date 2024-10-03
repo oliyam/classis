@@ -18,7 +18,7 @@ exports.run = () => {
     
     req_turn(data){
     
-        this.server_game=data/*.vessels.forEach(sv => {
+        /*this.server_game=data/*.vessels.forEach(sv => {
           data.vessels.forEach(cv => {
             if (sv.faction==cv.faction&&sv.id==cv.id) {
               sv
@@ -32,7 +32,8 @@ exports.run = () => {
     }
     
     req_game(data){
-      var cg = this.server_game;
+    
+      var cg = Objeth.assign({},this.server_game);
   
       cg.scan(data.f)
       cg.vessels.forEach(v => {
