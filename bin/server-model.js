@@ -16,7 +16,7 @@ exports.run = () => {
     
     turn(client_game){
       var f = this.active_f;
-      if (client_game.faction==f)
+      if (client_game.faction==f){
         
         //next player - next game
         this.active_f=f++%this.factions.length;
