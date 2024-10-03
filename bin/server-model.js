@@ -32,9 +32,8 @@ exports.run = () => {
     }
     
     req_game(data){
-      this.server_game.scan(data.f)
       var cg = JSON.parse(JSON.stringify(this.server_game))
-
+      cg.scan(data.f)
       cg.vessels.forEach(v => {
         if (v.faction!==data.f) 
           cg.vessels.splice(cg.vessels.indexOf(v), 1);
