@@ -34,10 +34,10 @@ exports.run = () => {
       });
       var s = this.server_game;
       
-        s.scan(f)
+        s.scan(data.faction)
         client_game.vessels=[];
         s.vessels.forEach(v => {
-          if (v.faction==f)
+          if (v.faction==data.faction)
             client_games.vessels.push(v)
         })
       
