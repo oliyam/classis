@@ -13,7 +13,7 @@ exports.run = () => {
       this.factions = ['red', 'blue']
       this.active_f=0;
       this.server_game=new game();
-      factions.forEach(() => {
+      this.factions.forEach(() => {
         client_games.push(this.server_game);
       });
     }
