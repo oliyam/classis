@@ -33,7 +33,7 @@ exports.run = () => {
     
     req_game(data){
       this.server_game.scan(data.f)
-      var cg = Object.assign({}, this.server_game);
+      var cg = JSON.parse(JSON.stringify(this.server_game))
 
       cg.vessels.forEach(v => {
         if (v.faction!==data.f) 
