@@ -7,7 +7,7 @@ class multiplayer {
         res(JSON.parse(xhttp.responseText))
      }
     };
-    xhttp.open("POOST", "battle_rx", true);
+    xhttp.open("POST", "battle_rx", true);
     xhttp.setRequestHeader('Content-Type', 'application/json');
     xhttp.send(data);
   })
