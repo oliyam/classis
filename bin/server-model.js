@@ -4,20 +4,24 @@ exports.run = () => {
     active_f;
     
     factions = [];
+    fleets = [];
     
-    game;
+    server_game;
     
     constructor(){
       this.factions = ['red', 'blue']
       this.active_f=0;
-      this.game = new game()
+      this.server_game=new game();
     }
     
     turn(client_game){
-      if (client_game.faction==this.factions[this.active_f]) {
-        Object.assign(this.game, client_game)
-      
-        this.active_f=this.active_f++%this.factions.length;
+      var f = this.active_f;
+      if (client_game.faction==f)
+        
+        //next player - next game
+        this.active_f=f++%this.factions.length;
+        
+        return this.server_game;
       }
     }
     
@@ -34,7 +38,7 @@ exports.run = () => {
       
       constructor(n){
               this.vessels.push(new vessel(0, 'red', "ROCINANTE", null, 100, 50, null, new radar(100)))
-              this.vessels.push(new vessel(1, 'red', "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
+              this.vessels.push(new vessel(1, 'blue', "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
       }
       
       reset_tmp(){

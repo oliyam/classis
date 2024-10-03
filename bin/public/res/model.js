@@ -10,8 +10,6 @@ class game {
       
       constructor(faction){
         this.faction=faction;
-        this.vessels.push(new vessel(0, this.faction, "ROCINANTE", null, 100, 50, null, new radar(100)))
-        this.vessels.push(new vessel(1, this.faction, "ENTERPRISE", [{x: 200, y: 100}], 100, 50, new weapon(69, 200), new radar(200,1)))
       }
       
       reset_tmp(){
