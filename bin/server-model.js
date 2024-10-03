@@ -17,7 +17,8 @@ exports.run = () => {
     }
     
     req_turn(data){
-    
+      this.server_game.splashes.contact(data.splashes)
+      this.server_game.deal_dmg()
         /*this.server_game=data/*.vessels.forEach(sv => {
           data.vessels.forEach(cv => {
             if (sv.faction==cv.faction&&sv.id==cv.id) {
