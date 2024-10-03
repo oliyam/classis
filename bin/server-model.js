@@ -12,7 +12,7 @@ exports.run = () => {
     client_games = [];
     
     constructor(){
-      this.factions = ['red', 'blue']
+      this.factions = []
       this.active_f=0;
       this.server_game=new game();
     }
