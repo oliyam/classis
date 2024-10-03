@@ -9,7 +9,6 @@ exports.run = () => {
     fleets = [];
     
     server_game;
-    client_games = [];
     
     constructor(){
       this.factions = []
@@ -17,8 +16,14 @@ exports.run = () => {
       this.server_game=new game();
     }
     
-    req_turn(data){
-        data.vessels
+    req_turn(data){/*
+        server_game.vessels.forEach(sv => {
+          data.vessels.forEach(cv => {
+            if (sv.faction==cv.faction&&sv.id==cv.id) {
+              sv
+            }
+          })
+        })*/
         //next player - next game
         //this.active_f=f++%this.factions.length;
         console.log("game updated - turn ended")
@@ -26,28 +31,24 @@ exports.run = () => {
     }
     
     req_game(data){
-      var faction = data.f;
       var s = this.server_game;
-      var cgs = this.client_games;
-      var cg;
-      
-      for (var i = 0; i < cgs.length; i++) {
-        if (cgs[i].faction==faction){
-          cg=cgs[i]
-          s.scan(cg.faction)
+      var cg = s;
+      /*
+      for (var i = 0; i < s.vessels.length; i++) {
+        if (s.vessels[i].faction==data.f){
+          s.scan(data.f)
           s.vessels.forEach(v => {
-            if(v.faction==cg.faction)
+            if(v.faction==data.f)
               v.radar.blips.forEach(b => {
                 cg.radar.blips=b;
               })
           })
           break;
         }
-      }
-      if (!cg)
-        this.client_games.push(new game(faction))
+      }*/
+
       
-      return cg||cgs.at(-1);
+      return cg;
     }
     
   }
