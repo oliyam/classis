@@ -29,7 +29,7 @@ exports.run = () => {
     req_game(data){
       var client_game;
       this.client_games.forEach((c_g)=>{
-        if (c_g.faction==data.faction) 
+        if (c_g.faction===data.faction) 
           client_game=c_g;
       });
       var s = this.server_game;
