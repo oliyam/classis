@@ -36,7 +36,6 @@ window.onload = ()=> {
   }
   
   document.getElementById('scan').onclick = () => {
-    battle.scan(faction)
     document.getElementById('radar').checked=true;
     view.draw_game(battle)
   }
