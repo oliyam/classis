@@ -61,25 +61,7 @@ class game {
         }
       }
       
-      deal_dmg(){
-       this.splashes.forEach(s=>{
-         this.vessels.forEach(v=>{
-           if (
-             in_range(s.pos, v.pos.at(-1), s.rad) && //in reichweite
-             s.active //waffe gerade abgeschossen
-           )
-             v.health<s.dmg?v.health=0:v.health-=s.dmg;
-         })
-         s.active=0;
-       })
-      }
-      
       turn(){
-        this.vessels.forEach(v => {
-          sail(v)
-        })
-        this.fire()
-        this.deal_dmg()
         this.reset_tmp()
       }
     }
