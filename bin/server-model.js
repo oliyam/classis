@@ -1,4 +1,4 @@
-import {game} from './public/res/model.js';
+//import {game} from './public/res/model.js';
 
 exports.run = () => {
   
