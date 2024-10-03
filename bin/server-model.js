@@ -23,7 +23,7 @@ exports.run = () => {
         //next player - next game
         this.active_f=f++%this.factions.length;
         console.log("game updated - turn ended")
-      }
+      
     }
     
     req_game(data){
