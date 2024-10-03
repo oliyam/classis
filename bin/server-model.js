@@ -27,17 +27,21 @@ exports.run = () => {
     }
     
     req_game(data){
-      var f = data.faction;
+      var client_game;
+      this.client_games.forEach((c_g)=>{
+        if (c_g.faction==data.faction) 
+          client_game=c_g;
+      });
       var s = this.server_game;
       
         s.scan(f)
-        this.client_games[f].vessels=[];
+        client_game.vessels=[];
         s.vessels.forEach(v => {
           if (v.faction==f)
-            this.client_games[f].vessels.push(v)
+            client_games.vessels.push(v)
         })
       
-      return this.client_games[f];
+      return client_game;
     }
     
   }
