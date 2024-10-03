@@ -13,7 +13,7 @@ exports.run = () => {
     constructor(){
       this.factions = []
       this.active_f=0;
-      this.server_game=new game();
+      this.server_game=new game('red');
     }
     
     req_turn(data){/*
