@@ -18,7 +18,7 @@ exports.run = () => {
     
     req_turn(data){
     
-        server_game=data/*.vessels.forEach(sv => {
+        this.server_game=data/*.vessels.forEach(sv => {
           data.vessels.forEach(cv => {
             if (sv.faction==cv.faction&&sv.id==cv.id) {
               sv
