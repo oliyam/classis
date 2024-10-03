@@ -1,3 +1,5 @@
+import {game} from './public/res/model.js';
+
 exports.run = () => {
   
   class turn_system {
@@ -13,9 +15,6 @@ exports.run = () => {
       this.factions = ['red', 'blue']
       this.active_f=0;
       this.server_game=new game();
-      this.factions.forEach(() => {
-        this.client_games.push(this.server_game);
-      });
     }
     
     req_turn(data){
@@ -27,21 +26,26 @@ exports.run = () => {
     }
     
     req_game(data){
-      var client_game;
-      this.client_games.forEach((c_g)=>{
-        if (c_g.faction===data.faction) 
-          client_game=c_g;
-      });
-      var s = this.server_game;
+      var cgs = this.client_games;
+      var cg;
       
-        s.scan(data.faction)
-        client_game.vessels=[];
-        s.vessels.forEach(v => {
-          if (v.faction==data.faction)
-            client_games.vessels.push(v)
-        })
+      for (var i = 0; i < cgs.length; i++) {
+        cg=cgs[i];
+        if (cg.faction==data.faction){
+          s.scan(cg.faction)
+          s.vessels.forEach(v => {
+            if(v.faction==cg.faction)
+              v.radar.blips.forEach(b => {
+                cg.radar.blips=b;
+              })
+          })
+          break;
+        }
+      }
+      if (!cg)
+        this.client_games.push(data)
       
-      return client_game;
+      return cg||data;
     }
     
   }
