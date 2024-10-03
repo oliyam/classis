@@ -4,7 +4,6 @@ const log = require('./logger/color-logger.js').log;
 
 const express = require('express');
 const classis = require('./server-model.js').run();
-var game = classis;
 
 const app = express();
 
@@ -26,15 +25,15 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname+"/bin/res/index.html")
 })
 
-app.get('/battle_rx', (req, res) => {
+app.post('/battle_rx', (req, res) => {
   log("[> TX: sending game-update. >]",'yellow')
-  res.send(JSON.stringify(game))
+  res.send(JSON.stringify(classis.req_game(req.body)))
 })
 
 app.post('/battle_tx', (req, res) => {
   log("[< RX: recieved game-update. <]",'yellow')
-  game=Object.assign(game, req.body)
-  res.send
+  classis.req_turn(req.body)
+  res.send()
 })
 
 app.listen(port, () => {

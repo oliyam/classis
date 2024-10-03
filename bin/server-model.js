@@ -14,15 +14,18 @@ exports.run = () => {
       this.server_game=new game();
     }
     
-    turn(client_game){
+    req_turn(client_game){
       var f = this.active_f;
       if (client_game.faction==f){
         
         //next player - next game
         this.active_f=f++%this.factions.length;
-        
-        return this.server_game;
+        console.log("game updated - turn ended")
       }
+    }
+    
+    req_game(client_game){
+      return this.server_game;
     }
     
   }
@@ -155,5 +158,5 @@ exports.run = () => {
       return Math.sqrt(d_x*d_x+d_y*d_y) <= range;
     }
     
-    return new game(8)
+    return new turn_system()
 }
