@@ -20,7 +20,7 @@ exports.run = () => {
       data.vessels.forEach(cv=>{
         for(var i=0;i<this.server_game.vessels.length;i++){
           if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
-            this.server_game.vessels[i]=cv;
+            this.server_game.vessels[i]=JSON.parse(JSON.stringify(cv));
         }
       })
       this.server_game.turn()
