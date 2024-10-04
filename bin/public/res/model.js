@@ -4,7 +4,7 @@ class game {
       
       vessels = [];
       selected_v = 0;
-      faction;
+      faction = 'x';
       
       splashes = [];
       

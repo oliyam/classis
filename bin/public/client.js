@@ -98,7 +98,4 @@ window.onload = ()=> {
     }
     view.draw_game(battle);
   });
-
-      
-    }
-    
+}
