@@ -64,7 +64,7 @@ class game {
       
       turn(){
         this.splashes=[]
-        this.reset_tmp()
+      //  this.reset_tmp()
       }
     }
     
