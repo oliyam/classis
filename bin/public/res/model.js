@@ -13,6 +13,7 @@ class game {
       }
       
       reset_tmp(){
+        this.splashes = []
         this.vessels[this.selected_v].weapons[0].lockon = undefined;
         this.vessels[this.selected_v].new_pos = undefined;
       }
