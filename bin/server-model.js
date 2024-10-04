@@ -61,7 +61,7 @@ exports.run = () => {
           this.vessels.push(new vessel(i, 'red', "ROCINANTE-0"+i, [{x:50*i+50,y:100}], 100, 50, null, new radar(100)))
           this.vessels.push(new vessel(i, 'blue', "ENTERPRISE-0"+i, [{ x: 50*i+50, y: 500 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
         }
-        console.log(this.vessels.length)
+        console.log("Number of vessels: "+this.vessels.length)
       }
       
       scan(faction){
