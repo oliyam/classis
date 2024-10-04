@@ -112,6 +112,18 @@
     let x=p.x;
     let y=p.y;
     
+    if (!ded&&document.getElementById('radar').checked){
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+      this.ctx.fillStyle = 'black'
+      this.ctx.fill;
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+      this.ctx.strokeStyle = 'green'
+      this.ctx.stroke();
+    }
+      
+    
     //destination 
     let d = vessel.new_pos;
     if (d) {
@@ -218,15 +230,9 @@
             });
           }
           
-          //draw radar-range and blips
-          if (document.getElementById('radar').checked) {
-            this.ctx.beginPath();
-            this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-            this.ctx.strokeStyle = 'green'
-            this.ctx.stroke();
-        
+          //draw blips
+          if (document.getElementById('radar').checked)
             this.draw_blips(vessel.radar)
-          }
         }
           else {
              this.draw_triangle(p, 20, 'black')
