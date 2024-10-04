@@ -29,6 +29,7 @@ exports.run = () => {
         this.active_f=++this.active_f%this.factions.length;
         console.log("game updated - turn ended. active faction: "+this.factions[this.active_f])
       }
+      return this.active_f;
     }
     
     req_game(data){

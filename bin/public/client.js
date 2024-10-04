@@ -29,9 +29,11 @@ window.onload = ()=> {
   disableUI(1)
 
   document.getElementById('turn').onclick=()=>{
-    mult.send_game(battle)
+    mult.send_game(battle).then( res => {
+    console.log(res)
     disableUI(true)
     battle.turn()
+    });
     view.draw_game(battle,1)
   }
   
@@ -76,7 +78,7 @@ window.onload = ()=> {
       disableUI(false)
       battle=Object.assign(new game(faction,battle.selected_v), res);
       view.draw_game(battle)
-    })
+    });
     , 0);
   }
 

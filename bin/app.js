@@ -32,8 +32,7 @@ app.post('/battle_rx', (req, res) => {
 
 app.post('/battle_tx', (req, res) => {
   log("[< RX: recieved game-update. <]",'yellow')
-  classis.req_turn(req.body)
-  res.send()
+  res.send(JSON.stringify(classis.req_turn(req.body)))
 })
 
 app.listen(port, () => {
