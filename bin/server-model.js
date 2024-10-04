@@ -22,7 +22,7 @@ exports.run = () => {
         console.log(cv.splashes)
         for(var i=0;i<this.server_game.vessels.length;i++){
           if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
-            this.server_game.vessels[i]=JSON.parse(JSON.stringify(cv));
+            this.server_game.vessels[i]=cv;
         }
       })
       this.server_game.turn()
@@ -106,7 +106,7 @@ exports.run = () => {
            if (
              in_range(s.pos, v.pos.at(-1), s.rad) && //in reichweite
              s.active //waffe gerade abgeschossen
-           ){console.log('¤')
+           ){
              v.health<s.dmg?v.health=0:v.health-=s.dmg;
            }
          })
