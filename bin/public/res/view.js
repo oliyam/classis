@@ -112,6 +112,7 @@
     let x=p.x;
     let y=p.y;
     
+    //draw radar
     if (!ded&&document.getElementById('radar').checked){
       this.ctx.beginPath();
       this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
