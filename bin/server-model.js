@@ -25,17 +25,9 @@ exports.run = () => {
         }
       })
       this.server_game.turn()
-        /*this.server_game=data/*.vessels.forEach(sv => {
-          data.vessels.forEach(cv => {
-            if (sv.faction==cv.faction&&sv.id==cv.id) {
-              sv
-            }
-          })
-        })*/
-        //next player - next game
-        //this.active_f=f++%this.factions.length;
-        console.log("game updated - turn ended")
-      
+      //next player - next game
+      //this.active_f=f++%this.factions.length;
+      console.log("game updated - turn ended")
     }
     
     req_game(data){
@@ -43,7 +35,7 @@ exports.run = () => {
       var cg = JSON.parse(JSON.stringify(this.server_game))
 
       cg.vessels.forEach(v => {
-        if (v.faction!==data.f) 
+        if (v.faction!=data.f) 
           cg.vessels.splice(cg.vessels.indexOf(v), 1);
       })
 
