@@ -2,7 +2,7 @@ window.onload = ()=> {
   
   const faction=prompt('PLS SELECT FACTION! [red/blue]:')
   
-  var battle=new game(faction);
+  var battle=new game(faction,0);
   
   var mult = new multiplayer();
     
