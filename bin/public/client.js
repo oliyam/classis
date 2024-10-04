@@ -30,11 +30,11 @@ window.onload = ()=> {
 
   document.getElementById('turn').onclick=()=>{
     mult.send_game(battle).then( res => {
-    console.log(res)
-    disableUI(true)
-    battle.turn()
+      disableUI(true)
+      if (res.turned)
+        battle.turn()
+      view.draw_game(battle,1)
     });
-    view.draw_game(battle,1)
   }
   
   document.getElementById('scan').onclick = () => {
