@@ -17,15 +17,12 @@ exports.run = () => {
     }
     
     req_turn(data){
-      data= JSON.parse(JSON.stringify(data))
+
       data.vessels.forEach(cv=>{
-        console.log(cv.splashes)
-        
+        this.server_game.splashes.concat(data.splashes)
         for(var i=0;i<this.server_game.vessels.length;i++){
-          if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction){
+          if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
             this.server_game.vessels[i]=cv;
-            this.server_game.splashes.concat(cv.splashes)
-          }
         }
       })
       console.log(this.server_game.splashes)
