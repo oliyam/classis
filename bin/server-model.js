@@ -27,7 +27,7 @@ exports.run = () => {
         this.server_game.turn()
         //next player - next game
         this.active_f=++this.active_f%this.factions.length;
-        log("game updated - turn ended. active faction: "+this.factions[this.active_f],'magenta')
+        console.log("game updated - turn ended. active faction: "+this.factions[this.active_f]);
         return {turned: true};
       }
       return {turned: false};
