@@ -115,9 +115,9 @@
       
       if (!ded && document.getElementById('radar').checked) {
         this.ctx.beginPath();
-        this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
         this.ctx.strokeStyle = 'green'
         this.ctx.strokeWidth = 5
+        this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
         this.ctx.stroke();
       }
     })
