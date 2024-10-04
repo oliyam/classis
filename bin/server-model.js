@@ -19,7 +19,7 @@ exports.run = () => {
     req_turn(data){
       data.vessels.forEach(cv=>{
         for(var i=0;i<this.server_game.vessels.length;i++){
-          if(this.server_game.vessels[i].id==cv.id)
+          if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
             this.server_game.vessels[i]=cv;
         }
       })
@@ -64,7 +64,7 @@ exports.run = () => {
         
         this.vessels.push(new vessel(0, 'red', "ROCINANTE", null, 100, 50, null, new radar(100)))
         
-        this.vessels.push(new vessel(1, 'blue', "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
+        this.vessels.push(new vessel(0, 'blue', "ENTERPRISE", [{ x: 200, y: 100 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
         
       }
       
