@@ -33,7 +33,7 @@ exports.run = () => {
     req_game(data){
       this.server_game.scan(data.f)
       var cg = JSON.parse(JSON.stringify(this.server_game))
-
+console.log(data.f)
       cg.vessels.forEach(v => {
         if (v.faction!=='söx') 
           cg.vessels.splice(cg.vessels.indexOf(v), 1);
