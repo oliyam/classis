@@ -18,7 +18,7 @@ exports.run = () => {
     
     req_turn(data){
       data.vessels.forEach(cv=>{
-        for(var i=0;i<this.server.vessels.length;i++){
+        for(var i=0;i<this.server_game.vessels.length;i++){
           if(this.server_game.vessels[i].id==cv.id)
             this.server_game.vessels[i]=cv;
         }
