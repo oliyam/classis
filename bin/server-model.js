@@ -24,7 +24,7 @@ exports.run = () => {
             this.server_game.vessels[i]=cv;
         }
       })
-      console.log(this.server_game.splashes)
+      console.log(data.splashes)
       this.server_game.turn()
         /*this.server_game=data/*.vessels.forEach(sv => {
           data.vessels.forEach(cv => {
