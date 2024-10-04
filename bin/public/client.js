@@ -78,7 +78,7 @@ window.onload = ()=> {
       disableUI(false)
       battle=Object.assign(new game(faction,battle.selected_v), res);
       view.draw_game(battle)
-    });
+    })
     , 0);
   }
 
