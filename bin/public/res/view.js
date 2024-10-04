@@ -105,7 +105,7 @@
     }
   
   //draw radar cloud - entire radar coverage for a whole fleet (array of vessels)
-  draw_radar_cloud(fleet){
+  draw_radars(fleet){
     fleet.forEach(vessel => {
       var ded = !vessel.health;
       
@@ -311,7 +311,7 @@
     else if (this.loading) {
       clearInterval(this.loading)
     }
-    
+    this.draw_radars(game.vessels)
     this.draw_splashes(game)
     game.vessels.forEach(v => {
         this.draw_vessel(v, game.selected_v == v.id, false);
