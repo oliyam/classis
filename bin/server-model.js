@@ -17,9 +17,8 @@ exports.run = () => {
     }
     
     req_turn(data){
-
+     this.server_game.splashes.concat(data.splashes)
       data.vessels.forEach(cv=>{
-        this.server_game.splashes.concat(data.splashes)
         for(var i=0;i<this.server_game.vessels.length;i++){
           if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
             this.server_game.vessels[i]=cv;
