@@ -94,6 +94,7 @@ exports.run = () => {
       }
       
       deal_dmg(){
+        console.log(this.splashes)
        this.splashes.forEach(s=>{
          this.vessels.forEach(v=>{
            if (
