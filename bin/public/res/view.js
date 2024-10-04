@@ -133,7 +133,7 @@
          this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
          this.ctx.fillStyle = 'black'
          let tmp = this.ctx.globalAlpha;
-         this.ctx.globalAlpha = 1;
+         this.ctx.globalAlpha = ;
          this.ctx.fill();
          this.ctx.globalAlpha = tmp;
       }
@@ -286,8 +286,16 @@
   loading;
     
   draw_game(game, inactive) {
-    
+
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
+    if (inactive)
+      this.ctx.globalAlpha = .25;
+      
+    this.draw_radars(game.vessels)
+    this.draw_splashes(game)
+    game.vessels.forEach(v => {
+        this.draw_vessel(v, game.selected_v == v.id, false);
+    });
     if (inactive) {
       var 
         x=20,
@@ -320,17 +328,10 @@
         }
         i++;
       }, 500)
-      this.ctx.globalAlpha = .25;
     }
     else if (this.loading) {
       clearInterval(this.loading)
     }
-    this.draw_radars(game.vessels)
-    this.draw_splashes(game)
-    game.vessels.forEach(v => {
-        this.draw_vessel(v, game.selected_v == v.id, false);
-    });
-    
     this.ctx.globalAlpha=1;
   }
 }
