@@ -35,10 +35,8 @@ exports.run = () => {
       var cg = JSON.parse(JSON.stringify(this.server_game))
       var filtered_v = [];
       
-      //DO NOT MODIFY CONTENTS OF THE ARRAY YOU ARE.forEach-ing!!!!
+      //DO NOT (NEVER EVER) MODIFY CONTENTS OF THE ARRAY YOU ARE.forEach-ing!!!!
       cg.vessels.forEach(v => {
-        console.log('.')
-        console.log(data.f+" !== "+v.faction+" = "+ (v.faction!==data.f) )
         if (v.faction==data.f) 
           filtered_v.push(v)
       })
