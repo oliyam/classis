@@ -35,7 +35,7 @@ exports.run = () => {
       var cg = JSON.parse(JSON.stringify(this.server_game))
 
       cg.vessels.forEach(v => {
-        if (v.faction!=data.f) 
+        if (v.faction!==data.f) 
           cg.vessels.splice(cg.vessels.indexOf(v), 1);
       })
 
@@ -55,7 +55,7 @@ exports.run = () => {
       constructor(faction){
         for (var i = 0; i < 4; i++){
           
-          this.vessels.push(new vessel(i, 'red', "ROCINANTE-0"+i, [{x:50*i+50,y:100}], 100, 50, null, new radar(100)))
+          this.vessels.push(new vessel(i, 'redpp', "ROCINANTE-0"+i, [{x:50*i+50,y:100}], 100, 50, null, new radar(100)))
           this.vessels.push(new vessel(i, 'blue', "ENTERPRISE-0"+i, [{ x: 50*i+50, y: 500 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
         }
       }
