@@ -15,7 +15,6 @@ window.onload = ()=> {
     var ids=[
       'turn',
       'radar',
-      'scan',
       'selectv',
       'shoot',
       'mode',
