@@ -62,7 +62,7 @@ class game {
       }
       
       turn(){
-        fire()
+        this.fire()
         this.reset_tmp()
       }
     }
