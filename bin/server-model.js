@@ -106,8 +106,9 @@ exports.run = () => {
            if (
              in_range(s.pos, v.pos.at(-1), s.rad) && //in reichweite
              s.active //waffe gerade abgeschossen
-           )
+           ){console.log('¤')
              v.health<s.dmg?v.health=0:v.health-=s.dmg;
+           }
          })
          s.active=0;
        })
