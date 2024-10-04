@@ -30,18 +30,9 @@ window.onload = ()=> {
 
   document.getElementById('turn').onclick=()=>{
     disableUI(true)
-       document.getElementById('req').disabled=false;
+    document.getElementById('req').disabled=false;
     view.draw_game(battle,1)
-    mult.send_game(battle).then( res => {
-      if (res.turned){
-        battle.turn()
-        view.draw_game(battle,1)
-       // document.getElementById('req').disabled=false;
-      }
-      else{
-        view.draw_game(battle,0)
-      }
-    });
+    mult.send_game(battle);
   }
   
   document.getElementById('scan').onclick = () => {
