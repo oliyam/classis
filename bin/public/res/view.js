@@ -117,7 +117,7 @@
         this.ctx.beginPath();
         this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
         this.ctx.strokeStyle = 'green'
-        this.ctx.strokeWidth = 2
+        this.ctx.strokeWidth = 5
         this.ctx.stroke();
       }
     })
@@ -296,6 +296,7 @@
     game.vessels.forEach(v => {
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
+    this.ctx.globalAlpha=1;
     if (inactive) {
       var 
         x=20,
@@ -332,6 +333,5 @@
     else if (this.loading) {
       clearInterval(this.loading)
     }
-    this.ctx.globalAlpha=1;
   }
 }
