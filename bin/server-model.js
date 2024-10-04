@@ -29,7 +29,7 @@ exports.run = () => {
         this.active_f=++this.active_f%this.factions.length;
         console.log("game updated - turn ended. active faction: "+this.factions[this.active_f])
       }
-      return this.active_f;
+      //return this.active_f;
     }
     
     req_game(data){
@@ -44,7 +44,7 @@ exports.run = () => {
       })
       cg.vessels=filtered_v;
 
-      return cg;
+      return {game:cg,turn:this.factions[this.active_f]==data.f};
     }
     
   }

@@ -75,9 +75,11 @@ window.onload = ()=> {
   document.getElementById('req').onclick = () => {
     setTimeout(
     mult.get_game({f:faction}).then(res => {
-      disableUI(false)
-      battle=Object.assign(new game(faction,battle.selected_v), res);
-      view.draw_game(battle)
+      if (res.turn) {
+        disableUI(false)
+        battle=Object.assign(new game(faction,battle.selected_v), res.game);
+        view.draw_game(battle)
+      }
     })
     , 0);
   }
