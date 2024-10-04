@@ -79,6 +79,9 @@ window.onload = ()=> {
         battle=Object.assign(new game(faction,battle.selected_v), res.game);
         view.draw_game(battle)
       }
+      else{
+        alert("*Mace Windu voice*: 'Not yet!' - req again later!")
+      }
     })
     , 0);
   }
