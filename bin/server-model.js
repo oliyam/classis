@@ -34,6 +34,8 @@ exports.run = () => {
       this.server_game.scan(data.f)
       var cg = JSON.parse(JSON.stringify(this.server_game))
       var filtered_v;
+      
+      //DO NOT MODIFY CONTENTS OF THE ARRAY YOU ARE.forEach-ing!!!!
       cg.vessels.forEach(v => {
         console.log('.')
         console.log(data.f+" !== "+v.faction+" = "+ (v.faction!==data.f) )
