@@ -106,39 +106,41 @@
        
   //draw radar cloud - entire radar coverage for a whole fleet (array of vessels)
   draw_radars(fleet){
-    fleet.forEach(vessel => {
-      var ded = !vessel.health;
+    if (document.getElementById('radar').checked) {
+      this.ctx.lineWidth = 5;
+      fleet.forEach(vessel => {
+        var ded = !vessel.health;
+        
+        let p = vessel.pos.at(-1);
+        let x = p.x;
+        let y = p.y;
+        
+        if (!ded) {
+          this.ctx.beginPath();
+          this.ctx.strokeStyle = 'green'
+          this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+          this.ctx.stroke();
+        }
+      })
+      this.ctx.lineWidth = 1.5;
+      fleet.forEach(vessel => {
+        var ded = !vessel.health;
       
-      let p = vessel.pos.at(-1);
-      let x = p.x;
-      let y = p.y;
+        let p = vessel.pos.at(-1);
+        let x = p.x;
+        let y = p.y;
       
-      if (!ded && document.getElementById('radar').checked) {
-        this.ctx.beginPath();
-        this.ctx.strokeStyle = 'green'
-        this.ctx.lineWidth = 5;
-        this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-        this.ctx.stroke();
-        this.ctx.lineWidth = 1.5;
-      }
-    })
-    fleet.forEach(vessel => {
-      var ded = !vessel.health;
-    
-      let p = vessel.pos.at(-1);
-      let x = p.x;
-      let y = p.y;
-    
-      if (!ded && document.getElementById('radar').checked) {
-         this.ctx.beginPath();
-         this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-         this.ctx.fillStyle = 'black'
-         let tmp = this.ctx.globalAlpha;
-         this.ctx.globalAlpha = 1;
-         this.ctx.fill();
-         this.ctx.globalAlpha = tmp;
-      }
-    })
+        if (!ded) {
+           this.ctx.beginPath();
+           this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+           this.ctx.fillStyle = 'black'
+           let tmp = this.ctx.globalAlpha;
+           this.ctx.globalAlpha = 1;
+           this.ctx.fill();
+           this.ctx.globalAlpha = tmp;
+        }
+      })
+    }
   }
   
   draw_vessel(vessel, selected){

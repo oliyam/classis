@@ -8,8 +8,9 @@ class game {
       
       splashes = [];
       
-      constructor(faction){
+      constructor(faction, sel){
         this.faction=faction;
+        this.selected_v=sel;
       }
       
       reset_tmp(){

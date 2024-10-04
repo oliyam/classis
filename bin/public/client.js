@@ -74,10 +74,10 @@ window.onload = ()=> {
     setTimeout(
     mult.get_game({f:faction}).then(res => {
       disableUI(false)
-      battle=Object.assign(new game(faction), res);
+      battle=Object.assign(new game(faction,battle.selected_v), res);
       view.draw_game(battle)
     })
-    , 1000);
+    , 0);
   }
 
   c.addEventListener("touchmove", (e)=>{
