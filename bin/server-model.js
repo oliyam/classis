@@ -5,29 +5,30 @@ exports.run = () => {
   class turn_system {
     active_f;
     
-    factions = [];
+    factions = ['red', 'blue'];
     fleets = [];
     
     server_game;
     
     constructor(){
-      this.factions = []
       this.active_f=0;
       this.server_game=new game();
     }
     
     req_turn(data){
-      this.server_game.splashes=data.splashes
-      data.vessels.forEach(cv=>{
-        for(var i=0;i<this.server_game.vessels.length;i++){
-          if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
-            this.server_game.vessels[i]=cv;
-        }
-      })
-      this.server_game.turn()
-      //next player - next game
-      //this.active_f=f++%this.factions.length;
-      console.log("game updated - turn ended")
+      if (data.faction==this.factions[this.active_f]){
+        this.server_game.splashes=data.splashes
+        data.vessels.forEach(cv=>{
+          for(var i=0;i<this.server_game.vessels.length;i++){
+            if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
+              this.server_game.vessels[i]=cv;
+          }
+        })
+        this.server_game.turn()
+        //next player - next game
+        this.active_f=f++%this.factions.length;
+        console.log("game updated - turn ended")
+      }
     }
     
     req_game(data){
