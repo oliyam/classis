@@ -55,14 +55,14 @@ class game {
       
       fire(){
         if(this.vessels[this.selected_v].health>0){
-          let shot = weapon_fire(this.vessels[this.selected_v].weapons[0])
+          let shot = weaponfire(this.vessels[this.selected_v].weapons[0])
           if (shot)
             this.splashes.push(shot)
         }
       }
       
       turn(){
-        this.fire()
+        this.reset_tmp()
       }
     }
     

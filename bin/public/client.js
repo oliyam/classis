@@ -53,6 +53,7 @@ window.onload = ()=> {
     
       case 'fire':
         battle.fire();
+        console.log(battle.splashes)
         break;
     }
     battle.reset_tmp()
