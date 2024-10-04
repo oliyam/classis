@@ -53,16 +53,16 @@ class game {
         });
       }
       
-      fire_all(){
+      fire(){
         if(this.vessels[this.selected_v].health>0){
-          let shot = fire(this.vessels[this.selected_v].weapons[0])
+          let shot = weapon_fire(this.vessels[this.selected_v].weapons[0])
           if (shot)
             this.splashes.push(shot)
         }
       }
       
       turn(){
-        fire_all()
+        fire()
         this.reset_tmp()
       }
     }
@@ -138,7 +138,7 @@ class game {
           v.weapons[w].lockon = vec;
     }
       
-    function fire(w){
+    function weapon_fire(w){
         if (w.ammo>0&&w.lockon) {
           w.ammo--;
           return {pos: w.lockon, rad: w.radius, dmg: w.damage, active: true};
