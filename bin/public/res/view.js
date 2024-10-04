@@ -103,7 +103,7 @@
       this.ctx.arc(pos.x, pos.y, radius, 0, 2 * Math.PI);
       this.ctx.stroke();
     }
-  
+       
   //draw radar cloud - entire radar coverage for a whole fleet (array of vessels)
   draw_radars(fleet){
     fleet.forEach(vessel => {
@@ -116,12 +116,22 @@
       if (!ded && document.getElementById('radar').checked) {
         this.ctx.beginPath();
         this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
-        this.ctx.fillStyle = 'black'
-        this.ctx.fill();
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
         this.ctx.strokeStyle = 'green'
         this.ctx.stroke();
+      }
+    })
+    fleet.forEach(vessel => {
+      var ded = !vessel.health;
+    
+      let p = vessel.pos.at(-1);
+      let x = p.x;
+      let y = p.y;
+    
+      if (!ded && document.getElementById('radar').checked) {
+         this.ctx.beginPath();
+         this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
+         this.ctx.fillStyle = 'black'
+         this.ctx.fill();
       }
     })
   }
