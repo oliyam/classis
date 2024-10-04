@@ -92,7 +92,7 @@ exports.run = () => {
       
       fire(v){
         if(v.health>0){
-          let shot = fire(v.weapons[0])
+          let shot = fire_(v.weapons[0])
           if (shot)
             this.splashes.push(shot)
         }
@@ -118,6 +118,14 @@ exports.run = () => {
         })
         this.deal_dmg()
       }
+    }
+    
+    function fire_(w) {
+      if (w.ammo > 0 && w.lockon) {
+        w.ammo--;
+        return { pos: w.lockon, rad: w.radius, dmg: w.damage, active: true };
+      }
+      return 0;
     }
     class vessel {
     
