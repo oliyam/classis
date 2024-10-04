@@ -62,6 +62,7 @@ class game {
       }
       
       turn(){
+        fire()
         this.reset_tmp()
       }
     }
