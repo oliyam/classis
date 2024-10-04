@@ -53,16 +53,7 @@ class game {
         });
       }
       
-      fire(){
-        if(this.vessels[this.selected_v].health>0){
-          let shot = fire(this.vessels[this.selected_v].weapons[0])
-          if (shot)
-            this.splashes.push(shot)
-        }
-      }
-      
       turn(){
-        fire()
         this.reset_tmp()
       }
     }

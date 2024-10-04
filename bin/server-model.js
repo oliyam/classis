@@ -17,8 +17,13 @@ exports.run = () => {
     }
     
     req_turn(data){
-      this.server_game.splashes.concat(data.splashes)
-      this.server_game.deal_dmg()
+      data.vessels(cv=>{
+        for(var i=0;i<this.server.vessels.length;i++){
+          if(this.server_game.vessels[i].id==cv.id)
+            this.server_game.vessels[i]=cv;
+        }
+      })
+      this.server_game.turn()
         /*this.server_game=data/*.vessels.forEach(sv => {
           data.vessels.forEach(cv => {
             if (sv.faction==cv.faction&&sv.id==cv.id) {
@@ -94,7 +99,6 @@ exports.run = () => {
       }
       
       deal_dmg(){
-        console.log(this.splashes)
        this.splashes.forEach(s=>{
          this.vessels.forEach(v=>{
            if (
