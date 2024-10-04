@@ -54,10 +54,11 @@ exports.run = () => {
       splashes = [];
       
       constructor(faction){
-        for (var i = 0; i < 4; i++)
-          this.vessels.push(new vessel(i, 'r', "ROCINANTE-0"+i, [{x:50*i+50,y:100}], 100, 50, null, new radar(100)))
-        for (var i = 0; i < 4; i++)
-          this.vessels.push(new vessel(i, 'b', "ENTERPRISE-0"+i, [{ x: 50*i+50, y: 500 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
+        for (var i = 0; i < 4; i++){
+          this.vessels.push(new vessel(i, 'red', "ROCINANTE-0"+i, [{x:50*i+50,y:100}], 100, 50, null, new radar(100)))
+          this.vessels.push(new vessel(i, 'blue', "ENTERPRISE-0"+i, [{ x: 50*i+50, y: 500 }], 100, 50, new weapon(69, 200), new radar(200, 1)))
+        }
+        console.log(this.vessels.length)
       }
       
       scan(faction){
