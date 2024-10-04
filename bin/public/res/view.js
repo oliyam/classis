@@ -117,7 +117,7 @@
       this.ctx.beginPath();
       this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
       this.ctx.fillStyle = 'black'
-      this.ctx.fill;
+      this.ctx.fill();
       this.ctx.beginPath();
       this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
       this.ctx.strokeStyle = 'green'
