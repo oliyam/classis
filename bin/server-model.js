@@ -27,6 +27,7 @@ exports.run = () => {
           }
         }
       })
+      console.log(this.server_game.splashes)
       this.server_game.turn()
         /*this.server_game=data/*.vessels.forEach(sv => {
           data.vessels.forEach(cv => {
