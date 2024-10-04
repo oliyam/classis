@@ -33,13 +33,14 @@ exports.run = () => {
     req_game(data){
       this.server_game.scan(data.f)
       var cg = JSON.parse(JSON.stringify(this.server_game))
-      console.log(cg.vessels.length)
+      var filtered_v;
       cg.vessels.forEach(v => {
         console.log('.')
         console.log(data.f+" !== "+v.faction+" = "+ (v.faction!==data.f) )
-        if (v.faction!==data.f) 
-          cg.vessels.splice(cg.vessels.indexOf(v), 1);
+        if (v.faction==data.f) 
+          filtered_v.push(v)
       })
+      cg.vessels=filtered_v;
 
       return cg;
     }
