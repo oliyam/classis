@@ -116,9 +116,10 @@
       if (!ded && document.getElementById('radar').checked) {
         this.ctx.beginPath();
         this.ctx.strokeStyle = 'green'
-        this.ctx.lineWidth = 5
+        this.ctx.lineWidth = 5;
         this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
         this.ctx.stroke();
+        this.ctx.lineWidth = 1.5;
       }
     })
     fleet.forEach(vessel => {
@@ -192,7 +193,6 @@
             this.ctx.beginPath();
             this.ctx.arc(x, y, w.range, 0, 2 * Math.PI);
             this.ctx.strokeStyle = 'orange'
-            this.ctx.strokeWidth = 2
             this.ctx.stroke();
     
             this.draw_solution(vessel.pos.at(-1), w)
