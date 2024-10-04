@@ -117,6 +117,7 @@
         this.ctx.beginPath();
         this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
         this.ctx.strokeStyle = 'green'
+        this.ctx.strokeWidth = 2
         this.ctx.stroke();
       }
     })
@@ -131,7 +132,10 @@
          this.ctx.beginPath();
          this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
          this.ctx.fillStyle = 'black'
+         let tmp = this.ctx.globalAlpha;
+         this.ctx.globalAlpha = s.dmg / 100;
          this.ctx.fill();
+         this.ctx.globalAlpha = tmp;
       }
     })
   }
