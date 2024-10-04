@@ -35,11 +35,6 @@ window.onload = ()=> {
     mult.send_game(battle);
   }
   
-  document.getElementById('scan').onclick = () => {
-    document.getElementById('radar').checked=true;
-    view.draw_game(battle)
-  }
-  
   document.getElementById('selectv').onclick = () => {
     battle.select_next()
     view.draw_game(battle)
@@ -80,7 +75,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else{
-        alert("*Mace Windu voice*: 'Not yet!' - req again later!")
+        alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
     , 0);
