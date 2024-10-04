@@ -133,7 +133,7 @@
          this.ctx.arc(x, y, vessel.radar.range, 0, 2 * Math.PI);
          this.ctx.fillStyle = 'black'
          let tmp = this.ctx.globalAlpha;
-         this.ctx.globalAlpha = ;
+         this.ctx.globalAlpha = 1;
          this.ctx.fill();
          this.ctx.globalAlpha = tmp;
       }
