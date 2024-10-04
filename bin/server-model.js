@@ -17,6 +17,7 @@ exports.run = () => {
     }
     
     req_turn(data){
+      data=  var cg = JSON.parse(JSON.stringify(data))
       data.vessels.forEach(cv=>{
         console.log(cv.splashes)
         
