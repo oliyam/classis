@@ -40,7 +40,7 @@ window.onload = ()=> {
     mult.send_game(battle)
     if(ask)
       clearInterval(ask)
-    ask=setInterval(()=>{req_game()}, 500);
+    ask=setInterval(req_game(), 5000);
   }
   
   document.getElementById('selectv').onclick = () => {
