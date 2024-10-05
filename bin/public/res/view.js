@@ -304,6 +304,12 @@
         var x=20,y=20,px=20;
         var line = 0;
       
+      var txt="vessels are maneuvering"
+      var sym="~~~"
+      
+       var txt_l=this.ctx.measureText(txt).width
+       var sym_l=this.ctx.measureText(sym).width
+      
         var t = parseFloat((60000 - elapsed) / 1000).toFixed(2);
         var txt_t = missed ? "You've missed your turn. - Try to 'req' again later!" : (t > 0 ? ("Pls wait: " + (t < 10 ? '0' + t : t) + "sec. to 'req'!") : "You may claim your turn now. - PLS PRESS: 'req'!");
         var txt_t_l = this.ctx.measureText(txt_t).width;
