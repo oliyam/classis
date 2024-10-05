@@ -301,6 +301,7 @@
     this.ctx.globalAlpha=1;
     if (!inactive && !this.loading) {
       this.loading = setInterval(() => {
+        var x=20,y=20,px=20;
         var line = 0;
       
         var t = parseFloat((60000 - elapsed) / 1000).toFixed(2);
