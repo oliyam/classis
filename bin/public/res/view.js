@@ -302,7 +302,7 @@
     if (!inactive && this.loading==undefined) {
       var i=0;
       var elapsed =0;
-              var x=20,y=20,px=20;
+              var x=20,y=20,px=10;
       
       var txt="vessels are maneuvering"
       var sym="~~~"
