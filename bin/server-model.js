@@ -51,7 +51,7 @@ exports.run = () => {
       })
       cg.vessels=filtered_v;
    
-      return {game:cg,turn:this.factions[this.active_f]==data.f};
+      return {game:cg,turn:this.factions[this.active_f]==data.f,time:getTimeLeft(turn_timeout)};
     }
     
   }

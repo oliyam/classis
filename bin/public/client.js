@@ -79,7 +79,8 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        alert("Mace Windu voice: 'Not yet!' - req again later!")
+        view.draw_game(battle, 1, res.time)
+        //alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
   }
