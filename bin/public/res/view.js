@@ -286,7 +286,9 @@
   }
   
   loading;
-  loader(){
+  set_loader(inactive){
+    if (this.loader) 
+      clearInterval(this.loader)
       var 
         x=20,
         y=40,
@@ -308,24 +310,27 @@
         var line=0;
         
         var t = parseFloat((60000-elapsed)/1000).toFixed(2);
-        var txt_t = t>0?("Pls wait: "+(t<10?'0'+t:t)+"sec. to 'req'!"):"You may claim your turn now. - PLS PRESS: 'req'!"
+        var txt_t = t>0?("You have: "+(t<10?'0'+t:t)+"sec. to end your turn!"):"No move - turn ended!"
         var txt_t_l = this.ctx.measureText(txt_t).width;
        
         this.ctx.font = "bold " + px + "px monospace";       
         
-        this.ctx.fillStyle = "orange"
-        this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
-        this.ctx.fillText(txt_t, x, y + px * line++);
-        
-        this.ctx.fillStyle = "white"
-        this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
-        this.ctx.fillText(txt, x, y + px * line);
-      
-        if (i%4==0)
-            this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
+        if(!inactive){
+          this.ctx.fillStyle = "orange"
+          this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
+          this.ctx.fillText(txt_t, x, y + px * line);
+        }
         else{
-            this.ctx.fillStyle = "cyan"
-            this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
+          this.ctx.fillStyle = "white"
+          this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
+          this.ctx.fillText(txt, x, y + px * line);
+        
+          if (i%4==0)
+              this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
+          else{
+              this.ctx.fillStyle = "cyan"
+              this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
+          }
         }
         i++;
         elapsed+=500;
