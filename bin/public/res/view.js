@@ -299,7 +299,7 @@
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
     this.ctx.globalAlpha=1;
-    if (!inactive && !this.loading&& 0) {
+    if (!inactive && this.loading==undefined) {
       var i=0;
       var elapsed =0;
               var x=20,y=20,px=20;
@@ -337,7 +337,7 @@
         i++;
         elapsed += 500;
       }, 500);
-    } else if (inactive && this.loading){
+    } else if (this.loading){
       clearTimeout(this.loading)
     }
   }
