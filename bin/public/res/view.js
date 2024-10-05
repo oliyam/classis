@@ -299,7 +299,7 @@
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
     this.ctx.globalAlpha=1;
-    if (!inactive && !this.loading) {
+    if (!inactive && !this.loading&& 0) {
       var i=0;
       var elapsed =0;
               var x=20,y=20,px=20;
@@ -310,6 +310,7 @@
       
        var txt_l=this.ctx.measureText(txt).width
        var sym_l=this.ctx.measureText(sym).width
+    
       this.loading = setInterval(() => {
 
       
