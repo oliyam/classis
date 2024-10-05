@@ -77,6 +77,7 @@ window.onload = ()=> {
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
+        view.loader()
 
         setTimeout(() => {
           turn()

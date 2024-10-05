@@ -7,7 +7,6 @@
     this.size = {x: canvas.width, y: canvas.height};
     this.ctx=canvas.getContext('2d');
     this.ctx.lineWidth = 1.5;
-    this.loder()
   }
   
   draw_splashes(game){
