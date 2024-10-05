@@ -33,6 +33,7 @@ window.onload = ()=> {
     view.draw_game(battle, 1)
     mult.send_game(battle);
     setTimeout(()=>{
+      req_game();
       document.getElementById('req').disabled=false
     }, 60000);
   }
@@ -50,7 +51,6 @@ window.onload = ()=> {
     
       case 'fire':
         battle.fire();
-        console.log(battle.splashes)
         break;
     }
     battle.reset_tmp()
@@ -68,19 +68,21 @@ window.onload = ()=> {
   })
   
   document.getElementById('req').onclick = () => {
-    setTimeout(
-    mult.get_game({f:faction}).then(res => {
+    req_game();
+  }
+
+  function req_game() {
+    mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
         disableUI(false)
-        document.getElementById('req').disabled=true;
-        battle=Object.assign(new game(faction,battle.selected_v), res.game);
+        document.getElementById('req').disabled = true;
+        battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
       }
-      else{
+      else {
         alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
-    , 0);
   }
 
   c.addEventListener("touchmove", (e)=>{
