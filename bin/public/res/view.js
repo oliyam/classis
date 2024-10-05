@@ -310,8 +310,8 @@
       
       this.ctx.fillStyle = "white"
       this.ctx.font = "bold " + px + "px monospace";
-      var txt="LOADING";
-      var sym="○";
+      var txt="vessels maneuvering";
+      var sym="~~~";
       var sym_l=this.ctx.measureText(sym).width;
       var txt_l=this.ctx.measureText(txt).width;
       
