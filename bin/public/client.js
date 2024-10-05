@@ -33,9 +33,10 @@ window.onload = ()=> {
   
   function turn() {
     disableUI(true)
-    document.getElementById('req').disabled = true
+    //document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
     mult.send_game(battle)
+    view.set_loader(true)
   }
   
   document.getElementById('selectv').onclick = () => {
