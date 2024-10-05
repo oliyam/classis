@@ -31,7 +31,7 @@ exports.run = () => {
     turn_timeout=setTimeout(()=>{},1);
     
     turn(){
-      this.turn_timeout.clearTimeout()
+      clearTimeout(this.turn_timeout)
       this.server_game.turn()
       //next player
       this.active_f=++this.active_f%this.factions.length;
