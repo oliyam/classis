@@ -74,6 +74,7 @@ window.onload = ()=> {
   }
 
   function req_game() {
+    console.log("req")
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
         disableUI(false)
