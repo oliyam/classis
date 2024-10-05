@@ -31,13 +31,15 @@ window.onload = ()=> {
     turn();
   }
   
+  ask;
   function turn() {
     view.set_loader(true)
     disableUI(true)
     //document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
-    mult.send_game(battle);
-    setInterval(()=>{req_game()}, 500);
+    mult.send_game(battle)
+    clearInterval(this.ask)
+    this.ask=setInterval(()=>{req_game()}, 500);
   }
   
   document.getElementById('selectv').onclick = () => {
