@@ -320,7 +320,7 @@
       this.loading = setInterval(()=>{
         var timer = ("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.");
         
-        this.ctx.fillRect(x, y, 4000, px);
+        this.ctx.strokeRect(x, y, 4000, px);
         this.ctx.fillText(timer, x, y);
         
         this.ctx.clearRect(x, y + px, txt_l, px);
