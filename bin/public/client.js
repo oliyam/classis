@@ -80,7 +80,6 @@ window.onload = ()=> {
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
-        setTimeout(turn(), 20000)
       }
       else {
         alert("Mace Windu voice: 'Not yet!' - req again later!")
