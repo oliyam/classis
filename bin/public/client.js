@@ -37,7 +37,7 @@ window.onload = ()=> {
     //document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
     mult.send_game(battle);
-    setInterval(req_game(), 500);
+    setInterval(()=>{req_game()}, 500);
   }
   
   document.getElementById('selectv').onclick = () => {
