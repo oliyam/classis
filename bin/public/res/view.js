@@ -310,18 +310,18 @@
       
       this.ctx.fillStyle = "white"
       this.ctx.font = "bold " + px + "px monospace";
-      var txt="PRESS 'REQ'";
+      var txt="LOADING";
       var sym="○";
       var sym_l=this.ctx.measureText(sym).width;
       var txt_l=this.ctx.measureText(txt).width;
       
-      console.log(sym_l+" "+txt_l)
-      
-      this.ctx.fillText("PLS REQUEST NEW GAME-UPDATE:", x, y);
-      this.ctx.fillText(txt, x, y + px);
-      
+      var elapsed=0
       
       this.loading = setInterval(()=>{
+        
+        this.ctx.fillText("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.", x, y);
+        this.ctx.fillText(txt, x, y + px);
+      
         if (i%4==0)
             this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
         else{
@@ -330,6 +330,7 @@
             this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
         }
         i++;
+        elapsed+=500;
       }, 500)
     }
     else if (this.loading) {
