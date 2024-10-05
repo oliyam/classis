@@ -33,7 +33,6 @@ window.onload = ()=> {
   
   var ask;
   function turn() {
-    view.set_loader(true)
     disableUI(true)
     //document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
@@ -80,15 +79,13 @@ window.onload = ()=> {
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
-        view.set_loader(false)
         setTimeout(() => {
           turn()
           document.getElementById('req').disabled = false
-        }, 60000);
+        });
       }
       else {
-        view.set_loader(true)
-        //alert("Mace Windu voice: 'Not yet!' - req again later!")
+        alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
   }
