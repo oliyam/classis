@@ -7,6 +7,7 @@
     this.size = {x: canvas.width, y: canvas.height};
     this.ctx=canvas.getContext('2d');
     this.ctx.lineWidth = 1.5;
+    this.loder()
   }
   
   draw_splashes(game){
@@ -286,20 +287,7 @@
   }
   
   loading;
-    
-  draw_game(game, inactive, missed) {
-
-    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
-    if (inactive)
-      this.ctx.globalAlpha = .25;
-      
-    this.draw_radars(game.vessels)
-    this.draw_splashes(game)
-    game.vessels.forEach(v => {
-        this.draw_vessel(v, game.selected_v == v.id, false);
-    });
-    this.ctx.globalAlpha=1;
-    if (inactive) {
+  loder(){
       var 
         x=20,
         y=40,
@@ -343,9 +331,25 @@
         i++;
         elapsed+=500;
       }, 500)
+  }
+    
+  draw_game(game, inactive, missed) {
+
+    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
+    if (inactive)
+      this.ctx.globalAlpha = .25;
+      
+    this.draw_radars(game.vessels)
+    this.draw_splashes(game)
+    game.vessels.forEach(v => {
+        this.draw_vessel(v, game.selected_v == v.id, false);
+    });
+    this.ctx.globalAlpha=1;
+    if (1) {
+
     }
     else if (this.loading) {
-      clearInterval(this.loading)
+     // clearInterval(this.loading)
     }
   }
 }
