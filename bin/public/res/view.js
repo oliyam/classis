@@ -318,8 +318,9 @@
       var elapsed=0
       
       this.loading = setInterval(()=>{
-        
-        this.ctx.fillText("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.", x, y);
+        var timer = "Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn."
+        this.ctx.clearRect(x, y, this.ctx.measureText(timer), px);
+        this.ctx.fillText(timer, x, y);
         this.ctx.fillText(txt, x, y + px);
       
         if (i%4==0)
