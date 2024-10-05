@@ -302,7 +302,7 @@
     if (inactive) {
       var 
         x=20,
-        y=40,
+        y=20,
         
         px=10
       ;
@@ -318,13 +318,15 @@
       var elapsed=0
       
       this.loading = setInterval(()=>{
+        var line=0;
+        
         var timer = ("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.");
         
-        this.ctx.strokeRect(x, y, 4000, px);
-        this.ctx.fillText(timer, x, y);
+        this.ctx.clearRect(x, y + px * line, this.ctx.measureText(timer).width, px);
+        this.ctx.fillText(timer, x, y + px * (line++ + 1));
         
-        this.ctx.clearRect(x, y + px, txt_l, px);
-        this.ctx.fillText(txt, x, y + px);
+        this.ctx.clearRect(x, y + px * line, txt_l, px);
+        this.ctx.fillText(txt, x, y + px * (line-- + 1));
       
         if (i%4==0)
             this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
