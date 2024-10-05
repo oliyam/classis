@@ -84,7 +84,8 @@ window.onload = ()=> {
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
         view.set_loader(false)
-
+        if (ask)
+          clearInterval(ask)
         setTimeout(() => {
           turn()
           document.getElementById('req').disabled = false
