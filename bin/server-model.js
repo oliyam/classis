@@ -49,7 +49,7 @@ exports.run = () => {
           filtered_v.push(v)
       })
       cg.vessels=filtered_v;
-      this.turn_timeout=setTimeout(this.turn(), 1*6000);
+      this.turn_timeout=setTimeout(()=>{this.turn()}, 1*6000);
    
       return {game:cg,turn:this.factions[this.active_f]==data.f};
     }
