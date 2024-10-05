@@ -320,9 +320,9 @@
       this.loading = setInterval(()=>{
         var line=0;
         
-        var timer = ("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.");
+        var timer = ("Pls wait: "+(parseFloat((60000-elapsed)/1000).toFixed(2))+"sec. to 'req'!");
         
-        this.ctx.clearRect(x, y + px * (line - 1), this.ctx.measureText(timer).width, px);
+        this.ctx.clearRect(x, y + px * (line - 1), this.ctx.measureText(timer).width, px*2);
         this.ctx.fillText(timer, x, y + px * line++);
         
         this.ctx.clearRect(x, y + px * (line - 1), txt_l, px);
