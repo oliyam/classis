@@ -289,6 +289,7 @@
     
   draw_game(game, inactive, missed) {
 
+    clearInterval(this.loading);
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive)
       this.ctx.globalAlpha = .25;
@@ -299,7 +300,7 @@
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
     this.ctx.globalAlpha=1;
-    if (inactive) {
+
       var 
         x=20,
         y=40,
@@ -326,10 +327,12 @@
        
         this.ctx.font = "bold " + px + "px monospace";       
         
+        if (!inactive) {
+          
         this.ctx.fillStyle = "orange"
         this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
-        this.ctx.fillText(txt_t, x, y + px * line++);
-        
+        this.ctx.fillText(txt_t, x, y + px * line);
+        }else{
         this.ctx.fillStyle = "white"
         this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
         this.ctx.fillText(txt, x, y + px * line);
@@ -340,12 +343,9 @@
             this.ctx.fillStyle = "cyan"
             this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
         }
+        }
         i++;
         elapsed+=500;
-      }, 500)
+      }, 500);
     }
-    else if (this.loading) {
-      clearInterval(this.loading)
-    }
-  }
 }

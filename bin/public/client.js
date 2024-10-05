@@ -28,13 +28,14 @@ window.onload = ()=> {
   disableUI(1)
 
   document.getElementById('turn').onclick=()=>{
+    turn();
+  }
+  
+  function turn() {
     disableUI(true)
-    document.getElementById('req').disabled=true
+    document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
     mult.send_game(battle);
-    setTimeout(()=>{
-      document.getElementById('req').disabled=false
-    }, 60000);
   }
   
   document.getElementById('selectv').onclick = () => {
@@ -77,9 +78,14 @@ window.onload = ()=> {
         document.getElementById('req').disabled = true;
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
+
+        setTimeout(() => {
+          turn()
+          document.getElementById('req').disabled = false
+        }, 60000);
       }
       else {
-        view.draw_game(battle, 1, true)
+        view.draw_game(battle, 1)
         //alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
