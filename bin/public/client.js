@@ -9,7 +9,7 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
 
   var view=new view_(c)
-  view.draw_game(battle,1)
+  //view.draw_game(battle,1)
 
   function disableUI(yes){
     var ids=[
