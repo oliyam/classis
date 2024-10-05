@@ -302,7 +302,7 @@
     if (inactive) {
       var 
         x=20,
-        y=20,
+        y=40,
         
         px=10
       ;
@@ -323,7 +323,7 @@
         var timer = ("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.");
         
         this.ctx.clearRect(x, y + px * line, this.ctx.measureText(timer).width, px);
-        this.ctx.fillText(timer, x, y + px * (line - 1));
+        this.ctx.fillText(timer, x, y + px * (line++ - 1));
         
         this.ctx.clearRect(x, y + px * line, txt_l, px);
         this.ctx.fillText(txt, x, y + px * (line - 1));
