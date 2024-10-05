@@ -38,7 +38,8 @@ window.onload = ()=> {
     //document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
     mult.send_game(battle)
-    clearInterval(this.ask)
+    if(ask)
+      clearInterval(this.ask)
     this.ask=setInterval(()=>{req_game()}, 500);
   }
   
