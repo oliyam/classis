@@ -303,7 +303,6 @@
       var i=0;
       var elapsed =0;
               var x=20,y=20,px=20;
-        var line = 0;
       
       var txt="vessels are maneuvering"
       var sym="~~~"
@@ -318,6 +317,8 @@
         var txt_t = missed ? "You've missed your turn. - Try to 'req' again later!" : (t > 0 ? ("Pls wait: " + (t < 10 ? '0' + t : t) + "sec. to 'req'!") : "You may claim your turn now. - PLS PRESS: 'req'!");
         var txt_t_l = this.ctx.measureText(txt_t).width;
       
+      
+        var line = 0;
         this.ctx.font = "bold " + px + "px monospace";
       
         this.ctx.fillStyle = "orange"
