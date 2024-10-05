@@ -29,7 +29,9 @@ window.onload = ()=> {
 
   document.getElementById('turn').onclick=()=>{
     disableUI(true)
-    document.getElementById('req').disabled=false;
+    setTimeout(()=>{
+      document.getElementById('req').disabled=false
+    }, 60000);
     view.draw_game(battle,1)
     mult.send_game(battle);
   }
