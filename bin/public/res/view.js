@@ -326,7 +326,7 @@
         i++;
         elapsed += 500;
       }, 500);
-    } else if (this.loading){
+    } else if (inactive && this.loading){
       clearTimeout(this.loading)
     }
   }
