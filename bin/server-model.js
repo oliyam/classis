@@ -23,12 +23,19 @@ exports.run = () => {
             if(this.server_game.vessels[i].id==cv.id&&cv.faction==this.server_game.vessels[i].faction)
               this.server_game.vessels[i]=cv;
           }
-        })
-        this.server_game.turn()
-        //next player - next game
-        this.active_f=++this.active_f%this.factions.length;
-        console.log("game updated - turn ended. active faction: "+this.factions[this.active_f]);
+        });
+        this.turn();
       }
+    }
+    
+    turn_timeout;
+    
+    turn(){
+      this.turn_timeout.clearTimeout()
+      this.server_game.turn()
+      //next player
+      this.active_f=++this.active_f%this.factions.length;
+      console.log("game updated - turn ended. active faction: "+this.factions[this.active_f]);
     }
     
     req_game(data){
@@ -42,7 +49,8 @@ exports.run = () => {
           filtered_v.push(v)
       })
       cg.vessels=filtered_v;
-
+      this.turn_timeout=setTimeout(this.turn(), 1*6000);
+   
       return {game:cg,turn:this.factions[this.active_f]==data.f};
     }
     
