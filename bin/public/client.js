@@ -31,10 +31,9 @@ window.onload = ()=> {
     turn();
   }
   
-  var ask;
   function turn() {
     disableUI(true)
-    //document.getElementById('req').disabled = true
+    document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
     mult.send_game(battle)
   }
