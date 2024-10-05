@@ -51,13 +51,9 @@ exports.run = () => {
       })
       cg.vessels=filtered_v;
    
-      return {game:cg,turn:this.factions[this.active_f]==data.f,time:getTimeLeft(this.turn_timeout)};
+      return {game:cg,turn:this.factions[this.active_f]==data.f};
     }
     
-  }
-  
-  function getTimeLeft(timeout) {
-    return Math.ceil((timeout._idleStart + timeout._idleTimeout - Date.now()) / 1000);
   }
   
   class game {
