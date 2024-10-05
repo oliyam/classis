@@ -287,8 +287,8 @@
   
   loading;
   set_loader(inactive){
-    if (this.loader) 
-      clearInterval(this.loader)
+    if (this.loading) 
+      clearInterval(this.loading)
       var 
         x=20,
         y=40,
