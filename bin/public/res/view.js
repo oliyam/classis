@@ -310,7 +310,7 @@
       
       this.ctx.fillStyle = "white"
       this.ctx.font = "bold " + px + "px monospace";
-      var txt="vessels maneuvering";
+      var txt="vessels are maneuvering";
       var sym="~~~";
       var sym_l=this.ctx.measureText(sym).width;
       var txt_l=this.ctx.measureText(txt).width;
@@ -320,19 +320,24 @@
       this.loading = setInterval(()=>{
         var line=0;
         
-        var timer = ("Pls wait: "+(parseFloat((60000-elapsed)/1000).toFixed(2))+"sec. to 'req'!");
+        var t = parseFloat((60000-elapsed)/1000).toFixed(2);
+        var txt_t = t>0?("Pls wait: "+(t<10?'0'+t:t)+"sec. to 'req'!"):"You may claim your turn now. - PLS PRESS: 'req'!";
+        var txt_t_l = this.ctx.measureText(txt_t).width;
+       
+        this.ctx.font = "bold " + px + "px monospace";       
         
-        this.ctx.clearRect(x, y + px * (line - 1), this.ctx.measureText(timer).width, px*1.5);
-        this.ctx.fillText(timer, x, y + px * line++);
+        this.ctx.fillStyle = "orange"
+        this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
+        this.ctx.fillText(txt_t, x, y + px * line++);
         
+        this.ctx.fillStyle = "white"
         this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
         this.ctx.fillText(txt, x, y + px * line);
       
         if (i%4==0)
             this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
         else{
-            this.ctx.fillStyle = "white"
-            this.ctx.font = "bold " + px + "px monospace";
+            this.ctx.fillStyle = "cyan"
             this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
         }
         i++;
