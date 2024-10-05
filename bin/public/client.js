@@ -32,6 +32,7 @@ window.onload = ()=> {
   }
   
   function turn() {
+    view.set_loader(true)
     disableUI(true)
     //document.getElementById('req').disabled = true
     view.draw_game(battle, 1)
