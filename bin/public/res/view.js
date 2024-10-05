@@ -286,38 +286,22 @@
   }
   
   loading;
+  set_loader(){
+    var i=0;
+    var elapsed =0;
+    var x=20,y=20,px=10;
+      
+    var txt="vessels are maneuvering"
+    var sym="~~~"
+      
+    var txt_l=this.ctx.measureText(txt).width
+    var sym_l=this.ctx.measureText(sym).width
     
-  draw_game(game, inactive, missed) {
-
-    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
-    if (inactive)
-      this.ctx.globalAlpha = .25;
-      
-    this.draw_radars(game.vessels)
-    this.draw_splashes(game)
-    game.vessels.forEach(v => {
-        this.draw_vessel(v, game.selected_v == v.id, false);
-    });
-    this.ctx.globalAlpha=1;
-    if (!inactive && this.loading==undefined) {
-      var i=0;
-      var elapsed =0;
-              var x=20,y=20,px=10;
-      
-      var txt="vessels are maneuvering"
-      var sym="~~~"
-      
-       var txt_l=this.ctx.measureText(txt).width
-       var sym_l=this.ctx.measureText(sym).width
-    
-      this.loading = setInterval(() => {
-
-      
+    this.loading = setInterval(() => {
         var t = parseFloat((60000 - elapsed) / 1000).toFixed(2);
         var txt_t = missed ? "You've missed your turn. - Try to 'req' again later!" : (t > 0 ? ("Pls wait: " + (t < 10 ? '0' + t : t) + "sec. to 'req'!") : "You may claim your turn now. - PLS PRESS: 'req'!");
         var txt_t_l = this.ctx.measureText(txt_t).width;
-      
-      
+    
         var line = 0;
         this.ctx.font = "bold " + px + "px monospace";
       
@@ -337,9 +321,19 @@
         }
         i++;
         elapsed += 500;
-      }, 500);
-    } else if (this.loading){
-      clearTimeout(this.loading)
-    }
+    }, 500);
+  }
+    
+  draw_game(game, inactive, missed) {
+
+    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
+    if (inactive)
+      this.ctx.globalAlpha = .25;
+      
+    this.draw_radars(game.vessels)
+    this.draw_splashes(game)
+    game.vessels.forEach(v => {
+        this.draw_vessel(v, game.selected_v == v.id, false);
+    });
   }
 }
