@@ -31,7 +31,7 @@ window.onload = ()=> {
     turn();
   }
   
-  ask;
+  var ask;
   function turn() {
     view.set_loader(true)
     disableUI(true)
@@ -39,8 +39,8 @@ window.onload = ()=> {
     view.draw_game(battle, 1)
     mult.send_game(battle)
     if(ask)
-      clearInterval(this.ask)
-    this.ask=setInterval(()=>{req_game()}, 500);
+      clearInterval(ask)
+    ask=setInterval(()=>{req_game()}, 500);
   }
   
   document.getElementById('selectv').onclick = () => {
