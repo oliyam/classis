@@ -33,7 +33,6 @@ window.onload = ()=> {
     view.draw_game(battle, 1)
     mult.send_game(battle);
     setTimeout(()=>{
-      req_game();
       document.getElementById('req').disabled=false
     }, 60000);
   }
