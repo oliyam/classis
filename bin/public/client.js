@@ -75,7 +75,7 @@ window.onload = ()=> {
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
         disableUI(false)
-        document.getElementById('req').disabled = true;
+        //document.getElementById('req').disabled = true;
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
 
@@ -85,8 +85,7 @@ window.onload = ()=> {
         }, 60000);
       }
       else {
-        view.draw_game(battle, 1)
-        //alert("Mace Windu voice: 'Not yet!' - req again later!")
+        alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
   }
