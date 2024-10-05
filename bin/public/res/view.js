@@ -322,10 +322,10 @@
         
         var timer = ("Pls wait: "+(parseFloat((60000-elapsed)/1000).toFixed(2))+"sec. to 'req'!");
         
-        this.ctx.clearRect(x, y + px * (line - 1), this.ctx.measureText(timer).width, px*2);
+        this.ctx.clearRect(x, y + px * (line - 1), this.ctx.measureText(timer).width, px*1.5);
         this.ctx.fillText(timer, x, y + px * line++);
         
-        this.ctx.clearRect(x, y + px * (line - 1), txt_l, px);
+        this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
         this.ctx.fillText(txt, x, y + px * line);
       
         if (i%4==0)
