@@ -13,6 +13,7 @@ window.onload = ()=> {
 
   function disableUI(yes){
     var ids=[
+      'req',
       'turn',
       'radar',
       'selectv',
@@ -29,11 +30,11 @@ window.onload = ()=> {
 
   document.getElementById('turn').onclick=()=>{
     disableUI(true)
+    view.draw_game(battle, 1)
+    mult.send_game(battle);
     setTimeout(()=>{
       document.getElementById('req').disabled=false
     }, 60000);
-    view.draw_game(battle,1)
-    mult.send_game(battle);
   }
   
   document.getElementById('selectv').onclick = () => {
