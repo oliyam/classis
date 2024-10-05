@@ -318,9 +318,9 @@
       var elapsed=0
       
       this.loading = setInterval(()=>{
-        var timer = "Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn."
+        var timer = ("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.");
         
-        this.ctx.clearRect(x, y, 300, px);
+        this.ctx.clearRect(x, y, 000, px);
         this.ctx.fillText(timer, x, y);
         
         this.ctx.clearRect(x, y + px, txt_l, px);
