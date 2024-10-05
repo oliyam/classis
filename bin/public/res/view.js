@@ -286,7 +286,7 @@
   }
   
   loading;
-  loder(){
+  loader(){
       var 
         x=20,
         y=40,
