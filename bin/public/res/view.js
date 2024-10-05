@@ -7,6 +7,7 @@
     this.size = {x: canvas.width, y: canvas.height};
     this.ctx=canvas.getContext('2d');
     this.ctx.lineWidth = 1.5;
+    this.set_loader();
   }
   
   draw_splashes(game){
@@ -285,6 +286,7 @@
           }
   }
   
+  inactive=true;
   loading;
   set_loader(){
     var i=0;
@@ -304,28 +306,31 @@
     
         var line = 0;
         this.ctx.font = "bold " + px + "px monospace";
-      
+  
+    if(this.inactive)  {
         this.ctx.fillStyle = "orange"
         this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px * 1.5);
-        this.ctx.fillText(txt_t, x, y + px * line++);
-      
+        this.ctx.fillText(txt_t, x, y + px * line);
+     }    
+     else {
         this.ctx.fillStyle = "white"
         this.ctx.clearRect(x, y + px * (line - 1), txt_l, px * 1.5);
         this.ctx.fillText(txt, x, y + px * line);
       
         if (i % 4 == 0)
-          this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
+          this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px * 1.5);
         else {
           this.ctx.fillStyle = "cyan"
-          this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
+          this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px * line)
         }
+      }
         i++;
         elapsed += 500;
     }, 500);
   }
     
   draw_game(game, inactive, missed) {
-
+    this.inactive=inactive;
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive)
       this.ctx.globalAlpha = .25;
