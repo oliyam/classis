@@ -322,10 +322,10 @@
         
         var timer = ("Pls wait: "+(60000-elapsed)/1000+"sec. for your next turn.");
         
-        this.ctx.clearRect(x, y + px * (line + 1), this.ctx.measureText(timer).width, px);
+        this.ctx.clearRect(x, y + px * (line - 1), this.ctx.measureText(timer).width, px);
         this.ctx.fillText(timer, x, y + px * line++);
         
-        this.ctx.clearRect(x, y + px * (line + 1), txt_l, px);
+        this.ctx.clearRect(x, y + px * (line - 1), txt_l, px);
         this.ctx.fillText(txt, x, y + px * line);
       
         if (i%4==0)
