@@ -287,7 +287,7 @@
   
   loading;
     
-  draw_game(game, inactive) {
+  draw_game(game, inactive, missed) {
 
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive)
@@ -321,7 +321,7 @@
         var line=0;
         
         var t = parseFloat((60000-elapsed)/1000).toFixed(2);
-        var txt_t = t>0?("Pls wait: "+(t<10?'0'+t:t)+"sec. to 'req'!"):"You may claim your turn now. - PLS PRESS: 'req'!";
+        var txt_t = missed?"You've missed your turn. - Try to 'req' again later!":(t>0?("Pls wait: "+(t<10?'0'+t:t)+"sec. to 'req'!"):"You may claim your turn now. - PLS PRESS: 'req'!");
         var txt_t_l = this.ctx.measureText(txt_t).width;
        
         this.ctx.font = "bold " + px + "px monospace";       
