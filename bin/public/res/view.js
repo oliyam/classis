@@ -299,7 +299,7 @@
         this.draw_vessel(v, game.selected_v == v.id, false);
     });
     this.ctx.globalAlpha=1;
-    if (inactive) {
+    if (!inactive) {
       var 
         x=20,
         y=40,
