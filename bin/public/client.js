@@ -81,7 +81,7 @@ window.onload = ()=> {
         setTimeout(() => {
           turn()
           document.getElementById('req').disabled = false
-        });
+        }, 60000);
       }
       else {
         alert("Mace Windu voice: 'Not yet!' - req again later!")
