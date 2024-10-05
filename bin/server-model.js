@@ -28,7 +28,7 @@ exports.run = () => {
       }
     }
     
-    turn_timeout;
+    turn_timeout=setTimeout({},1);
     
     turn(){
       this.turn_timeout.clearTimeout()
