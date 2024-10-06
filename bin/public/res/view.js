@@ -342,7 +342,7 @@
            if(msg) {
             this.ctx.fillStyle = "red"
             this.ctx.clearRect(x, y + px * (line - 1 + this.msg_line), msg_l, px * 1.5);
-            this.ctx.fillText(msg, x, y + px * (line + this.msg_line));
+            this.ctx.fillText('x', x, y + px * (line + this.msg_line));
            }
             if (i%4==0)
                 this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
