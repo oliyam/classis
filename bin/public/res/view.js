@@ -325,20 +325,20 @@
           var line=0;
          
           this.ctx.font = px + "px monospace";       
-            //px*=1.5;
+            px*=1.5;
             var txt_t = "You may 'req' a new game update."
             var txt_t_l = this.ctx.measureText(txt_t).width; 
             
-            this.ctx.fillStyle = "gray"
-            this.ctx.fillRect(0,0,px*10,game.size.y);
-            
             this.ctx.fillStyle = "orange"
+            this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px);
             this.ctx.fillText(txt_t, x, y + px * line++);
       
             this.ctx.fillStyle = "white"
-            this.ctx.fillText(txt, x, y + px * line++);
+            this.ctx.clearRect(x, y + px * (line - 1), txt_l, px);
+            this.ctx.fillText(txt, x, y + px *  line++);
            if (msg) {
             this.ctx.fillStyle = "red"
+            this.ctx.clearRect(x, y + px * (line - 1 + 0==this.msg_line%4?this.msg_line%4:)0, msg_l, 0==this.msg_line%4?px*4:px);
             this.ctx.fillText(msg, x, y + px * (line + this.msg_line++%4));
             msg=null;
            }
@@ -350,7 +350,7 @@
             }
           this.loader_pos++;
           elapsed+=500;
-          //px/=1.5
+          px/=1.5
         }, 500)
     }
     else if (this.loading) 
