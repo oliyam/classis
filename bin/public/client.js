@@ -90,7 +90,6 @@ window.onload = ()=> {
   }
 
   c.addEventListener("touchmove", (e)=>{
-    if(!turned)
     switch (document.getElementById("mode").value) {
       case 'maneuver':
         battle.new_course({
@@ -106,6 +105,6 @@ window.onload = ()=> {
         });
         break;
     }
-    view.draw_game(battle);
+    view.draw_game(battle, turned);
   });
 }
