@@ -47,7 +47,8 @@ exports.run = () => {
           filtered_v.push(v)
       })
       cg.vessels=filtered_v;
-      setTimeout(()=>{this.turn()}, 10*1000)
+      if(data.faction==this.factions[this.active_f])
+        setTimeout(()=>{this.turn()}, 10*1000)
       return {game:cg,turn:this.factions[this.active_f]==data.f, time:10};
     }
     
