@@ -90,7 +90,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        view.draw_game(battle, true, 'req failed')
+        view.draw_game(battle, true, "req failed")
       }
     })
   }
@@ -112,6 +112,6 @@ window.onload = ()=> {
           });
           break;
       }
-    view.draw_game(battle, turned)
+    view.draw_game(battle, turned, 'x')
   });
 }
