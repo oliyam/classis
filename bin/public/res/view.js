@@ -299,7 +299,6 @@
       });
   }else{
       this.msg_line++;
-      //clearInterval(this.loading)
       msg=this.msg_line+".> "+msg
   }
     this.ctx.globalAlpha=1;
@@ -323,7 +322,8 @@
       
       var elapsed=0
       if (!this.loading||
-      msg) 
+      msg)
+        clearInterval(this.loading)
         this.loading = setInterval(()=>{
           var line=0;
          
