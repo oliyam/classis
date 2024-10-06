@@ -9,6 +9,7 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
 
   var view=new view_(c)
+  
 
   function disableUI(yes){
     var ids=[
@@ -23,6 +24,8 @@ window.onload = ()=> {
       document.getElementById(id).disabled=yes;
     })
   }
+    
+  disableUI(1)
 
   document.getElementById('turn').onclick=()=>{
     turn();
