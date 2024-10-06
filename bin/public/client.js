@@ -78,6 +78,7 @@ window.onload = ()=> {
       if (res.turn) {
         view.set_loader(false, res.time)
         setTimeout(()=>{
+          view.set_loader(true)
           disableUI(true)
           req_game()
         },res.time*1000)
@@ -87,7 +88,8 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        alert("Mace Windu voice: 'Not yet!' - req again later!")
+        document.getElementById('req').disabled=true;
+        //alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
   }
