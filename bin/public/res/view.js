@@ -306,7 +306,7 @@
         x=20,
         y=40,
         
-        px=20
+        px=15
       ;
     
       this.ctx.fillStyle = "white"
