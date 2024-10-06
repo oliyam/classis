@@ -324,7 +324,7 @@
         this.loading = setInterval(()=>{
           var line=0;
          
-          this.ctx.font = "bold " + px + "px monospace";       
+          this.ctx.font = px + "px monospace";       
   
             var txt_t = "You may 'req' a new game update."
             var txt_t_l = this.ctx.measureText(txt_t).width; 
