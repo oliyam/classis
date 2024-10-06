@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/battle_rx', (req, res) => {
-  log("[> TX: sending game-update. >] for: "+(req.body.faction),'yellow')
+  log("[> TX: sending game-update. >] for: "+JSON.stringify(req.body),'yellow')
   res.send(JSON.stringify(classis.req_game(req.body)))
 })
 
