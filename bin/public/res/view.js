@@ -329,16 +329,16 @@
             var txt_t = "You may 'req' a new game update."
             var txt_t_l = this.ctx.measureText(txt_t).width; 
             
+            this.ctx.fillStyle = "gray"
+            this.ctx.fillRect(0,0,px*10,battle.size.y);
+            
             this.ctx.fillStyle = "orange"
-            this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
             this.ctx.fillText(txt_t, x, y + px * line++);
       
             this.ctx.fillStyle = "white"
-            this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
             this.ctx.fillText(txt, x, y + px * line++);
            if (msg) {
             this.ctx.fillStyle = "red"
-            this.ctx.clearRect(x, y + px * (line - 1 + (0==this.msg_line%4?this.msg_line%4:1)), msg_l, (0==this.msg_line%4?px*4:px));
             this.ctx.fillText(msg, x, y + px * (line + this.msg_line++%4));
             msg=null;
            }
