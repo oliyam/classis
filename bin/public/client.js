@@ -41,7 +41,7 @@ window.onload = ()=> {
     if (!auto_req)
       setInterval(() => {
         req_game();
-      }, 1*1000)
+      }, 5*1000)
   }
   
   document.getElementById('selectv').onclick = () => {
