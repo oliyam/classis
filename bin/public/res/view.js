@@ -350,6 +350,7 @@
             }
           this.loader_pos++;
           elapsed+=500;
+          px/=1.5
         }, 500)
     }
     else if (this.loading) 
