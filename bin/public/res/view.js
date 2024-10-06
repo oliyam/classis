@@ -288,16 +288,17 @@
   loading;
   msg_line=0;
   draw_game(game, inactive, msg) {
-    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
+    
     if (inactive)
       this.ctx.globalAlpha = .25;
-    
+    if(!msg){
+      this.ctx.clearRect(0, 0, this.size.x, this.size.y);
       this.draw_radars(game.vessels)
       this.draw_splashes(game)
       game.vessels.forEach(v => {
           this.draw_vessel(v, game.selected_v == v.id);
       });
-    
+    }
     this.ctx.globalAlpha=1;
     if (inactive) {
       var 
@@ -337,7 +338,7 @@
             
             this.ctx.fillStyle = "red"
             this.ctx.clearRect(x, y + px * (line - 1 + this.msg_line), msg_l, px * 1.5);
-            this.ctx.fillText(msg, x, y + px * (line + this.msg_line++));
+            this.ctx.fillText(msg, x, y + px * (line + this.msg_line);
           
             if (i%4==0)
                 this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
