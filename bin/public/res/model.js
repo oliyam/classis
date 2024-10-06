@@ -30,7 +30,7 @@ class game {
         for (var i = 1; i < this.vessels.length; i++) {
           console.log((this.selected_v + i) % this.vessels.length)
           let s = this.vessels[(this.selected_v + i) % this.vessels.length];
-          if (s.faction == this.faction) {
+          if (s.faction == this.faction && s.health>0) {
             this.selected_v = s.id;
             break;
           }
