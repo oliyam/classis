@@ -9,7 +9,7 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
 
   var view=new view_(c)
-  //view.draw_game(battle,1)
+  view.draw_game(battle,1)
 
   function disableUI(yes){
     var ids=[
@@ -24,8 +24,6 @@ window.onload = ()=> {
       document.getElementById(id).disabled=yes;
     })
   }
-  
-  disableUI(1)
 
   document.getElementById('turn').onclick=()=>{
     turn();
@@ -36,6 +34,7 @@ window.onload = ()=> {
     document.getElementById('req').disabled = false;
     view.draw_game(battle, 1)
     mult.send_game(battle)
+
   }
   
   document.getElementById('selectv').onclick = () => {
