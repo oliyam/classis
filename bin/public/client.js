@@ -90,7 +90,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        view.draw_game(battle, true, ("auto-req failed! - pls wait for you turn"))
+        view.draw_game(battle, true, "auto-req failed! - pls wait a little more.")
       }
     })
   }
