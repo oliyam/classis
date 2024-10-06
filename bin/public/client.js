@@ -36,7 +36,7 @@ window.onload = ()=> {
     turned=true;
     disableUI(true)
     document.getElementById('req').disabled = false;
-    view.draw_game(battle, 1)
+    //view.draw_game(battle, 1)
     mult.send_game(battle)
     if (!auto_req)
       auto_req=setInterval(() => {
