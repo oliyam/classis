@@ -322,7 +322,8 @@
       var msg_l = this.ctx.measureText(msg).width;
       
       var elapsed=0
-      if (!this.loading) 
+      if (!this.loading||
+      msg) 
         this.loading = setInterval(()=>{
           var line=0;
          
