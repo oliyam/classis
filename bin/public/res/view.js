@@ -299,6 +299,7 @@
       });
   }else
       this.msg_line++;
+      console.log(msg)
     
     this.ctx.globalAlpha=1;
     if (inactive) {
@@ -337,8 +338,8 @@
             this.ctx.fillText(txt, x, y + px * line++);
            
             this.ctx.fillStyle = "red"
-            this.ctx.clearRect(x, y + px * (line - 1 + this.msg_line), msg_l, px * 1.5);
-            this.ctx.fillText(msg, x, y + px * (line + this.msg_line));
+            this.ctx.clearRect(x, y + px * (line - 1), msg_l, px * 1.5);
+            this.ctx.fillText(msg, x, y + px * line);
            
             if (i%4==0)
                 this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
