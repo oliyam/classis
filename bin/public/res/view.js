@@ -316,32 +316,32 @@
       var txt_l=this.ctx.measureText(txt).width;
       
       var elapsed=0
+      if (!this.loading) 
+        this.loading = setInterval(()=>{
+          var line=0;
+         
+          this.ctx.font = "bold " + px + "px monospace";       
+  
+            var txt_t = "You may 'req' a new game update."
+            var txt_t_l = this.ctx.measureText(txt_t).width; 
+            
+            this.ctx.fillStyle = "orange"
+            this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
+            this.ctx.fillText(txt_t, x, y + px * line++);
       
-      this.loading = setInterval(()=>{
-        var line=0;
-       
-        this.ctx.font = "bold " + px + "px monospace";       
-
-          var txt_t = "You may 'req' a new game update."
-          var txt_t_l = this.ctx.measureText(txt_t).width; 
+            this.ctx.fillStyle = "white"
+            this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
+            this.ctx.fillText(txt, x, y + px * line);
           
-          this.ctx.fillStyle = "orange"
-          this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
-          this.ctx.fillText(txt_t, x, y + px * line);
-    
-          this.ctx.fillStyle = "white"
-          this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
-          this.ctx.fillText(txt, x, y + px * line);
-        
-          if (i%4==0)
-              this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
-          else{
-              this.ctx.fillStyle = "cyan"
-              this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
-          }
-        i++;
-        elapsed+=500;
-      }, 500)
+            if (i%4==0)
+                this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
+            else{
+                this.ctx.fillStyle = "cyan"
+                this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
+            }
+          i++;
+          elapsed+=500;
+        }, 500)
     }
     else if (this.loading) 
      clearInterval(this.loading)
