@@ -228,13 +228,13 @@
         this.ctx.fill();
       }
         if(!ded){
-          this.draw_triangle(p, 10, 'lightgreen')
+          this.draw_triangle(p, 15, 'lightgreen')
           this.ctx.strokeStyle = 'green'
           this.ctx.stroke()
           
          this.ctx.fillStyle = 'blue'
          this.ctx.beginPath();
-         this.ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
+         this.ctx.arc(p.x, p.y, 2.5, 0, 2 * Math.PI);
          this.ctx.fill();
           
           //info-text
@@ -261,13 +261,13 @@
             this.draw_blips(vessel.radar)
         }
           else {
-             this.draw_triangle(p, 10, 'black')
+             this.draw_triangle(p, 15, 'black')
              this.ctx.strokeStyle = 'green'
              this.ctx.stroke()
           
              this.ctx.fillStyle = 'blue'
              this.ctx.beginPath();
-             this.ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
+             this.ctx.arc(p.x, p.y, 2.5, 0, 2 * Math.PI);
              this.ctx.fillStyle = "red"
              this.ctx.font = "30px monospace";
              this.ctx.fillText('×', p.x-this.ctx.measureText('×').width/2, p.y+10);

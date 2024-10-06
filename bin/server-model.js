@@ -37,6 +37,7 @@ exports.run = () => {
     }
     
     req_game(data){
+      
       this.server_game.scan(data.f)
       var cg = JSON.parse(JSON.stringify(this.server_game))
       var filtered_v = [];
