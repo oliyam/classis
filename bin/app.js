@@ -31,7 +31,7 @@ app.post('/battle_rx', (req, res) => {
 })
 
 app.post('/battle_tx', (req, res) => {
-  log("[< RX: recieved game-update. <] from: "+JSOr.stringify(req.body),'yellow')
+  log("[< RX: recieved game-update. <] from: "+JSON.stringify(req.body),'yellow')
   res.send(JSON.stringify(classis.req_turn(req.body)))
 })
 
