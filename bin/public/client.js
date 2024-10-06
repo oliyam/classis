@@ -90,8 +90,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        let msg='sex'
-        view.draw_game(battle, true, msg)
+        view.draw_game(battle, true, 'req failed')
       }
     })
   }
