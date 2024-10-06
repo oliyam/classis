@@ -297,11 +297,11 @@
       game.vessels.forEach(v => {
           this.draw_vessel(v, game.selected_v == v.id);
       });
-  }else
+  }else{
       this.msg_line++;
-      
+      clearInterval(this.loading)
     msg=this.msg_line+".> "+msg
-    
+  }
     this.ctx.globalAlpha=1;
     if (inactive) {
       var 
