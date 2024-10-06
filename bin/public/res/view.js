@@ -289,6 +289,7 @@
   loading;
   msg_line=0;
   draw_game(game, inactive, msg){
+    msg=null;
     if (inactive)
       this.ctx.globalAlpha = .25;
     if(!msg){
@@ -310,7 +311,7 @@
       ;
     
       this.ctx.fillStyle = "white"
-      this.ctx.font = px + "px monospace";
+      this.ctx.font = "italic bold "+px + "px monospace";
       var txt="vessels moving";
       var sym="~~~";
       var sym_l=this.ctx.measureText(sym).width;
@@ -324,7 +325,7 @@
         this.loading = setInterval(()=>{
           var line=0;
          
-          this.ctx.font = px + "px monospace";       
+          this.ctx.font = "bold "+px + "px monospace";       
             
             var txt_t = "Please wait for your turn."
             var txt_t_l = this.ctx.measureText(txt_t).width; 
