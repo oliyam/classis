@@ -325,21 +325,21 @@
           var line=0;
          
           this.ctx.font = px + "px monospace";       
-  
+            px*=1.5;
             var txt_t = "You may 'req' a new game update."
             var txt_t_l = this.ctx.measureText(txt_t).width; 
             
             this.ctx.fillStyle = "orange"
-            this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px);
+            this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
             this.ctx.fillText(txt_t, x, y + px * line++);
       
             this.ctx.fillStyle = "white"
-            this.ctx.clearRect(x, y + px * (line - 1), txt_l, px);
-            this.ctx.fillText(txt, x, y + px * line++);
+            this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
+            this.ctx.fillText(txt, x, y + px *  line++);
            if (msg) {
             
             this.ctx.fillStyle = "red"
-            this.ctx.clearRect(x, y + px * (line - 1 + this.msg_line%4), msg_l, px *4);
+            this.ctx.clearRect(x, y + px * (line - 1 + this.msg_line%4), msg_l, px*4);
             this.ctx.fillText(msg, x, y + px * (line + this.msg_line++%4));
            }
             if (this.loader_pos%4==0)
