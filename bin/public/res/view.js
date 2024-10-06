@@ -286,7 +286,7 @@
   }
   
   loading;
-  msg_line=0;
+  msg_line=-1;
   draw_game(game, inactive, msg) {
     
     if (inactive)
@@ -298,6 +298,9 @@
       game.vessels.forEach(v => {
           this.draw_vessel(v, game.selected_v == v.id);
       });
+    }
+    else {
+      msg_line++;
     }
     this.ctx.globalAlpha=1;
     if (inactive) {
