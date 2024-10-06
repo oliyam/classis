@@ -37,9 +37,6 @@ window.onload = ()=> {
     view.draw_game(battle, 1)
     mult.send_game(battle)
     view.set_loader(true)
-    setInterval(()=>{
-      req_game()
-    },500)
   }
   
   document.getElementById('selectv').onclick = () => {
@@ -79,20 +76,14 @@ window.onload = ()=> {
     console.log("req")
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
-        view.set_loader(false, res.time)
-        setTimeout(()=>{
-          view.set_loader(true)
-          disableUI(true)
-          req_game()
-        },res.time*1000)
+        view.set_loader(false)
         document.getElementById('req').disabled=true;
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
       }
       else {
-        
-        //alert("Mace Windu voice: 'Not yet!' - req again later!")
+        alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
   }
