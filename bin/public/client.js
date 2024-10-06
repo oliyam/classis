@@ -10,6 +10,7 @@ window.onload = ()=> {
 
   var view=new view_(c)
   
+  var auto_req;
 
   function disableUI(yes){
     var ids=[
@@ -38,7 +39,10 @@ window.onload = ()=> {
     document.getElementById('req').disabled = false;
     view.draw_game(battle, 1)
     mult.send_game(battle)
-
+    if (!auto_req)
+      setInterval(() => {
+        req_game();
+      }, 1*1000)
   }
   
   document.getElementById('selectv').onclick = () => {
@@ -77,6 +81,9 @@ window.onload = ()=> {
   function req_game() {
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
+        clearInterval(auto_req)
+        auto_req=null;
+        
         turned=false;
         document.getElementById('req').disabled=true;
         disableUI(false)
@@ -84,7 +91,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        alert("Mace Windu voice: 'Not yet!' - req again later!")
+        //alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
   }
