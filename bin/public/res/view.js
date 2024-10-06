@@ -314,7 +314,7 @@
       
     
       this.ctx.fillStyle = "white"
-      this.ctx.font = "bold " + px + "px monospace";
+      this.ctx.font = px + "px monospace";
       var txt="vessels are maneuvering";
       var sym="~~~";
       var sym_l=this.ctx.measureText(sym).width;
