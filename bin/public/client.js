@@ -90,7 +90,8 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        view.draw_game(battle, true, "auto-req failed! - pls wait a little more.")
+        let msg='sex'
+        view.draw_game(battle, true, msg)
       }
     })
   }
