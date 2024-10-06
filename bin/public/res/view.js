@@ -291,14 +291,14 @@
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive)
       this.ctx.globalAlpha = .25;
-      
-    this.draw_radars(game.vessels)
-    this.draw_splashes(game)
-    game.vessels.forEach(v => {
-        this.draw_vessel(v, game.selected_v == v.id);
-    });
+    if(!msg){
+      this.draw_radars(game.vessels)
+      this.draw_splashes(game)
+      game.vessels.forEach(v => {
+          this.draw_vessel(v, game.selected_v == v.id);
+      });
+    }
     this.ctx.globalAlpha=1;
-  
     if (inactive) {
       var 
         x=20,
