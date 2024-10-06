@@ -299,9 +299,9 @@
           this.draw_vessel(v, game.selected_v == v.id);
       });
     }
-    else {
-      msg_line++;
-    }
+    else
+      this.msg_line++;
+    
     this.ctx.globalAlpha=1;
     if (inactive) {
       var 

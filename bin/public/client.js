@@ -39,7 +39,7 @@ window.onload = ()=> {
     view.draw_game(battle, 1)
     mult.send_game(battle)
     if (!auto_req)
-      setInterval(() => {
+      auto_req=setInterval(() => {
         req_game();
       }, 5*1000)
   }
