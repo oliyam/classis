@@ -18,7 +18,8 @@ window.onload = ()=> {
       'selectv',
       'shoot',
       'mode',
-      'info'
+      'info',
+      'myCanvas'
     ];
     ids.forEach(id => {
       document.getElementById(id).disabled=yes;
