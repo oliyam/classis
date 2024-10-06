@@ -35,7 +35,7 @@ window.onload = ()=> {
   function turn() {
     turned=true;
     disableUI(true)
-    document.getElementById('req').disabled = false;
+    //document.getElementById('req').disabled = false;
     view.draw_game(battle, true)
     mult.send_game(battle)
     if(auto_req)
@@ -73,18 +73,18 @@ window.onload = ()=> {
   document.getElementById('info').addEventListener("change", () => {
     view.draw_game(battle)
   })
-  
+/*  
   document.getElementById('req').onclick = () => {
     req_game();
   }
-
+*/
   function req_game() {
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
         clearInterval(auto_req)
         
         turned=false;
-        document.getElementById('req').disabled=true;
+        //document.getElementById('req').disabled=true;
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)

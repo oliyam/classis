@@ -306,12 +306,12 @@
         x=20,
         y=40,
         
-        px=15
+        px=12
       ;
     
       this.ctx.fillStyle = "white"
       this.ctx.font = px + "px monospace";
-      var txt="vessels are maneuvering";
+      var txt="vessels moving";
       var sym="~~~";
       var sym_l=this.ctx.measureText(sym).width;
       var txt_l=this.ctx.measureText(txt).width;
@@ -326,7 +326,7 @@
          
           this.ctx.font = px + "px monospace";       
             
-            var txt_t = "You may 'req' a new game update."
+            var txt_t = "Please wait for your turn."
             var txt_t_l = this.ctx.measureText(txt_t).width; 
             
             this.ctx.fillStyle = "orange"
