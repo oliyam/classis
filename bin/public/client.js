@@ -1,6 +1,7 @@
 window.onload = ()=> {
   
   const faction=prompt('PLS SELECT FACTION! [red/blue]:')
+  req_game()
   
   var battle=new game(faction,0);
   
