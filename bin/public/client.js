@@ -18,8 +18,7 @@ window.onload = ()=> {
       'selectv',
       'shoot',
       'mode',
-      'info',
-      'myCanvas'
+      'info'
     ];
     ids.forEach(id => {
       document.getElementById(id).disabled=yes;
@@ -32,7 +31,9 @@ window.onload = ()=> {
     turn();
   }
   
+  var turned=false;
   function turn() {
+    turned=true;
     disableUI(true)
     document.getElementById('req').disabled = false;
     view.draw_game(battle, 1)
@@ -76,6 +77,7 @@ window.onload = ()=> {
   function req_game() {
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
+        turned=false;
         document.getElementById('req').disabled=true;
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
@@ -88,6 +90,7 @@ window.onload = ()=> {
   }
 
   c.addEventListener("touchmove", (e)=>{
+    if(!turned)
     switch (document.getElementById("mode").value) {
       case 'maneuver':
         battle.new_course({
