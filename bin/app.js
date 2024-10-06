@@ -26,12 +26,12 @@ app.get('/', (req, res) => {
 })
 
 app.post('/battle_rx', (req, res) => {
-  log("[> TX: sending game-update. >] for: "+(req.body),'yellow')
+  log("[> TX: sending game-update. >] for: "+(req.body.game),'yellow')
   res.send(JSON.stringify(classis.req_game(req.body)))
 })
 
 app.post('/battle_tx', (req, res) => {
-  log("[< RX: recieved game-update. <] from: "+(req.body),'yellow')
+  log("[< RX: recieved game-update. <] from: "+(req.body.game),'yellow')
   res.send(JSON.stringify(classis.req_turn(req.body)))
 })
 
