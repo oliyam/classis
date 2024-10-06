@@ -311,7 +311,7 @@
       ;
     
       this.ctx.fillStyle = "white"
-      this.ctx.font = "italic bold "+px + "px monospace";
+      this.ctx.font = "bold italic "+px + "px monospace";
       var txt="vessels moving";
       var sym="~~~";
       var sym_l=this.ctx.measureText(sym).width;
