@@ -90,22 +90,23 @@ window.onload = ()=> {
   }
 
   c.addEventListener("touchmove", (e)=>{
-    switch (document.getElementById("mode").value) {
-      case 'maneuver':
-        battle.new_course({
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY
-        });
-        break;
-        
-      case 'fire':
-        battle.target(0, {
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY
-        });
-        break;
-    }
-    if (!turned)
+    if(!turned){
+      switch (document.getElementById("mode").value) {
+        case 'maneuver':
+          battle.new_course({
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+          });
+          break;
+          
+        case 'fire':
+          battle.target(0, {
+            x: e.touches[0].clientX,
+            y: e.touches[0].clientY
+          });
+          break;
+      }
       view.draw_game(battle);
+    }
   });
 }
