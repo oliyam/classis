@@ -1,7 +1,6 @@
 window.onload = ()=> {
   
   const faction=prompt('PLS SELECT FACTION! [red/blue]:')
-  req_game()
   
   var battle=new game(faction,0);
   
@@ -10,6 +9,8 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
 
   var view=new view_(c)
+
+  req_game()
 
   function disableUI(yes){
     var ids=[
