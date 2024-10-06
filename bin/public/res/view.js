@@ -290,16 +290,16 @@
   draw_game(game, inactive, msg){
     if (inactive)
       this.ctx.globalAlpha = .25;
-    
+    if(!msg){
       this.ctx.clearRect(0, 0, this.size.x, this.size.y);
       this.draw_radars(game.vessels)
       this.draw_splashes(game)
       game.vessels.forEach(v => {
           this.draw_vessel(v, game.selected_v == v.id);
       });
-  if(msg)
+  }else
       this.msg_line++;
-    
+      
     
     this.ctx.globalAlpha=1;
     if (inactive) {
