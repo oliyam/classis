@@ -33,7 +33,7 @@ window.onload = ()=> {
   
   function turn() {
     disableUI(true)
-    document.getElementById('req').disabled = 0
+    document.getElementById('req').disabled = false;
     view.draw_game(battle, 1)
     mult.send_game(battle)
     view.set_loader(true)
@@ -77,7 +77,7 @@ window.onload = ()=> {
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
         view.set_loader(false, res.time)
-        document.getElementById('req').disabled=1
+        document.getElementById('req').disabled=true;
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
