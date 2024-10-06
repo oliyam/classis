@@ -78,6 +78,7 @@ window.onload = ()=> {
       if (res.turn) {
         view.set_loader(false, res.time)
         setTimeout(()=>{
+          disableUI(true)
           req_game()
         },res.time*1000)
         document.getElementById('req').disabled=true;
