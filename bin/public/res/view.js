@@ -336,7 +336,7 @@
             var msg_l = this.ctx.measureText(msg).width;
             
             this.ctx.fillStyle = "red"
-            this.ctx.clearRect(x, y + px * (line - 1 + msg_l), msg_l, px * 1.5);
+            this.ctx.clearRect(x, y + px * (line - 1 + msg_line), msg_l, px * 1.5);
             this.ctx.fillText(msg, x, y + px * (line + this.msg_line));
           
             if (i%4==0)
