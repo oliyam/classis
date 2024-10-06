@@ -48,8 +48,11 @@ exports.run = () => {
       })
       cg.vessels=filtered_v;
       if(data.f==this.factions[this.active_f])
-        setTimeout(()=>{this.turn() 
-        console.log('turn for '+data.f+' ended automatically')}, 10*1000)
+        setTimeout(()=>{
+          console.log('turn for ['+data.f+'] ended automatically.')
+          this.turn()
+        }, 10*1000)
+        
       return {game:cg,turn:this.factions[this.active_f]==data.f, time:10};
     }
     
