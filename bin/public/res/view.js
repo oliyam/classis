@@ -295,7 +295,7 @@
     this.draw_radars(game.vessels)
     this.draw_splashes(game)
     game.vessels.forEach(v => {
-        this.draw_vessel(v, game.selected_v == v.id, false);
+        this.draw_vessel(v, game.selected_v == v.id && !inactive);
     });
     this.ctx.globalAlpha=1;
   
