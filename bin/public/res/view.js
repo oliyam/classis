@@ -330,7 +330,7 @@
             var txt_t_l = this.ctx.measureText(txt_t).width; 
             
             this.ctx.fillStyle = "gray"
-            this.ctx.fillRect(0,0,px*10,battle.size.y);
+            this.ctx.fillRect(0,0,px*10,game.size.y);
             
             this.ctx.fillStyle = "orange"
             this.ctx.fillText(txt_t, x, y + px * line++);
