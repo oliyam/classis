@@ -286,7 +286,8 @@
   }
   
   loading;
-  draw_game(game, inactive) {
+  msg_line=0;
+  draw_game(game, inactive, msg) {
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive)
       this.ctx.globalAlpha = .25;
@@ -330,7 +331,13 @@
       
             this.ctx.fillStyle = "white"
             this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
-            this.ctx.fillText(txt, x, y + px * line);
+            this.ctx.fillText(txt, x, y + px * line++);
+            
+            var msg_l = this.ctx.measureText(msg).width;
+            
+            this.ctx.fillStyle = "red"
+            this.ctx.clearRect(x, y + px * (line - 1 + msg_l), msg_l, px * 1.5);
+            this.ctx.fillText(msg, x, y + px * (line + this.msg_line++));
           
             if (i%4==0)
                 this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);

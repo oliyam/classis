@@ -9,8 +9,6 @@ window.onload = ()=> {
   var c = document.getElementById("myCanvas");
 
   var view=new view_(c)
-  
-  var auto_req;
 
   function disableUI(yes){
     var ids=[
@@ -32,6 +30,7 @@ window.onload = ()=> {
     turn();
   }
   
+  var auto_req;
   var turned=false;
   function turn() {
     turned=true;
@@ -91,7 +90,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        //alert("Mace Windu voice: 'Not yet!' - req again later!")
+        view.draw_game(battle, true, "Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
   }
