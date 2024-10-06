@@ -300,6 +300,7 @@
   }else
       this.msg_line++;
       
+    msg=this.msg_line+".> "+msg
     
     this.ctx.globalAlpha=1;
     if (inactive) {
@@ -311,6 +312,7 @@
       ;
       var i=0
       
+    
       this.ctx.fillStyle = "white"
       this.ctx.font = "bold " + px + "px monospace";
       var txt="vessels are maneuvering";
