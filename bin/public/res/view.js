@@ -335,8 +335,6 @@
             this.ctx.fillStyle = "white"
             this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
             this.ctx.fillText(txt, x, y + px * line++);
-            
-     
            
             this.ctx.fillStyle = "red"
             this.ctx.clearRect(x, y + px * (line - 1 + this.msg_line), msg_l, px * 1.5);
