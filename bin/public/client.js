@@ -36,7 +36,6 @@ window.onload = ()=> {
     document.getElementById('req').disabled = false;
     view.draw_game(battle, 1)
     mult.send_game(battle)
-    view.set_loader(true)
   }
   
   document.getElementById('selectv').onclick = () => {
@@ -73,10 +72,8 @@ window.onload = ()=> {
   }
 
   function req_game() {
-    console.log("req")
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
-        view.set_loader(false)
         document.getElementById('req').disabled=true;
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);

@@ -286,9 +286,20 @@
   }
   
   loading;
-  set_loader(inactive, time){
-    if (this.loading) 
-      clearInterval(this.loading)
+  draw_game(game, inactive) {
+
+    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
+    if (inactive)
+      this.ctx.globalAlpha = .25;
+      
+    this.draw_radars(game.vessels)
+    this.draw_splashes(game)
+    game.vessels.forEach(v => {
+        this.draw_vessel(v, game.selected_v == v.id, false);
+    });
+    this.ctx.globalAlpha=1;
+  
+    if (inactive) {
       var 
         x=20,
         y=40,
@@ -310,17 +321,14 @@
         var line=0;
        
         this.ctx.font = "bold " + px + "px monospace";       
-        
-        if(!inactive){
-          var t = parseFloat((time * 1000 - elapsed) / 1000).toFixed(2);
-          var txt_t = t > 0 ? ("You have: " + (t < 10 ? '0' + t : t) + "sec. to end your turn!") : "No move - turn ended!"
+
+          var txt_t = "You may 'req' a new game update."
           var txt_t_l = this.ctx.measureText(txt_t).width; 
           
           this.ctx.fillStyle = "orange"
           this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
           this.ctx.fillText(txt_t, x, y + px * line);
-        }
-        else{
+    
           this.ctx.fillStyle = "white"
           this.ctx.clearRect(x, y + px * (line - 1), txt_l, px*1.5);
           this.ctx.fillText(txt, x, y + px * line);
@@ -331,29 +339,10 @@
               this.ctx.fillStyle = "cyan"
               this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
           }
-        }
         i++;
         elapsed+=500;
       }, 500)
-  }
-    
-  draw_game(game, inactive) {
-
-    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
-    if (inactive)
-      this.ctx.globalAlpha = .25;
-      
-    this.draw_radars(game.vessels)
-    this.draw_splashes(game)
-    game.vessels.forEach(v => {
-        this.draw_vessel(v, game.selected_v == v.id, false);
-    });
-    this.ctx.globalAlpha=1;
-    if (1) {
-
     }
-    else if (this.loading) {
-     // clearInterval(this.loading)
-    }
+    else if (this.loading) 
+     clearInterval(this.loading)
   }
-}
