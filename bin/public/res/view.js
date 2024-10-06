@@ -285,6 +285,7 @@
           }
   }
   
+  loader_pos=0;
   loading;
   msg_line=0;
   draw_game(game, inactive, msg){
@@ -309,8 +310,6 @@
         
         px=10
       ;
-      var i=0
-      
     
       this.ctx.fillStyle = "white"
       this.ctx.font = px + "px monospace";
@@ -345,13 +344,13 @@
             this.ctx.clearRect(x, y + px * (line - 1), msg_l, px * 1.5);
             this.ctx.fillText(msg, x, y + px * line);
            }
-            if (i%4==0)
+            if (this.loader_pos%4==0)
                 this.ctx.clearRect(x + txt_l + sym_l, y, 4 * sym_l, px);
             else{
                 this.ctx.fillStyle = "cyan"
-                this.ctx.fillText(sym, x + txt_l + i % 4 * sym_l, y + px)
+                this.ctx.fillText(sym, x + txt_l + this.loader_pos % 4 * sym_l, y + px)
             }
-          i++;
+          this.loader_pos++;
           elapsed+=500;
         }, 500)
     }
