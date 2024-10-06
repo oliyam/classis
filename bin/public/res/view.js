@@ -287,7 +287,6 @@
   
   loading;
   draw_game(game, inactive) {
-
     this.ctx.clearRect(0, 0, this.size.x, this.size.y);
     if (inactive)
       this.ctx.globalAlpha = .25;

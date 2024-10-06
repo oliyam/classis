@@ -105,6 +105,7 @@ window.onload = ()=> {
         });
         break;
     }
-    view.draw_game(battle, turned);
+    if (!turned)
+      view.draw_game(battle);
   });
 }
