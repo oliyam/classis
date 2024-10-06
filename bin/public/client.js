@@ -90,7 +90,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        view.draw_game(battle, true, "Mace Windu voice: 'Not yet!' - req again later!")
+        view.draw_game(battle, true, "auto-'req' failed! - pls wait for you turn")
       }
     })
   }
