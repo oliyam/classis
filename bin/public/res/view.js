@@ -286,7 +286,7 @@
   }
   
   loading;
-  set_loader(inactive){
+  set_loader(inactive, time){
     if (this.loading) 
       clearInterval(this.loading)
       var 
@@ -308,14 +308,14 @@
       
       this.loading = setInterval(()=>{
         var line=0;
-        
-        var t = parseFloat((60000-elapsed)/1000).toFixed(2);
-        var txt_t = t>0?("You have: "+(t<10?'0'+t:t)+"sec. to end your turn!"):"No move - turn ended!"
-        var txt_t_l = this.ctx.measureText(txt_t).width;
        
         this.ctx.font = "bold " + px + "px monospace";       
         
         if(!inactive){
+          var t = parseFloat((time * 1000 - elapsed) / 1000).toFixed(2);
+          var txt_t = t > 0 ? ("You have: " + (t < 10 ? '0' + t : t) + "sec. to end your turn!") : "No move - turn ended!"
+          var txt_t_l = this.ctx.measureText(txt_t).width; 
+          
           this.ctx.fillStyle = "orange"
           this.ctx.clearRect(x, y + px * (line - 1), txt_t_l, px*1.5);
           this.ctx.fillText(txt_t, x, y + px * line);
