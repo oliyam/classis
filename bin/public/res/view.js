@@ -346,3 +346,4 @@
     else if (this.loading) 
      clearInterval(this.loading)
   }
+}
