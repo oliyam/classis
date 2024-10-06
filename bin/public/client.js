@@ -37,6 +37,9 @@ window.onload = ()=> {
     view.draw_game(battle, 1)
     mult.send_game(battle)
     view.set_loader(true)
+    setInterval(()=>{
+      req_game()
+    },500)
   }
   
   document.getElementById('selectv').onclick = () => {
@@ -88,7 +91,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        document.getElementById('req').disabled=true;
+        
         //alert("Mace Windu voice: 'Not yet!' - req again later!")
       }
     })
