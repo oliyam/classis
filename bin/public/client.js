@@ -76,7 +76,7 @@ window.onload = ()=> {
     console.log("req")
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
-        view.set_loader(false)
+        view.set_loader(false, res.time)
         disableUI(false)
         battle = Object.assign(new game(faction, battle.selected_v), res.game);
         view.draw_game(battle)
