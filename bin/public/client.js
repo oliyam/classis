@@ -36,9 +36,10 @@ window.onload = ()=> {
     turned=true;
     disableUI(true)
     document.getElementById('req').disabled = false;
-    //view.draw_game(battle, 1)
+
     mult.send_game(battle)
-    if (!auto_req)
+    if(auto_req)
+    clearInterval(auto_req)
       auto_req=setInterval(() => {
         req_game();
       }, 4*1000)
@@ -81,7 +82,6 @@ window.onload = ()=> {
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
         clearInterval(auto_req)
-        auto_req=null;
         
         turned=false;
         document.getElementById('req').disabled=true;
