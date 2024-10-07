@@ -289,7 +289,7 @@
   loading;
   msg_line=0;
   draw_game(game, inactive, msg){
-    msg=null;
+   //msg=null;
     if (inactive)
       this.ctx.globalAlpha = .25;
     if(!msg){
