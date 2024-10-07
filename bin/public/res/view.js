@@ -7,6 +7,10 @@
     this.size = {x: canvas.width, y: canvas.height};
     this.ctx=canvas.getContext('2d');
     this.ctx.lineWidth = 1.5;
+    
+    document.addEventListener("visibilitychange", (e) => {
+      this.loading=undefined;
+    });
   }
   
   draw_splashes(game){
@@ -285,6 +289,7 @@
           }
   }
   
+
   loader_pos=0;
   loading;
   msg_line=0;
@@ -319,8 +324,7 @@
       var msg_l = this.ctx.measureText(msg).width;
       
       var elapsed=0
-      if (!this.loading||
-      msg){
+      if (!this.loading||msg){
         clearInterval(this.loading)
         this.loading = setInterval(()=>{
           var line=0;
