@@ -1,3 +1,5 @@
+//it kinda works
+
 //custom color logger
 const log = require('./logger/color-logger.js').log;
 
