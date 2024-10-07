@@ -75,11 +75,11 @@ window.onload = ()=> {
   document.getElementById('info').addEventListener("change", () => {
     view.draw_game(battle)
   })
-/*  
+
   document.getElementById('req').onclick = () => {
     req_game();
   }
-*/
+  
   function req_game() {
     mult.get_game({ f: faction }).then(res => {
       if (res.turn) {
