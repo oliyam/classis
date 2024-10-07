@@ -9,6 +9,8 @@
     this.ctx.lineWidth = 1.5;
     
     document.addEventListener("visibilitychange", (e) => {
+      if (this.loading)
+        clearInterval(this.loading)
       this.loading=undefined;
     });
   }
