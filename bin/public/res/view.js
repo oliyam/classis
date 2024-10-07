@@ -355,7 +355,7 @@
         }, 500)
       }
     }
-    else if (this.loading) 
+    else if (this.loading) {}
      //clearInterval(this.loading)
   }
 }
