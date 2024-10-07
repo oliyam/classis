@@ -92,7 +92,7 @@ window.onload = ()=> {
         view.draw_game(battle)
       }
       else {
-        view.draw_game(battle, true)
+        //view.draw_game(battle, true)
       }
     })
   }
