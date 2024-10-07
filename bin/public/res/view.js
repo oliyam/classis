@@ -320,7 +320,7 @@
       
       var elapsed=0
       if (!this.loading||
-      msg||inactive){
+      msg){
         clearInterval(this.loading)
         this.loading = setInterval(()=>{
           var line=0;
